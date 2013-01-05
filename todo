@@ -14,13 +14,13 @@ add warnings for unacceptable form fill outed ness
 
 add double book protection
 
-finish triggers and stored procedure
+-finish triggers and stored procedure
 
 tool tip niceify
 
 select person on edit mutliple entery error (may require a simple expantion of js and used of .remove()
 
-FF compatability test
+-FF compatability test
 
 on save redirect to view of the saved event
 
@@ -28,15 +28,15 @@ on save redirect to view of the saved event
 
 --default admin login, accept any password
 
-password salting should involve the user name
+-password salting should involve the user name
 
 add event cost to views but it is not dirrectly editable
 
-protect against sql injection
+--protect against sql injection
 
 abitlity to delete users (admin only)
 
-remove programatic fk resolution
+-remove programatic fk resolution
 
 instead of default view on save the isolated view should be called
 
@@ -44,4 +44,4 @@ we will need to have the big three return ID also
 
 add person and org seem to be the same thing, must investigate further (it is only a problem for adding)
 
-make all js into one or two large objects
+-make all js into one or two large objects
