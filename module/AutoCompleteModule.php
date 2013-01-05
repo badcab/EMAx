@@ -6,7 +6,7 @@ require_once('../model/OrganizationModel.php');
 require_once('../model/PersonModel.php');
 require_once('../model/RoomLocationModel.php');
 require_once('../model/LoginModel.php');
-
+require_once('../configure/EMAxSTATIC.php');
 class AutoCompleteModule
 {
 	private $personList;
@@ -21,8 +21,7 @@ $queryResult = $this->connection->query($sqlPerson);
 
 	function __construct()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$this->personList = array();
 		$queryResult = $connection->query('SELECT * FROM `EMAx_Person`');
 		$personList = ($queryResult) ? $queryResult->fetchAll() : array();

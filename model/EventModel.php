@@ -11,8 +11,8 @@ class EventModel
 	
 	function __construct($id = NULL)
 	{
-		require('../configure/db_connect.php');
-    	$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+    	$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$sql = "SELECT * FROM `EMAx_Event` WHERE ID=" . $id;
 		$result = $connection->query($sql);
 		$currentDBvalues = ($result) ? $result->fetch(PDO::FETCH_OBJ) : NULL ;
@@ -89,8 +89,8 @@ class EventModel
 	
 	public function writeData()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 			
 		$Organization = $this->getOrganization(); 
 		$Location = $this->getRoomLocation();
@@ -240,8 +240,7 @@ class EventModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		
 		require_once('../module/GoogleCalanderModule.php');
 		$Google = new GoogleCalanderModule();

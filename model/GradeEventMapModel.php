@@ -1,5 +1,6 @@
 <?php
-
+//this file shold be deleted
+require_once('../configure/EMAxSTATIC.php');
 require_once('EventModel.php');
 require_once('GradeModel.php');
 class GradeEventMapModel
@@ -9,9 +10,9 @@ class GradeEventMapModel
 	
 	function __construct(EventModel $EventModelObject = NULL)
 	{
-		require('../configure/db_connect.php'); 
+		 
 		$this->$EventID = $EventModelObject->getID();
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$result = $connection->query("SELECT * FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID`='" . $EventModelObject->getID() . "'");
 		$GradeList = $result->fetchAll();
 		$this->ClassObjectArg = array();

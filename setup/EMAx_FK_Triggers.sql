@@ -6,7 +6,7 @@ BEFORE DELETE
 ON EMAx_Login
 FOR EACH ROW
 BEGIN
-	UPDATE `EMAx_Event` SET(`EMAx_Login_ID` = NULL) WHERE `EMAx_Login_ID` = OLD.ID;
+	UPDATE `EMAx_Event` SET `EMAx_Login_ID` = NULL  WHERE `EMAx_Login_ID` = OLD.ID;
 END
 $$
 
@@ -29,7 +29,7 @@ BEFORE DELETE
 ON EMAx_Person
 FOR EACH ROW
 BEGIN
-	UPDATE `EMAx_Event` SET(`EMAx_Person_ID` = NULL) WHERE `EMAx_Person_ID` = OLD.ID;
+	UPDATE `EMAx_Event` SET `EMAx_Person_ID` = NULL WHERE `EMAx_Person_ID` = OLD.ID;
 END
 $$
 
@@ -62,9 +62,19 @@ BEFORE DELETE
 ON EMAx_RoomLocation
 FOR EACH ROW
 BEGIN
-	UPDATE `EMAx_Event` SET(`EMAx_RoomLocation_ID` = NULL) WHERE `EMAx_RoomLocation_ID` = OLD.ID;
+	UPDATE `EMAx_Event` SET `EMAx_RoomLocation_ID` = NULL  WHERE `EMAx_RoomLocation_ID` = OLD.ID;
+END
+$$
+
+DROP TRIGGER IF EXISTS event_fk_protection $$
+
+CREATE TRIGGER event_fk_protection 
+BEFORE DELETE 
+ON EMAx_Event
+FOR EACH ROW
+BEGIN
+	DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_OptionEventMap`.`EMAx_Event_ID` = OLD.ID;
+	DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_GradeEventMap`.`EMAx_Event_ID` = OLD.ID;
 END
 $$
 DELIMITER ;
-
---still need event delete FK protection triger

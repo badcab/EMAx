@@ -70,8 +70,8 @@ class _SearchModel
 
 	function __construct()
 	{
-		require('../configure/db_connect.php');
-		$this->connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$this->connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 
 		$this->results = array(
 			'Person' => array(),
@@ -97,16 +97,18 @@ class _SearchModel
 	public function getPersonSearch($id = NULL)
 	{
 		$id = ($id == '') ? NULL : (int)$id;
-		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Person` WHERE `ID`='". $id ."'");
+		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Person` WHERE `ID`='". $this->connection->quote($id) ."'");
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)	
 		{
 			$objectToGetForienKey = $record;
 		}
 		
-		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID`='" . $id . "'";
-		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Person_ID`='" . $id . "'";
-		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`='" . $objectToGetForienKey['EMAx_Organization_ID'] . "'";
+		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID`='" . $this->connection->quote($id) . "'";
+		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Person_ID`='" . $this->connection->quote($id) . "'";
+		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`='" . 
+			$this->connection->quote($objectToGetForienKey['EMAx_Organization_ID']) 
+		. "'";
 
 		$Person = array();
 		$Event = array();
@@ -144,16 +146,20 @@ class _SearchModel
 	{	
 		$id = ($id == '') ? NULL : (int)$id;
 		
-		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Event` WHERE `ID`='". $id ."'");
+		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Event` WHERE `ID`='". $this->connection->quote($id) ."'");
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)	
 		{
 			$objectToGetForienKey = $record;
 		}
 		
-		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID` = '". $objectToGetForienKey['EMAx_Person_ID'] ."'";
-		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`ID`='" . $id . "'";
-		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID` = '". $objectToGetForienKey['EMAx_Organization_ID'] ."'";
+		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID` = '". 
+			$this->connection->quote($objectToGetForienKey['EMAx_Person_ID']) 
+		."'";
+		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`ID`='" . $this->connection->quote($id) . "'";
+		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID` = '". 
+			$this->connection->quote($objectToGetForienKey['EMAx_Organization_ID']) 
+		."'";
 
 		$Person = array();
 		$Event = array();
@@ -190,9 +196,9 @@ class _SearchModel
 	public function getOrganizationSearch($id = NULL)
 	{
 		$id = ($id == '') ? NULL : (int)$id;
-		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`EMAx_Organization_ID`='" . $id . "'";
-		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Organization_ID`='" . $id . "'";
-		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`='" . $id . "'";
+		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`EMAx_Organization_ID`='" . $this->connection->quote($id) . "'";
+		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Organization_ID`='" . $this->connection->quote($id) . "'";
+		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`='" . $this->connection->quote($id) . "'";
 		$Person = array();
 		$Event = array();
 		$Organization = array();
@@ -242,7 +248,7 @@ class _SearchModel
 			$date = date('Y-m-d', strtotime($searchString));
 
 			$sqlEvent .= "
-				AND DATE(`EMAx_Event`.`startTime`) = '". $date ."'
+				AND DATE(`EMAx_Event`.`startTime`) = '". $this->connection->quote($date) ."'
 				ORDER BY `EMAx_Event`.`startTime` DESC			
 			";
 
@@ -256,6 +262,7 @@ class _SearchModel
 		
 			foreach($searchStringArray as $search)
 			{
+				$search = $this->connection->quote($search);
 				$sqlPerson .= " 
 				AND (
 					`EMAx_Person`.`fName` LIKE '%" . $search . "%' OR

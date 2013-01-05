@@ -1,5 +1,5 @@
 <?php
-
+require_once('../configure/EMAxSTATIC.php');
 class RoomLocationModel
 {
 	private $ClassObjectArg;
@@ -7,8 +7,8 @@ class RoomLocationModel
 	
 	function __construct($id = NULL, $cost = 0.00)
 	{
-		require('../configure/db_connect.php'); 
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		 
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$currentDBvalues = NULL;
 		$roomLocationList = $connection->query("SELECT `ID`,`name`,`cost` FROM `EMAx_RoomLocation`");
 		$this->RoomLocationList = $roomLocationList->fetchAll();			
@@ -16,7 +16,7 @@ class RoomLocationModel
 		if(is_string($id))
 		{
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name='" . $name . "'");
+			$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name='" . $connection->quote($name) . "'");
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -30,8 +30,8 @@ class RoomLocationModel
 			
 			else
 			{
-				$create = $connection->exec("INSERT INTO `EMAx_RoomLocation`(`name`, `cost`) VALUES ('" . $name . "','" . $cost . "')");
-				$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name='" . $name . "'");
+				$create = $connection->exec("INSERT INTO `EMAx_RoomLocation`(`name`, `cost`) VALUES ('" . $connection->quote($name) . "','" . $connection->quote($cost) . "')");
+				$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name='" . $connection->quote($name) . "'");
 				$createReturn = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$createReturn->ID;
 			}	
@@ -39,7 +39,7 @@ class RoomLocationModel
 	
 		if($id && is_int($id))
 		{
-			$result = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE ID=" . $id);
+			$result = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE ID=" . $connection->quote($id));
 			$currentDBvalues = $result->fetch(PDO::FETCH_OBJ);
 		}
 		
@@ -75,16 +75,16 @@ class RoomLocationModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$id = $this->getID();
 		
 		$connection->exec("
 			UPDATE `EMAx_Event` 
 			SET `EMAx_Event`.`EMAx_RoomLocation_ID`= NULL 
-			WHERE `EMAx_Event`.`EMAx_RoomLocation_ID`= '" .$id . "'"
+			WHERE `EMAx_Event`.`EMAx_RoomLocation_ID`= '" . $connection->quote($id) . "'"
 		);
-		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`='" . $id . "'");
+		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`='" . $connection->quote($id) . "'");
 	}	
 	
 	public function getRoomLocation()

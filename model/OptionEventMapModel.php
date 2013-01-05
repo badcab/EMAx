@@ -1,6 +1,8 @@
 <?php
+//this file shold be deleted
 require_once('EventModel.php');
 require_once('OptionModel.php');
+require_once('../configure/EMAxSTATIC.php');
 class OptionEventMapModel
 {
 	private $ClassObjectArg;
@@ -8,9 +10,9 @@ class OptionEventMapModel
 	
 	function __construct(EventModel $EventModelObject = NULL)
 	{
-		require('../configure/db_connect.php'); 
+		 
 		$this->$EventID = $EventModelObject->getID();
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$result = $connection->query("SELECT * FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID`='" . $EventModelObject->getID() . "'");
 		$OptionList = $result->fetchAll();
 		$this->ClassObjectArg = array();

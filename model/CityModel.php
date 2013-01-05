@@ -1,5 +1,5 @@
 <?php
-
+require_once('../configure/EMAxSTATIC.php');
 class CityModel
 {
 	private $ClassObjectArg;
@@ -7,8 +7,8 @@ class CityModel
 	
 	function __construct($id = NULL)//is_ numeric
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$id = ($id == '') ? NULL : $id;
 		
 		if(is_string($id))
@@ -29,8 +29,8 @@ class CityModel
 			
 			else
 			{
-				$connection->exec("INSERT INTO `EMAx_City`(`name`) VALUES ('" . $name . "')");
-				$exists = $connection->query("SELECT * FROM `EMAx_City` WHERE name='" . $name . "'");
+				$connection->exec("INSERT INTO `EMAx_City`(`name`) VALUES ('" . $connection->quote( $name ). "')");
+				$exists = $connection->query("SELECT * FROM `EMAx_City` WHERE name='" . $connection->quote( $name ). "'");
 				$create = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$create->ID;
 			}	
@@ -40,7 +40,7 @@ class CityModel
 		
 		if($id && is_int($id))
 		{
-			$result = $connection->query("SELECT * FROM `EMAx_City` WHERE ID=" . $id);
+			$result = $connection->query("SELECT * FROM `EMAx_City` WHERE ID=" . $connection->quote($id));
 			$currentDBvalues = $result->fetch(PDO::FETCH_OBJ);
 		}
 		
@@ -74,10 +74,10 @@ class CityModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		/*handle dependancies*/
-		$connection->exec("DELETE FROM `EMAx_City` WHERE `ID`='" . getID() . "'");
+		$connection->exec("DELETE FROM `EMAx_City` WHERE `ID`='" . $this->getID() . "'");
 	}
 	
 	public function getCity()

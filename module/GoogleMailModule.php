@@ -8,15 +8,15 @@ class GoogleMailModule
 
 	function __construct()
 	{
-		require('../configure/google_connect.php');
+		
 		$path = '../ZendGdata-1.10.5/library';
 		$oldPath = set_include_path(get_include_path() . PATH_SEPARATOR . $path);		
 		require_once ('Zend/Loader.php');
 		
-		$this->username = $googleUserName;
-		$this->password = $googlePassword;
-		$this->nameOfSender = $nameOfSender;
-		$this->replyEmail = $replyEmail;
+		$this->username = EMAxSTATIC::$googleUserName;
+		$this->password = EMAxSTATIC::$googlePassword;
+		$this->nameOfSender = EMAxSTATIC::$nameOfSender;
+		$this->replyEmail = EMAxSTATIC::$replyEmail;
 	}
 
 	public function activate( $eventID )

@@ -1,5 +1,5 @@
 <?php
-
+require_once('../configure/EMAxSTATIC.php');
 class GradeModel
 {
 	private $ClassObjectArg;
@@ -7,8 +7,8 @@ class GradeModel
 	
 	function __construct($id = NULL, $cost = 0.00)
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$currentDBvalues = NULL;
 		
 		$gradeList = $connection->query("SELECT `ID`,`name`,`cost` FROM `EMAx_Grade`");
@@ -17,7 +17,7 @@ class GradeModel
 		if(is_string($id))
 		{
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name='" . $name . "'");
+			$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name='" . $connection->quote( $name ) . "'");
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -31,8 +31,8 @@ class GradeModel
 			
 			else
 			{
-				$connection->exec("INSERT INTO `EMAx_Grade`(`name`, `cost`) VALUES ('" . $name . "','". $cost ."')");
-				$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name='" . $name . "'");
+				$connection->exec("INSERT INTO `EMAx_Grade`(`name`, `cost`) VALUES ('" . $connection->quote( $name ) . "','". $connection->quote($cost) ."')");
+				$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name='" . $connection->quote( $name ) . "'");
 				$create = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$create->ID;
 			}	
@@ -40,7 +40,7 @@ class GradeModel
 	
 		if($id && is_int($id))
 		{
-			$result = $connection->query("SELECT * FROM `EMAx_Grade` WHERE ID=" . $id);
+			$result = $connection->query("SELECT * FROM `EMAx_Grade` WHERE ID=" . $connection->quote($id));
 			$currentDBvalues = $result->fetch(PDO::FETCH_OBJ);
 		}
 
@@ -73,14 +73,14 @@ class GradeModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$id = $this->getID();
 		$connection->exec("
 			DELETE FROM `EMAx_GradeEventMap` 
-			WHERE `EMAx_GradeEventMap`.`EMAx_Grade_ID`= '" .$id . "'"
+			WHERE `EMAx_GradeEventMap`.`EMAx_Grade_ID`= '" . $connection->quote($id) . "'"
 		);
-		$connection->exec("DELETE FROM `EMAx_Grade` WHERE `ID`='" . $id . "'");
+		$connection->exec("DELETE FROM `EMAx_Grade` WHERE `ID`='" . $connection->quote($id) . "'");
 	}	
 	
 	public function getCost()

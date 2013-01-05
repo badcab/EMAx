@@ -1,5 +1,5 @@
 <?php
-
+require_once('../configure/EMAxSTATIC.php');
 require_once('CityModel.php');
 require_once('StateModel.php');
 require_once('ZipModel.php');
@@ -11,11 +11,11 @@ class PersonModel
 	function __construct($id = NULL)
 	{
 		$currentDBvalues = NULL;
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		if($id)
 		{
-			$result = $connection->query("SELECT * FROM `EMAx_Person` WHERE ID=" . $id);
+			$result = $connection->query("SELECT * FROM `EMAx_Person` WHERE ID=" . $connection->quote($id));
 			$currentDBvalues  = ($result) ? $result->fetch(PDO::FETCH_OBJ) : NULL ;
 		}
 		$connection = NULL;
@@ -72,26 +72,26 @@ class PersonModel
 
 	public function writeData()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$zip = ($this->ClassObjectArg['Zip']) ? "'" . $this->ClassObjectArg['Zip'] . "'" : 'NULL' ;
 		$city = ($this->ClassObjectArg['City']) ? "'" . $this->ClassObjectArg['City'] . "'" : 'NULL' ;
 		if($this->ClassObjectArg['ID'])
 		{
 //			$result = $connection->query("SELECT * FROM `EMAx_Person` WHERE ID=" . $id);
-			$sql = "UPDATE `EMAx_Person` SET `fName`='". $this->ClassObjectArg['fName']  
-				."',`mName`='". $this->ClassObjectArg['mName']  
-				."',`lName`='". $this->ClassObjectArg['lName'] 
-				."',`phoneNumber`='". $this->ClassObjectArg['phoneNumber']  
-				."',`secondaryPhoneNumber`='". $this->ClassObjectArg['secondaryPhoneNumber']  
-				."',`emailAddress`='". $this->ClassObjectArg['emailAddress']  
-				."',`address`='". $this->ClassObjectArg['address']  
-				."',`notes`='". $this->ClassObjectArg['notes']  
-				."',`EMAx_City_ID`=". $city  
-				.",`EMAx_State_ID`='". $this->ClassObjectArg['State']  
-				."',`EMAx_Zip_ID`=". $zip  
-				.",`EMAx_Organization_ID`='". $this->ClassObjectArg['Organization']  
-				."' WHERE `ID`='" . $this->ClassObjectArg['ID'] . "'";
+			$sql = "UPDATE `EMAx_Person` SET `fName`='". $connection->quote($this->ClassObjectArg['fName'])  
+				."',`mName`='". $connection->quote($this->ClassObjectArg['mName'])  
+				."',`lName`='". $connection->quote($this->ClassObjectArg['lName']) 
+				."',`phoneNumber`='". $connection->quote($this->ClassObjectArg['phoneNumber'])  
+				."',`secondaryPhoneNumber`='". $connection->quote($this->ClassObjectArg['secondaryPhoneNumber'])  
+				."',`emailAddress`='". $connection->quote($this->ClassObjectArg['emailAddress'])  
+				."',`address`='". $connection->quote($this->ClassObjectArg['address'])  
+				."',`notes`='". $connection->quote($this->ClassObjectArg['notes'])  
+				."',`EMAx_City_ID`=". $connection->quote($city)  
+				.",`EMAx_State_ID`='". $connection->quote($this->ClassObjectArg['State'])  
+				."',`EMAx_Zip_ID`=". $connection->quote($zip)
+				.",`EMAx_Organization_ID`='". $connection->quote($this->ClassObjectArg['Organization'])  
+				."' WHERE `ID`='" . $connection->quote($this->ClassObjectArg['ID']) . "'";
 		}
 		
 		else
@@ -112,18 +112,18 @@ class PersonModel
 					`EMAx_Zip_ID`, 
 					`EMAx_Organization_ID`
 				) VALUES (
-					'". $this->ClassObjectArg['fName'] ."',
-					'". $this->ClassObjectArg['mName'] ."',
-					'". $this->ClassObjectArg['lName'] ."',
-					'". $this->ClassObjectArg['phoneNumber'] ."',
-					'". $this->ClassObjectArg['secondaryPhoneNumber'] ."',
-					'". $this->ClassObjectArg['emailAddress'] ."',
-					'". $this->ClassObjectArg['address'] ."',
-					'". $this->ClassObjectArg['notes'] ."',
-					". $city .",
-					'". $this->ClassObjectArg['State'] ."',
-					". $zip .",
-					'". $this->ClassObjectArg['Organization'] ."'
+					'". $connection->quote($this->ClassObjectArg['fName']) ."',
+					'". $connection->quote($this->ClassObjectArg['mName']) ."',
+					'". $connection->quote($this->ClassObjectArg['lName']) ."',
+					'". $connection->quote($this->ClassObjectArg['phoneNumber']) ."',
+					'". $connection->quote($this->ClassObjectArg['secondaryPhoneNumber']) ."',
+					'". $connection->quote($this->ClassObjectArg['emailAddress']) ."',
+					'". $connection->quote($this->ClassObjectArg['address']) ."',
+					'". $connection->quote($this->ClassObjectArg['notes']) ."',
+					". $connection->quote($city) .",
+					'". $connection->quote($this->ClassObjectArg['State']) ."',
+					". $connection->quote($zip) .",
+					'". $connection->quote($this->ClassObjectArg['Organization']) ."'
 				)";
 		}		
 		$connection->beginTransaction();
@@ -143,10 +143,10 @@ class PersonModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
-		$connection->exec("UPDATE `EMAx_Event` SET `EMAx_Person_ID`= NULL WHERE `EMAx_Person_ID` = '". $this->getID() ."'");
-		$connection->exec("DELETE FROM `EMAx_Person` WHERE `ID`='" . $this->getID() . "'");
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
+		$connection->exec("UPDATE `EMAx_Event` SET `EMAx_Person_ID`= NULL WHERE `EMAx_Person_ID` = '". $connection->quote($this->getID()) ."'");
+		$connection->exec("DELETE FROM `EMAx_Person` WHERE `ID`='" . $connection->quote($this->getID()) . "'");
 	}	
 
 	public function getfName()
@@ -284,16 +284,15 @@ class PersonModel
 	public function getListByOrganization(OrganizationModel $value)
 	{
 		$OrgID = (int)$value->getID();
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
 		
-		$result = $connection->query("SELECT `ID`,`fName`,`lName` FROM `EMAx_Person` WHERE `EMAx_Organization_ID` = '" . $OrgID . "'");
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
+		
+		$result = $connection->query("SELECT `ID`,`fName`,`lName` FROM `EMAx_Person` WHERE `EMAx_Organization_ID` = '" . $connection->quote($OrgID) . "'");
 		$personList = $result->fetchAll();
 		
 		$listArr = array();
 		foreach($personList as $list)	
 		{
-//			$listArr[$list['ID']] = $list['fName'] . ' ' . $list['lName'];
 			$listArr[] = array( 'id' => $list['ID'], 'name' => $list['fName'] . ' ' . $list['lName']);
 		}
 		return $listArr;	

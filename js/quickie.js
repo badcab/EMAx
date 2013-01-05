@@ -30,3 +30,24 @@ function autoCompleteSearch()
 	});
 
 }
+
+function datepicker()
+{
+	$( "#datepicker" ).datepicker();
+}
+
+function reloadTabs()
+{
+	$( "#tabs" ).tabs();
+}
+
+$("html").on({
+    ajaxStart: function() 
+    { 
+        $(this).addClass("loading");
+    },
+    ajaxStop: function() 
+    { 
+        $(this).removeClass("loading"); 
+    }    
+});

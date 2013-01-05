@@ -1,5 +1,5 @@
 <?php
-
+require_once('../configure/EMAxSTATIC.php');
 class LoginModel
 {
 	private $ClassObjectArg;
@@ -7,16 +7,15 @@ class LoginModel
 	
 	function __construct($id = NULL)
 	{
-		require('../configure/db_connect.php'); 
 		$currentDBvalues = NULL;
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$loginList = $connection->query("SELECT `ID`,`userName` FROM `EMAx_Login`");
 		$this->LoginList = $loginList->fetchAll();	
 		$id = ($id == '') ? NULL : $id;
 		if(is_string($id))
 		{
 			$name = ucwords(strtolower($id));
-			$exists = $connection->query("SELECT * FROM `EMAx_Login` WHERE userName='" . $name . "'");	
+			$exists = $connection->query("SELECT * FROM `EMAx_Login` WHERE userName='" . $connection->quote($name) . "'");	
 			$existsReturn = $exists->fetch(PDO::FETCH_OBJ);
 			if($existsReturn)
 			{
@@ -25,7 +24,7 @@ class LoginModel
 		}
 		if($id && is_int($id))
 		{
-			$result = $connection->query("SELECT * FROM `EMAx_Login` WHERE ID=" . $id);
+			$result = $connection->query("SELECT * FROM `EMAx_Login` WHERE ID=" . $connection->quote($id));
 			$currentDBvalues = $result->fetch(PDO::FETCH_OBJ);
 		}
 
@@ -53,16 +52,16 @@ class LoginModel
 
 	public function writeData()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		
 		if($this->ClassObjectArg['ID'])
 		{
 			$sql = "
 				UPDATE `EMAx_Login` SET " .
-				"`userName`='". $this->ClassObjectArg['userName']  
-				."',`password`='". $this->ClassObjectArg['password']  
-				."' WHERE `ID`='" . $this->ClassObjectArg['ID'] . "'";			
+				"`userName`='". $connection->quote($this->ClassObjectArg['userName'])  
+				."',`password`='". $connection->quote($this->ClassObjectArg['password'])  
+				."' WHERE `ID`='" . $connection->quote($this->ClassObjectArg['ID']) . "'";			
 		}
 		
 		else
@@ -72,8 +71,8 @@ class LoginModel
 					`userName`, 
 					`password`
 				) VALUES (
-					'". $this->ClassObjectArg['userName'] ."',
-					'". $this->ClassObjectArg['password'] ."'
+					'". $connection->quote($this->ClassObjectArg['userName']) ."',
+					'". $connection->quote($this->ClassObjectArg['password']) ."'
 				)";
 		}			
 	
@@ -89,10 +88,10 @@ class LoginModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		/*handle dependancies*/
-		$connection->exec("DELETE FROM `EMAx_Login` WHERE `ID`='" . $this->getID() . "'");
+		$connection->exec("DELETE FROM `EMAx_Login` WHERE `ID`='" . $connection->quote($this->getID()) . "'");
 	}	
 	
 	public function getuserName()
@@ -133,9 +132,8 @@ class LoginModel
 	
 	private function hashifyPassword($plainTextPassword)
 	{
-		require('../configure/login_user_connect.php');
-		$hashedPassword = sha1($plainTextPassword . $passwordSalt);
-		//$hashedPassword = sha1($plainTextPassword . $passwordSalt . $this->getuserName());
+		$hashedPassword = sha1($plainTextPassword . EMAxSTATIC::$passwordSalt);
+		//$hashedPassword = sha1($plainTextPassword . EMAxSTATIC::$passwordSalt . $this->getuserName());
 		return $hashedPassword;	
 	}
 	

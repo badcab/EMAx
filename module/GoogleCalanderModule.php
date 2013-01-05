@@ -6,7 +6,7 @@ class GoogleCalanderModule
 	
 	function __construct()
 	{
-		require('../configure/google_connect.php');
+
 		$path = '../ZendGdata-1.10.5/library';
 		$oldPath = set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 		
@@ -17,7 +17,7 @@ class GoogleCalanderModule
 
 		try 
 		{
-   		$this->client = Zend_Gdata_ClientLogin::getHttpClient($googleUserName, $googlePassword, 'cl');
+   		$this->client = Zend_Gdata_ClientLogin::getHttpClient(EMAxSTATIC::$googleUserName, EMAxSTATIC::$googlePassword, 'cl');
 		} 
 		catch (Zend_Gdata_App_CaptchaRequiredException $cre) 
 		{

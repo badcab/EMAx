@@ -1,5 +1,5 @@
 <?php
- 
+require_once('../configure/EMAxSTATIC.php');
 require_once('CityModel.php');
 require_once('StateModel.php');
 require_once('ZipModel.php');
@@ -10,8 +10,8 @@ class OrganizationModel
 	
 	function __construct($id = NULL)
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$currentDBvalues = NULL;
 		if($id)
 		{
@@ -63,8 +63,8 @@ class OrganizationModel
 
 	public function writeData()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$zip = ($this->ClassObjectArg['Zip']) ? "'" . $this->ClassObjectArg['Zip'] . "'" : 'NULL' ;
 		$city = ($this->ClassObjectArg['City']) ? "'" . $this->ClassObjectArg['City'] . "'" : 'NULL' ;
 		if($this->ClassObjectArg['ID'])
@@ -122,8 +122,8 @@ class OrganizationModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$connection->exec("UPDATE `EMAx_Person` SET `EMAx_Organization_ID`= NULL WHERE `EMAx_Organization_ID` = '". $this->getID() ."'");
 		$connection->exec("DELETE FROM `EMAx_Event` WHERE `EMAx_Organization_ID`= '" . $this->getID() . "'");
 		$connection->exec("DELETE FROM `EMAx_Organization` WHERE `ID`='" . $this->getID() . "'");

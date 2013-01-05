@@ -1,5 +1,5 @@
 <?php
-
+require_once('../configure/EMAxSTATIC.php');
 class StateModel
 {
 	private $ClassObjectArg;
@@ -8,14 +8,14 @@ class StateModel
 	function __construct($id = NULL)
 	{
 		$currentDBvalues = NULL;
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$id = ($id == '') ? NULL : $id;
 		if(is_string($id))
 		{
 			if(is_null($id)) {return $id;}
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_State` WHERE name='" . $name . "'");
+			$exists = $connection->query("SELECT * FROM `EMAx_State` WHERE name='" . $connection->quote( $name ) . "'");
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -29,8 +29,8 @@ class StateModel
 			
 			else
 			{
-				$create = $connection->exec("INSERT INTO `EMAx_State`(`name`) VALUES ('" . $name . "')");
-				$exists = $connection->query("SELECT * FROM `EMAx_State` WHERE name='" . $name . "'");
+				$create = $connection->exec("INSERT INTO `EMAx_State`(`name`) VALUES ('" . $connection->quote( $name ) . "')");
+				$exists = $connection->query("SELECT * FROM `EMAx_State` WHERE name='" . $connection->quote( $name ) . "'");
 				$createReturn = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$createReturn->ID;
 			}	
@@ -38,7 +38,7 @@ class StateModel
 	
 		if($id && is_int($id))
 		{
-			$result = $connection->query("SELECT * FROM `EMAx_State` WHERE ID=" . $id);
+			$result = $connection->query("SELECT * FROM `EMAx_State` WHERE ID=" . $connection->quote($id));
 			$currentDBvalues = $result->fetch(PDO::FETCH_OBJ);
 		}
 		
@@ -71,22 +71,22 @@ class StateModel
 	
 	public function deleteRecord()
 	{
-		require('../configure/db_connect.php');
-		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
+		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$id = $this->getID();
 
 		$connection->exec("
 			UPDATE `EMAx_Person` 
 			SET `EMAx_Person`.`EMAx_State_ID`= NULL 
-			WHERE `EMAx_Person`.`EMAx_State_ID`= '" .$id . "'"
+			WHERE `EMAx_Person`.`EMAx_State_ID`= '" . $connection->quote($id) . "'"
 		);
 		$connection->exec("
 			UPDATE `EMAx_Organization` 
 			SET `EMAx_Organization`.`EMAx_State_ID`= NULL 
-			WHERE `EMAx_Organization`.`EMAx_State_ID`= '" .$id . "'"
+			WHERE `EMAx_Organization`.`EMAx_State_ID`= '" . $connection->quote($id) . "'"
 		);
 
-		$connection->exec("DELETE FROM `EMAx_State` WHERE `ID`='" . $id . "'");
+		$connection->exec("DELETE FROM `EMAx_State` WHERE `ID`='" . $connection->quote($id) . "'");
 	}	
 	
 	public function getState()

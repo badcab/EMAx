@@ -1,4 +1,0 @@
-function reloadTabs()
-{
-	$( "#tabs" ).tabs();
-}
