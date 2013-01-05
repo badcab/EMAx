@@ -1,0 +1,129 @@
+CREATE TABLE IF NOT EXISTS `EMAx_State` ( 
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_City` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_Zip` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` int(10) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_Option` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `cost` DECIMAL(6,2) UNSIGNED NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`ID`),
+  UNIQUE (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_Grade` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `cost` DECIMAL(6,2) UNSIGNED NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`ID`),
+  UNIQUE (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_RoomLocation` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `cost` DECIMAL(6,2) UNSIGNED NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`ID`),
+  UNIQUE (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_Login` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(25) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  UNIQUE (userName),
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_Organization` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL, 
+  `phoneNumber` varchar(255) DEFAULT NULL,
+  `emailAddress` varchar(255) DEFAULT NULL,
+  `EMAx_City_ID` int(11) DEFAULT NULL,
+  `EMAx_State_ID` int(11) DEFAULT NULL,
+  `EMAx_Zip_ID` int(11) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `sameCounty` int(1) DEFAULT 0,
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (EMAx_City_ID) REFERENCES EMAx_City (ID),
+  FOREIGN KEY (EMAx_State_ID) REFERENCES EMAx_State (ID),
+  FOREIGN KEY (EMAx_Zip_ID) REFERENCES EMAx_Zip (ID)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_Person` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `fName` varchar(255) DEFAULT NULL,
+  `mName` varchar(255) DEFAULT NULL,
+  `lName` varchar(255) NOT NULL,
+  `phoneNumber` varchar(255) DEFAULT NULL,
+  `secondaryPhoneNumber` varchar(255) DEFAULT NULL,
+  `emailAddress` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `EMAx_City_ID` int(11) DEFAULT NULL,
+  `EMAx_State_ID` int(11) DEFAULT NULL,
+  `EMAx_Zip_ID` int(11) DEFAULT NULL,
+  `EMAx_Organization_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (EMAx_City_ID) REFERENCES EMAx_City (ID),
+  FOREIGN KEY (EMAx_State_ID) REFERENCES EMAx_State (ID),
+  FOREIGN KEY (EMAx_Zip_ID) REFERENCES EMAx_Zip (ID),
+  FOREIGN KEY (EMAx_Organization_ID) REFERENCES EMAx_Organization (ID)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_Event` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `EMAx_Organization_ID` int(11) NOT NULL,
+  `EMAx_Person_ID` int(11) DEFAULT NULL,
+  `EMAx_RoomLocation_ID` int(11) DEFAULT NULL,
+  `EMAx_Login_ID` int(11) DEFAULT NULL,
+  `startTime` DATETIME DEFAULT NULL,
+  `endTime` DATETIME DEFAULT NULL,
+  `attendance` int(11) DEFAULT 0,
+  `havingLunch` int(1) DEFAULT 0,
+  `googlURI` varchar(255),
+  `hasPaid` int(1) DEFAULT 0,
+  `notes` varchar(255) DEFAULT NULL,
+  `roomReservation` int(1) DEFAULT 0,
+  `cost` DECIMAL(6,2) UNSIGNED NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (EMAx_Organization_ID) REFERENCES EMAx_Organization (ID),
+  FOREIGN KEY (EMAx_Person_ID) REFERENCES EMAx_Person (ID),
+  FOREIGN KEY (EMAx_RoomLocation_ID) REFERENCES EMAx_RoomLocation (ID),
+  FOREIGN KEY (EMAx_Login_ID) REFERENCES EMAx_Login (ID)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_OptionEventMap` (
+  `EMAx_Event_ID` int(11) NOT NULL,
+  `EMAx_Option_ID` int(11) NOT NULL,
+  FOREIGN KEY (EMAx_Event_ID) REFERENCES EMAx_Event (ID),
+  FOREIGN KEY (EMAx_Option_ID) REFERENCES EMAx_Option (ID),
+  UNIQUE (EMAx_Event_ID, EMAx_Option_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+CREATE TABLE IF NOT EXISTS `EMAx_GradeEventMap` (
+  `EMAx_Event_ID` int(11) NOT NULL,
+  `EMAx_Grade_ID` int(11) NOT NULL,
+  FOREIGN KEY (EMAx_Event_ID) REFERENCES EMAx_Event (ID),
+  FOREIGN KEY (EMAx_Grade_ID) REFERENCES EMAx_Grade (ID),
+  UNIQUE (EMAx_Event_ID, EMAx_Grade_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;

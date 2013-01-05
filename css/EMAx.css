@@ -1,0 +1,190 @@
+body
+{
+	background-color: whitesmoke;	
+}
+
+#mainArea
+{
+	width: 100%;
+	height: 500px;
+	position:absolute;
+	left:0;
+	top:50px;
+}
+
+#sidebar
+{
+	width: 100px;
+	height: 100%;
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+#content
+{
+	width: 90%;
+	height: 100%;
+	position:absolute;
+	top: 0;
+	right: 0;
+}
+
+#header
+{
+	width: 100%;
+	height: 50px;
+	position:absolute;
+	top: 0;
+	left: 0;
+}
+
+#footer
+{
+	width: 100%;
+	height: 50px;
+	position:absolute;
+	top: 550px;
+	left: 0;
+}
+
+#mainList
+{
+	list-style-type: none;
+	margin-left: 5px;
+   margin-right: 5px;
+   background-color:lightgray;
+   width: 70%;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;    
+}
+#mainList li
+{
+	background-color:lightgray;
+	margin-left: -40px;
+	padding-left: 5px;
+	padding-right: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px; 
+}
+
+#mainList li input
+{
+	background:none!important;
+	border:none; 
+	padding:0!important;
+}
+
+#changePasswordButton
+{
+	background:none!important;
+	border:none; 
+	padding:0!important;
+	color: blue;
+	font-size: xx-small;
+	text-decoration: underline;
+}
+
+#changePasswordButton:hover
+{
+	color: darkblue;
+}
+
+#mainList li input:hover
+{
+	color: white;
+} 
+
+#searchBar
+{
+	position: absolute;
+	right: 15px;
+	top: 25%;
+}
+
+#tooltip
+{
+  margin-top: 50px;
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background:lightGrey;
+  text-align: center;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px; 
+}
+
+#userStatus
+{
+	position: absolute;
+	left: 15px;
+	top: 25%;
+}
+
+#tabs
+{
+	position: absolute;
+	height: 100%;
+	width: 95%;	
+}
+
+.searchTable tr td
+{
+	font-size: xx-small;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.searchTable tr th
+{
+	font-size: small;
+	text-align: left;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.searchTable tr:hover
+{
+	background-color: lightgray;
+}
+
+.overflow
+{
+	overflow:auto;	
+	height: 420px;
+}
+
+.modal 
+{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('images/ajax-loader.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+html.loading 
+{
+    overflow: hidden;   
+}
+
+html.loading .modal 
+{
+    display: block;
+}

@@ -1,0 +1,1 @@
+INSERT INTO `EMA_Login` (`userName`,`password`) VALUES ('admin', 'admin'); --the default login
