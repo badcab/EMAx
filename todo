@@ -43,3 +43,5 @@ instead of default view on save the isolated view should be called
 we will need to have the big three return ID also
 
 add person and org seem to be the same thing, must investigate further (it is only a problem for adding)
+
+make all js into one or two large objects
