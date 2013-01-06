@@ -14,8 +14,6 @@ foreach($personList as $person):
 <?php endforeach; ?>	
 </select>
 <script type="text/javascript" >
-document.getElementById('PersonEvent').value = $("#PersonEventDropDown").val();
-
-//should be
-//$("#PersonEventDropDown").val($("#PersonEvent").val());
+//document.getElementById('PersonEvent').value = $("#PersonEventDropDown").val();
+$("#PersonEventDropDown").val($("#PersonEvent").val());
 </script>

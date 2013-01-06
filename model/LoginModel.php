@@ -15,7 +15,9 @@ class LoginModel
 		if(is_string($id))
 		{
 			$name = ucwords(strtolower($id));
-			$exists = $connection->query("SELECT * FROM `EMAx_Login` WHERE userName='" . $connection->quote($name) . "'");	
+			$sql = "SELECT * FROM `EMAx_Login` WHERE userName=" . $connection->quote($name);
+			$exists = $connection->query($sql);	
+error_log($sql);			
 			$existsReturn = $exists->fetch(PDO::FETCH_OBJ);
 			if($existsReturn)
 			{

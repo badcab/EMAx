@@ -287,8 +287,8 @@ class PersonModel
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		
-		$result = $connection->query("SELECT `ID`,`fName`,`lName` FROM `EMAx_Person` WHERE `EMAx_Organization_ID` = '" . $connection->quote($OrgID) . "'");
-		$personList = $result->fetchAll();
+		$result = $connection->query("SELECT `ID`,`fName`,`lName` FROM `EMAx_Person` WHERE `EMAx_Organization_ID` = " . $connection->quote($OrgID));	
+		$personList = ($result) ? $result->fetchAll() : NULL ;
 		
 		$listArr = array();
 		foreach($personList as $list)	
