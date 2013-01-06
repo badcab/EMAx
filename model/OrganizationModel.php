@@ -70,15 +70,15 @@ class OrganizationModel
 		if($this->ClassObjectArg['ID'])
 		{
 			$sql = "		
-				UPDATE `EMAx_Organization` SET `name`='". $connection->quote($this->ClassObjectArg['name'])  
-				."',`phoneNumber`='". $connection->quote($this->ClassObjectArg['phoneNumber'])  
-				."',`emailAddress`='". $connection->quote($this->ClassObjectArg['emailAddress'])  
-				."',`EMAx_City_ID`=". $connection->quote($city)  
-				.",`EMAx_State_ID`='". $connection->quote($this->ClassObjectArg['State'])  
-				."',`EMAx_Zip_ID`=". $connection->quote($zip)  
-				.",`address`='". $connection->quote($this->ClassObjectArg['address'])  
-				."',`notes`='". $connection->quote($this->ClassObjectArg['notes']) 
-				."' WHERE `ID`='" . $connection->quote($this->ClassObjectArg['ID']) . "'";
+				UPDATE `EMAx_Organization` SET `name`=". $connection->quote($this->ClassObjectArg['name'])  
+				.",`phoneNumber`=". $connection->quote($this->ClassObjectArg['phoneNumber'])  
+				.",`emailAddress`=". $connection->quote($this->ClassObjectArg['emailAddress'])  
+				.",`EMAx_City_ID`=". $connection->quote($city)  
+				.",`EMAx_State_ID`=". $connection->quote($this->ClassObjectArg['State'])  
+				.",`EMAx_Zip_ID`=". $connection->quote($zip)  
+				.",`address`=". $connection->quote($this->ClassObjectArg['address'])  
+				.",`notes`=". $connection->quote($this->ClassObjectArg['notes']) 
+				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']);
 			
 		}
 		
@@ -95,14 +95,14 @@ class OrganizationModel
 					`address`, 
 					`notes`
 				) VALUES (
-					'". $connection->quote($this->ClassObjectArg['name']) ."',
-					'". $connection->quote($this->ClassObjectArg['phoneNumber']) ."',
-					'". $connection->quote($this->ClassObjectArg['emailAddress']) ."',
+					". $connection->quote($this->ClassObjectArg['name']) .",
+					". $connection->quote($this->ClassObjectArg['phoneNumber']) .",
+					". $connection->quote($this->ClassObjectArg['emailAddress']) .",
 					". $connection->quote($city) .",
-					'". $connection->quote($this->ClassObjectArg['State']) ."',
+					". $connection->quote($this->ClassObjectArg['State']) .",
 					". $connection->quote($zip) .",
-					'". $connection->quote($this->ClassObjectArg['address']) ."',
-					'". $connection->quote($this->ClassObjectArg['notes']) ."'
+					". $connection->quote($this->ClassObjectArg['address']) .",
+					". $connection->quote($this->ClassObjectArg['notes']) ."
 				)";
 		}
 		$connection->beginTransaction();
@@ -124,9 +124,9 @@ class OrganizationModel
 	{
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$connection->exec("UPDATE `EMAx_Person` SET `EMAx_Organization_ID`= NULL WHERE `EMAx_Organization_ID` = '". $connection->quote($this->getID()) ."'");
-		$connection->exec("DELETE FROM `EMAx_Event` WHERE `EMAx_Organization_ID`= '" . $connection->quote($this->getID()) . "'");
-		$connection->exec("DELETE FROM `EMAx_Organization` WHERE `ID`='" . $connection->quote($this->getID()) . "'");
+		$connection->exec("UPDATE `EMAx_Person` SET `EMAx_Organization_ID`= NULL WHERE `EMAx_Organization_ID` = ". $connection->quote($this->getID()) );
+		$connection->exec("DELETE FROM `EMAx_Event` WHERE `EMAx_Organization_ID`= " . $connection->quote($this->getID()) );
+		$connection->exec("DELETE FROM `EMAx_Organization` WHERE `ID`=" . $connection->quote($this->getID()) );
 	}	
 	
 	public function getOrganization()
@@ -222,7 +222,7 @@ class OrganizationModel
 		$listArr = array();
 		foreach($this->OrganizationList as $list)	
 		{
-			$listArr[$list['ID']] = $list['name'];
+			$listArr[] = array( 'id' => $list['ID'], 'name' => $list['name']);
 		}
 		return $listArr;
 	}

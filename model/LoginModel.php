@@ -17,7 +17,7 @@ class LoginModel
 			$name = ucwords(strtolower($id));
 			$sql = "SELECT * FROM `EMAx_Login` WHERE userName=" . $connection->quote($name);
 			$exists = $connection->query($sql);	
-error_log($sql);			
+//error_log($sql);			
 			$existsReturn = $exists->fetch(PDO::FETCH_OBJ);
 			if($existsReturn)
 			{
@@ -61,9 +61,9 @@ error_log($sql);
 		{
 			$sql = "
 				UPDATE `EMAx_Login` SET " .
-				"`userName`='". $connection->quote($this->ClassObjectArg['userName'])  
-				."',`password`='". $connection->quote($this->ClassObjectArg['password'])  
-				."' WHERE `ID`='" . $connection->quote($this->ClassObjectArg['ID']) . "'";			
+				"`userName`=". $connection->quote($this->ClassObjectArg['userName'])  
+				.",`password`=". $connection->quote($this->ClassObjectArg['password'])  
+				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']) ;			
 		}
 		
 		else
@@ -73,8 +73,8 @@ error_log($sql);
 					`userName`, 
 					`password`
 				) VALUES (
-					'". $connection->quote($this->ClassObjectArg['userName']) ."',
-					'". $connection->quote($this->ClassObjectArg['password']) ."'
+					". $connection->quote($this->ClassObjectArg['userName']) .",
+					". $connection->quote($this->ClassObjectArg['password']) ."
 				)";
 		}			
 	
@@ -93,7 +93,7 @@ error_log($sql);
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		/*handle dependancies*/
-		$connection->exec("DELETE FROM `EMAx_Login` WHERE `ID`='" . $connection->quote($this->getID()) . "'");
+		$connection->exec("DELETE FROM `EMAx_Login` WHERE `ID`=" . $connection->quote($this->getID()) );
 	}	
 	
 	public function getuserName()

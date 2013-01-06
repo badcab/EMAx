@@ -34,7 +34,7 @@ class EventModel
 			$grades = array();
 			$option = array();
 
-				$gradeSQL = "SELECT * FROM `EMAx_GradeEventMap` WHERE `EMAx_GradeEventMap`.`EMAx_Event_ID` = '" . $connection->quote($id) . "'";
+				$gradeSQL = "SELECT * FROM `EMAx_GradeEventMap` WHERE `EMAx_GradeEventMap`.`EMAx_Event_ID` = " . $connection->quote($id);
 				$gradeResult =	$connection->query($gradeSQL);
 				$gradeRecords = ($gradeResult) ? $gradeResult->fetchAll() : array() ;
 				foreach($gradeRecords as $record)
@@ -42,7 +42,7 @@ class EventModel
 					$grades[] = (int)$record['EMAx_Grade_ID'];
 				}			
 				
-				$optionSQL = "SELECT * FROM `EMAx_OptionEventMap` WHERE `EMAx_OptionEventMap`.`EMAx_Event_ID` = '" . $connection->quote($id) . "'";
+				$optionSQL = "SELECT * FROM `EMAx_OptionEventMap` WHERE `EMAx_OptionEventMap`.`EMAx_Event_ID` = " . $connection->quote($id);
 				$optionResult = $connection->query($optionSQL);
 				$optionRecords = ($optionResult) ? $optionResult->fetchAll() : array() ;
 				foreach($optionRecords as $record)
@@ -121,18 +121,18 @@ class EventModel
 			}
 				
 			$sql = "
-				UPDATE `EMAx_Event` SET `EMAx_Organization_ID`='". $connection->quote($this->ClassObjectArg['Organization'])  
-				."',`EMAx_Person_ID`='". $connection->quote($this->ClassObjectArg['Person'])  
-				."',`EMAx_RoomLocation_ID`='". $connection->quote($this->ClassObjectArg['RoomLocation'])  
-				."',`EMAx_Login_ID`='". $connection->quote($this->ClassObjectArg['Login'])  
-				."',`startTime`='". $connection->quote($this->ClassObjectArg['startTime'])  
-				."',`endTime`='". $connection->quote($this->ClassObjectArg['endTime'])  
-				."',`attendance`='". $connection->quote($this->ClassObjectArg['attendance'])  
-				."',`havingLunch`='". $connection->quote($this->ClassObjectArg['havingLunch'])  
-				."',`googlURI`='". $connection->quote($googleURI)  
-				."',`hasPaid`='". $connection->quote($this->ClassObjectArg['hasPaid'])  
-				."',`notes`='". $connection->quote($this->ClassObjectArg['notes'])  
-				."' WHERE `ID`='" . $connection->quote($this->ClassObjectArg['ID']) . "'";	
+				UPDATE `EMAx_Event` SET `EMAx_Organization_ID`=". $connection->quote($this->ClassObjectArg['Organization'])  
+				.",`EMAx_Person_ID`=". $connection->quote($this->ClassObjectArg['Person'])  
+				.",`EMAx_RoomLocation_ID`=". $connection->quote($this->ClassObjectArg['RoomLocation'])  
+				.",`EMAx_Login_ID`=". $connection->quote($this->ClassObjectArg['Login'])  
+				.",`startTime`=". $connection->quote($this->ClassObjectArg['startTime'])  
+				.",`endTime`=". $connection->quote($this->ClassObjectArg['endTime'])  
+				.",`attendance`=". $connection->quote($this->ClassObjectArg['attendance'])  
+				.",`havingLunch`=". $connection->quote($this->ClassObjectArg['havingLunch'])  
+				.",`googlURI`=". $connection->quote($googleURI)  
+				.",`hasPaid`=". $connection->quote($this->ClassObjectArg['hasPaid'])  
+				.",`notes`=". $connection->quote($this->ClassObjectArg['notes'])  
+				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']) ;	
 			$success = $connection->exec($sql);
 		}
 		
@@ -174,17 +174,17 @@ class EventModel
 					`hasPaid`, 
 					`notes`
 				) VALUES (
-					'". $connection->quote($this->ClassObjectArg['Organization']) ."',
-					'". $connection->quote($this->ClassObjectArg['Person']) ."',
-					'". $connection->quote($this->ClassObjectArg['RoomLocation']) ."',
-					'". $connection->quote($this->ClassObjectArg['Login']) ."',
-					'". $connection->quote($this->ClassObjectArg['startTime']) ."',
-					'". $connection->quote($this->ClassObjectArg['endTime']) ."',
-					'". $connection->quote($this->ClassObjectArg['attendance']) ."',
-					'". $connection->quote($this->ClassObjectArg['havingLunch']) ."',
-					'". $connection->quote($googleURI) ."',
-					'". $connection->quote($this->ClassObjectArg['hasPaid']) ."',
-					'". $connection->quote($this->ClassObjectArg['notes']) ."'
+					". $connection->quote($this->ClassObjectArg['Organization']) .",
+					". $connection->quote($this->ClassObjectArg['Person']) .",
+					". $connection->quote($this->ClassObjectArg['RoomLocation']) .",
+					". $connection->quote($this->ClassObjectArg['Login']) .",
+					". $connection->quote($this->ClassObjectArg['startTime']) .",
+					". $connection->quote($this->ClassObjectArg['endTime']) .",
+					". $connection->quote($this->ClassObjectArg['attendance']) .",
+					". $connection->quote($this->ClassObjectArg['havingLunch']) .",
+					". $connection->quote($googleURI) ."',
+					". $connection->quote($this->ClassObjectArg['hasPaid']) .",
+					". $connection->quote($this->ClassObjectArg['notes']) ."
 				);";
 			$connection->beginTransaction();
 				$connection->exec($sql);
@@ -248,7 +248,7 @@ class EventModel
 		
 //		$connection->exec("DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
 //		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
-		$connection->exec("DELETE FROM `EMAx_Event` WHERE `ID`='" . $connection->quote($this->getID()) . "'");
+		$connection->exec("DELETE FROM `EMAx_Event` WHERE `ID`=" . $connection->quote($this->getID()));
 	}	
 	
 	public function getOrganization() 

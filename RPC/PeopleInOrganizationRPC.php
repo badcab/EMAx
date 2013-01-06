@@ -7,13 +7,19 @@ $Organization = new OrganizationModel($id);
 $Person = new PersonModel();
 $personList = $Person->getListByOrganization($Organization);
 echo('<select name="dropDownPerson" onchange="setPersonInForm(this)" id="PersonEventDropDown">');
-echo('<option></option>');
+echo('<option value="defultBlank"></option>');
 foreach($personList as $person):
 ?>
 	<option value="<?= $person['id'] ?>"><?= $person['name'] ?></option>
 <?php endforeach; ?>	
 </select>
 <script type="text/javascript" >
-//document.getElementById('PersonEvent').value = $("#PersonEventDropDown").val();
-$("#PersonEventDropDown").val($("#PersonEvent").val());
+if($("#PersonEvent").val())//if there is a person already set for this event
+{
+	$("#PersonEventDropDown").val($("#PersonEvent").val());
+}
+//else
+//{
+//	$("#PersonEventDropDown").val("defultBlank");
+//}
 </script>

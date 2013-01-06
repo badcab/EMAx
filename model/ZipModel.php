@@ -13,7 +13,7 @@ class ZipModel
 		{
 			if(is_null($id)) {return $id;}
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_Zip` WHERE name='" . $connection->quote( $name ) . "')");
+			$exists = $connection->query("SELECT * FROM `EMAx_Zip` WHERE name=" . $connection->quote( $name ) );
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -28,8 +28,8 @@ class ZipModel
 			else
 			{
 				//if(/*lenght is 5 and all are numerical*/){}
-				$connection->exec("INSERT INTO `EMAx_Zip`(`name`) VALUES ('" . $connection->quote( $name ) . "')");
-				$exists = $connection->query("SELECT * FROM `EMAx_Zip` WHERE name='" . $connection->quote( $name ) . "'");
+				$connection->exec("INSERT INTO `EMAx_Zip`(`name`) VALUES (" . $connection->quote( $name ) . ")");
+				$exists = $connection->query("SELECT * FROM `EMAx_Zip` WHERE name=" . $connection->quote( $name ) );
 				$create = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$create->ID;
 			}	
@@ -68,7 +68,7 @@ class ZipModel
 	{
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$connection->exec("DELETE FROM `EMAx_Zip` WHERE `ID`='" . $connection->quote($this->getID()) . "'");
+		$connection->exec("DELETE FROM `EMAx_Zip` WHERE `ID`=" . $connection->quote($this->getID()) );
 	}	
 	
 	public function getZip()

@@ -17,7 +17,7 @@ class OptionModel
 		if(is_string($id))
 		{
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_Option` WHERE name='" . $connection->quote( $name ) . "'");
+			$exists = $connection->query("SELECT * FROM `EMAx_Option` WHERE name=" . $connection->quote( $name ) );
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -31,8 +31,8 @@ class OptionModel
 			
 			else
 			{
-				$connection->exec("INSERT INTO `EMAx_Option`(`name`, `cost`) VALUES ('" . $connection->quote( $name ) . "','". $connection->quote($cost) ."')");
-				$exists = $connection->query("SELECT * FROM `EMAx_Option` WHERE name='" . $connection->quote( $name ) . "'");
+				$connection->exec("INSERT INTO `EMAx_Option`(`name`, `cost`) VALUES (" . $connection->quote( $name ) . ",". $connection->quote($cost) .")");
+				$exists = $connection->query("SELECT * FROM `EMAx_Option` WHERE name=" . $connection->quote( $name ) );
 				$create = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$create->ID;
 			}	
@@ -79,9 +79,9 @@ class OptionModel
 		/*handle dependancies*/
 		$connection->exec("
 			DELETE FROM `EMAx_OptionEventMap` 
-			WHERE `EMAx_OptionEventMap`.`EMAx_Option_ID`= '" . $connection->quote($id) . "'"
+			WHERE `EMAx_OptionEventMap`.`EMAx_Option_ID`= " . $connection->quote($id) 
 		);
-		$connection->exec("DELETE FROM `EMAx_Option` WHERE `ID`='" . $connection->quote($id) . "'");
+		$connection->exec("DELETE FROM `EMAx_Option` WHERE `ID`=" . $connection->quote($id) );
 	}	
 	
 	public function getCost()

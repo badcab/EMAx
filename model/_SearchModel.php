@@ -104,11 +104,11 @@ class _SearchModel
 			$objectToGetForienKey = $record;
 		}
 		
-		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID`='" . $this->connection->quote($id) . "'";
-		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Person_ID`='" . $this->connection->quote($id) . "'";
-		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`='" . 
+		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID`=" . $this->connection->quote($id);
+		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Person_ID`=" . $this->connection->quote($id) ;
+		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`=" . 
 			$this->connection->quote($objectToGetForienKey['EMAx_Organization_ID']) 
-		. "'";
+		;
 
 		$Person = array();
 		$Event = array();
@@ -146,20 +146,20 @@ class _SearchModel
 	{	
 		$id = ($id == '') ? NULL : (int)$id;
 		
-		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Event` WHERE `ID`='". $this->connection->quote($id) ."'");
+		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Event` WHERE `ID`=". $this->connection->quote($id) );
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)	
 		{
 			$objectToGetForienKey = $record;
 		}
 		
-		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID` = '". 
+		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID` = ". 
 			$this->connection->quote($objectToGetForienKey['EMAx_Person_ID']) 
-		."'";
+		;
 		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`ID`='" . $this->connection->quote($id) . "'";
-		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID` = '". 
+		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID` = ". 
 			$this->connection->quote($objectToGetForienKey['EMAx_Organization_ID']) 
-		."'";
+		;
 
 		$Person = array();
 		$Event = array();
@@ -196,9 +196,9 @@ class _SearchModel
 	public function getOrganizationSearch($id = NULL)
 	{
 		$id = ($id == '') ? NULL : (int)$id;
-		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`EMAx_Organization_ID`='" . $this->connection->quote($id) . "'";
-		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Organization_ID`='" . $this->connection->quote($id) . "'";
-		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`='" . $this->connection->quote($id) . "'";
+		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`EMAx_Organization_ID`=" . $this->connection->quote($id) ;
+		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`EMAx_Organization_ID`=" . $this->connection->quote($id) ;
+		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID`=" . $this->connection->quote($id) ;
 		$Person = array();
 		$Event = array();
 		$Organization = array();
@@ -248,7 +248,7 @@ class _SearchModel
 			$date = date('Y-m-d', strtotime($searchString));
 
 			$sqlEvent .= "
-				AND DATE(`EMAx_Event`.`startTime`) = '". $this->connection->quote($date) ."'
+				AND DATE(`EMAx_Event`.`startTime`) = ". $this->connection->quote($date) ."
 				ORDER BY `EMAx_Event`.`startTime` DESC			
 			";
 

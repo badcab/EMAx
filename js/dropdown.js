@@ -1,10 +1,12 @@
 function personAssociatedWithOrg(organization)
 {
+	var orgValue = organization.value;
+	//so we need to allow int to be passed in
 	$.ajax
 	({
   		type: "POST",
   		url: "RPC/PeopleInOrganizationRPC.php",
- 		data: { orgID: organization.value },
+ 		data: { orgID: orgValue },
  		dataType: "html",
 		success:	function(result)
 		{

@@ -15,7 +15,8 @@ class CityModel
 		{
 			if(is_null($id)) {return $id;}
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_City` WHERE name='" . $name . "')");
+			$sql = "SELECT * FROM `EMAx_City` WHERE name=" . $connection->quote( $name );
+			$exists = $connection->query( $sql );
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -29,8 +30,11 @@ class CityModel
 			
 			else
 			{
-				$connection->exec("INSERT INTO `EMAx_City`(`name`) VALUES ('" . $connection->quote( $name ). "')");
-				$exists = $connection->query("SELECT * FROM `EMAx_City` WHERE name='" . $connection->quote( $name ). "'");
+				$sql = "INSERT INTO `EMAx_City`(`name`) VALUES (" . $connection->quote( $name ). ")";
+				$connection->exec( $sql );
+				
+				$sql = "SELECT * FROM `EMAx_City` WHERE name=" . $connection->quote( $name );
+				$exists = $connection->query( $sql );
 				$create = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$create->ID;
 			}	
@@ -66,7 +70,6 @@ class CityModel
 		);
 	}
 
-		
 	public function getID()
 	{
 		return (int)$this->ClassObjectArg['ID'];
@@ -76,8 +79,7 @@ class CityModel
 	{
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		/*handle dependancies*/
-		$connection->exec("DELETE FROM `EMAx_City` WHERE `ID`='" . $this->getID() . "'");
+		$connection->exec("DELETE FROM `EMAx_City` WHERE `ID`=" . $connection->quote( $this->getID() ) );
 	}
 	
 	public function getCity()
@@ -96,7 +98,6 @@ class CityModel
 		$listArr = array();
 		foreach($this->cityList as $list)	
 		{
-//			$listArr[$list['ID']] = $list['name'];
 			$listArr[] = array( 'id' => $list['ID'], 'name' => $list['name']);
 		}
 		return $listArr;

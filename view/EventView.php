@@ -8,9 +8,9 @@
 	<tr>
 		<td>Organization</td>
 		<td>
-		<select id="Organization" name="Organization" onchange="personAssociatedWithOrg(this)" id="OrganizationEventDropDown">
+		<select id="Organization" name="Organization" onchange="personAssociatedWithOrg(this)">
 			<?php foreach($orgList as $org): ?>
-				<option value="<?php echo(array_search($org, $orgList)) ?>"><?= $org ?></option>
+				<option value="<?= $org['id'] ?>"><?= $org['name'] ?></option>
 			<?php endforeach; ?>		
 		</select>		
 		</td>	
@@ -21,7 +21,7 @@
 		<td>Person</td>
 		<input type="hidden" id="PersonEvent" value="<?= $Person->getID() ?>" name="Person" />
 		<td id="person">
-			<select name="dropDownPerson" onchange="setPersonInForm(this)" onload="setPersonInForm(this)" id="PersonEventDropDown">
+			<select name="dropDownPerson" onchange="setPersonInForm(this)" id="PersonEventDropDown">
 			<!-- this is not sending information, how odd -->
 			</select>
 		</td>
@@ -126,10 +126,23 @@
 	</tr>	
 	<script type="text/javascript" > 
 		datepicker(); 
-		personAssociatedWithOrg($('#Organization')); 	
+	
+	
+//$('select[name="Organization"] option[selected="selected"]').each(
+//    function() {
+//        $(this).removeAttr('selected');
+//    }
+//);
+//$("select[name='Organization'] option:first").attr('selected','selected');	
+	
+	
+alert($('select[name="Organization"]').val() + " is the value of org");
+//personAssociatedWithOrg($('select[name="Organization"]')); //need to change
+
+
 		<?php if($id):?>
 			setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);
-			personAssociatedWithOrg($('#Organization'));
+			personAssociatedWithOrg($('select[name="Organization"]'));
 
 			<?php if($lunch): ?>
 			$("#LunchCB").prop("checked", true);

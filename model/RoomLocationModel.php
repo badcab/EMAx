@@ -16,7 +16,7 @@ class RoomLocationModel
 		if(is_string($id))
 		{
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name='" . $connection->quote($name) . "'");
+			$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name=" . $connection->quote($name) );
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -30,8 +30,8 @@ class RoomLocationModel
 			
 			else
 			{
-				$create = $connection->exec("INSERT INTO `EMAx_RoomLocation`(`name`, `cost`) VALUES ('" . $connection->quote($name) . "','" . $connection->quote($cost) . "')");
-				$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name='" . $connection->quote($name) . "'");
+				$create = $connection->exec("INSERT INTO `EMAx_RoomLocation`(`name`, `cost`) VALUES (" . $connection->quote($name) . "," . $connection->quote($cost) . ")");
+				$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name=" . $connection->quote($name) );
 				$createReturn = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$createReturn->ID;
 			}	
@@ -82,9 +82,9 @@ class RoomLocationModel
 		$connection->exec("
 			UPDATE `EMAx_Event` 
 			SET `EMAx_Event`.`EMAx_RoomLocation_ID`= NULL 
-			WHERE `EMAx_Event`.`EMAx_RoomLocation_ID`= '" . $connection->quote($id) . "'"
+			WHERE `EMAx_Event`.`EMAx_RoomLocation_ID`= " . $connection->quote($id)
 		);
-		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`='" . $connection->quote($id) . "'");
+		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`=" . $connection->quote($id) );
 	}	
 	
 	public function getRoomLocation()

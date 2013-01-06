@@ -17,7 +17,7 @@ class GradeModel
 		if(is_string($id))
 		{
 			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name='" . $connection->quote( $name ) . "'");
+			$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name=" . $connection->quote( $name ) );
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -31,8 +31,8 @@ class GradeModel
 			
 			else
 			{
-				$connection->exec("INSERT INTO `EMAx_Grade`(`name`, `cost`) VALUES ('" . $connection->quote( $name ) . "','". $connection->quote($cost) ."')");
-				$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name='" . $connection->quote( $name ) . "'");
+				$connection->exec("INSERT INTO `EMAx_Grade`(`name`, `cost`) VALUES (" . $connection->quote( $name ) . ",". $connection->quote($cost) .")");
+				$exists = $connection->query("SELECT * FROM `EMAx_Grade` WHERE name=" . $connection->quote( $name ) );
 				$create = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$create->ID;
 			}	
@@ -78,9 +78,9 @@ class GradeModel
 		$id = $this->getID();
 		$connection->exec("
 			DELETE FROM `EMAx_GradeEventMap` 
-			WHERE `EMAx_GradeEventMap`.`EMAx_Grade_ID`= '" . $connection->quote($id) . "'"
+			WHERE `EMAx_GradeEventMap`.`EMAx_Grade_ID`= " . $connection->quote($id) 
 		);
-		$connection->exec("DELETE FROM `EMAx_Grade` WHERE `ID`='" . $connection->quote($id) . "'");
+		$connection->exec("DELETE FROM `EMAx_Grade` WHERE `ID`=" . $connection->quote($id) );
 	}	
 	
 	public function getCost()
