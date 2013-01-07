@@ -27,22 +27,20 @@ class WriteEventModule
 		$Event->setattendance($dataArray['attendance']);
 		$Event->sethavingLunch($dataArray['Lunch']);
 		$Event->sethasPaid($dataArray['Paid']);
+		$Event->setroomReservation($dataArray['roomReservation']);
 		$Event->setnotes($dataArray['notes']);
 		
 		$Event->setstartTime($this->make_Time($dataArray['startTime'], $dataArray['Date']));
 		$Event->setendTime($this->make_Time($dataArray['endTime'], $dataArray['Date']));
 		$Event->setGrade($dataArray['gradeEventMapHiddenText']);
 		$Event->setOption($dataArray['optionEventMapHiddenText']);
-		
 
 		$Event->setOrganization($Organization);
 		$Event->setPerson($Person);
 		$Event->setRoomLocation($RoomLocation);
 		$Event->setLogin($Login);
-
-		$Event->writeData();
 		
-		//stuff to handle options and grades
+		$Event->writeData();
 		
 		unset($Event);
 		unset($Organization);

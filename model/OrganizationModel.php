@@ -124,8 +124,8 @@ class OrganizationModel
 	{
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$connection->exec("UPDATE `EMAx_Person` SET `EMAx_Organization_ID`= NULL WHERE `EMAx_Organization_ID` = ". $connection->quote($this->getID()) );
-		$connection->exec("DELETE FROM `EMAx_Event` WHERE `EMAx_Organization_ID`= " . $connection->quote($this->getID()) );
+		$connection->exec("UPDATE `EMAx_Person` SET `EMAx_Organization_ID`= NULL WHERE `EMAx_Organization_ID` =". $connection->quote($this->getID()) );
+		$connection->exec("DELETE FROM `EMAx_Event` WHERE `EMAx_Organization_ID`=" . $connection->quote($this->getID()) );
 		$connection->exec("DELETE FROM `EMAx_Organization` WHERE `ID`=" . $connection->quote($this->getID()) );
 	}	
 	

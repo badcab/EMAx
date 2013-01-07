@@ -14,7 +14,7 @@ function emailValid(field)
     }
 }
 
-function phoneValid(field)//to to change selector to this and pass this in as peramiter
+function phoneValid(field)
 {
 	phonenum = field.value;
 

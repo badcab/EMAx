@@ -22,6 +22,7 @@ class EventModel
 		{
 			$Organization = $currentDBvalues->EMAx_Organization_ID;
 			$Person = $currentDBvalues->EMAx_Person_ID;
+			$roomReservation = $currentDBvalues->roomReservation;
 			$RoomLocation = $currentDBvalues->EMAx_RoomLocation_ID;
 			$Login = $currentDBvalues->EMAx_Login_ID;
 			$startTime = $currentDBvalues->startTime;
@@ -56,6 +57,7 @@ class EventModel
 			$id = NULL;
 			$Organization = NULL;
 			$Person = NULL;
+			$roomReservation = NULL;
 			$RoomLocation = NULL;
 			$Login = NULL; 
 			$startTime = NULL;
@@ -83,7 +85,8 @@ class EventModel
 			'hasPaid' => $hasPaid,
 			'notes' => $notes,
 			'grades' => $grades,
-			'option' => $option
+			'option' => $option,
+			'roomReservation' => $roomReservation
 		);
 	}
 	
@@ -131,7 +134,8 @@ class EventModel
 				.",`havingLunch`=". $connection->quote($this->ClassObjectArg['havingLunch'])  
 				.",`googlURI`=". $connection->quote($googleURI)  
 				.",`hasPaid`=". $connection->quote($this->ClassObjectArg['hasPaid'])  
-				.",`notes`=". $connection->quote($this->ClassObjectArg['notes'])  
+				.",`notes`=". $connection->quote($this->ClassObjectArg['notes']) 
+				.",`roomReservation`=" . $connection->quote($this->ClassObjectArg['roomReservation']) 
 				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']) ;	
 			$success = $connection->exec($sql);
 		}
@@ -172,7 +176,8 @@ class EventModel
 					`havingLunch`, 
 					`googlURI`, 
 					`hasPaid`, 
-					`notes`
+					`notes`,
+					`roomReservation`
 				) VALUES (
 					". $connection->quote($this->ClassObjectArg['Organization']) .",
 					". $connection->quote($this->ClassObjectArg['Person']) .",
@@ -184,7 +189,8 @@ class EventModel
 					". $connection->quote($this->ClassObjectArg['havingLunch']) .",
 					". $connection->quote($googleURI) ."',
 					". $connection->quote($this->ClassObjectArg['hasPaid']) .",
-					". $connection->quote($this->ClassObjectArg['notes']) ."
+					". $connection->quote($this->ClassObjectArg['notes']) .",
+					". $connection->quote($this->ClassObjectArg['roomReservation']) ."
 				);";
 			$connection->beginTransaction();
 				$connection->exec($sql);
@@ -307,17 +313,17 @@ class EventModel
 	
 	public function getattendance() 
 	{
-		return $this->ClassObjectArg['attendance'];
+		return (int)$this->ClassObjectArg['attendance'];
 	}
 	
 	public function gethavingLunch() 
 	{
-		return $this->ClassObjectArg['havingLunch'];
+		return (int)$this->ClassObjectArg['havingLunch'];
 	}
 	
 	public function gethasPaid() 
 	{
-		return $this->ClassObjectArg['hasPaid'];
+		return (int)$this->ClassObjectArg['hasPaid'];
 	}
 	
 	public function getnotes() 
@@ -359,26 +365,37 @@ class EventModel
 	
 	public function setattendance($value) //force to int
 	{
-		$this->ClassObjectArg['attendance'] = $value;		
+		$this->ClassObjectArg['attendance'] = (int)$value;		
 	}
 	
 	public function sethavingLunch($value) 
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['havingLunch'] = $value;		
+		$this->ClassObjectArg['havingLunch'] = (int)$value;		
 	}
 	
 	public function sethasPaid($value) 
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['hasPaid'] = $value;		
+		$this->ClassObjectArg['hasPaid'] = (int)$value;		
 	}
 	
 	public function setnotes($value) 
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['notes'] = ($value);		
+		$this->ClassObjectArg['notes'] = $value;		
 	}
+	
+	public function getroomReservation()
+	{
+		return (int)$this->ClassObjectArg['roomReservation'];
+	}
+	
+	public function setroomReservation($value)
+	{
+		$this->ClassObjectArg['roomReservation'] = (int)$value;
+	}
+	
 }
  
 ?>

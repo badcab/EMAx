@@ -20,16 +20,10 @@
 ?>
 	<title>EMAx Event Management Application eXtended</title>	
 	<link type="text/css" href="css/EMAx.css" rel="stylesheet" />
-	
-<!--
-	<script type="text/javascript" src="../jQuery/jquery.min.js"></script>
-	<script type="text/javascript" src="../jQuery/jquery-ui.min.js"></script>
-	<link type="text/css" href="../jquery-ui.css" rel="stylesheet" />
--->
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-	<link type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css" rel="stylesheet" />
+	<script src="<?= EMAxSTATIC::$PATH_JQUERY ?>"></script>
+	<script src="<?= EMAxSTATIC::$PATH_JQUERY_UI ?>"></script>
+	<link type="text/css" href="<?= EMAxSTATIC::$PATH_JQUERY_UI_CSS ?>" rel="stylesheet" />
 	
 	<script type="text/javascript" src="js/valid.js"></script>
 	<script type="text/javascript" src="js/eventAdd.js"></script> 

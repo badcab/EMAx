@@ -1,7 +1,16 @@
 function personAssociatedWithOrg(organization)
 {
-	var orgValue = organization.value;
-	//so we need to allow int to be passed in
+	var orgValue;
+
+	if(typeof(organization)=='string')
+	{	
+		orgValue = organization;
+	}
+	else
+	{
+		orgValue = organization.value;
+	}
+
 	$.ajax
 	({
   		type: "POST",
@@ -10,7 +19,7 @@ function personAssociatedWithOrg(organization)
  		dataType: "html",
 		success:	function(result)
 		{
-			$("#PersonEventDropDown").remove();
+			$('select[name="dropDownPerson"]', this.form).remove();
 			$("#person").html(result);
 		},
 		error: function()
@@ -27,44 +36,35 @@ function setDropDownValue(dropDownObj, valueToSet)
 
 function setEndTimeAfterStartTime(endTime)
 {
-//	var startTime = document.getElementById("startTime");
+	var startTime = $('select[name="startTime"]', this.form);
 
-//	if(startTime.value > endTime.value)
-//	{
-//		startTime.value = endTime.value;
-//	}
-
-	if($('#startTime').val() > $(endTime).val())
+	if(startTime.value > endTime.value)
 	{
-		$('#startTime').val($(endTime).val());
+		startTime.value = endTime.value;
+	}
+
+	if($('select[name="startTime"]', this.form).val() > $(endTime).val())
+	{
+		$('select[name="startTime"]', this.form).val($(endTime).val());
 	}		
 	
 }
 
-function setPersonDropDown(orgDropDown)
-{
-		//make an ajax call for a list of people who work for the value (id) of the org and set it
-		
-		//we will need an RPC call here
-}
-
 function setPersonInForm(dropdown)
 {
-//	alert(dropdown.value);
-	$('#PersonEvent').val($(dropdown).val());
+	$('select[name="Person"]', this.form).val($(dropdown).val());
 }
 
 function setTimePlus2Hr(feild)
 {
-	var endTime = document.getElementById("endTime");
+	var endTime = $('select[name="endTime"]', this.form);
 	var startTimePlus = parseInt(feild.value) + (900 * 8);
 	var maxTime = 1352997900;
 	
-//	if(startTimePlus > maxTime)
-//	{
-//		endTime.value = maxTime;
-//		return;
-//	}
-	
+	if(startTimePlus > maxTime)
+	{
+		endTime.value = maxTime;
+		return;
+	}	
 	endTime.value = startTimePlus;	
 }

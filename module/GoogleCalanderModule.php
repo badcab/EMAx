@@ -1,4 +1,5 @@
 <?php 
+require_once('configure/EMAxSTATIC.php');
 class GoogleCalanderModule
 {
 	private $service;
@@ -6,9 +7,7 @@ class GoogleCalanderModule
 	
 	function __construct()
 	{
-
-		$path = '../ZendGdata-1.10.5/library';
-		$oldPath = set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+		$oldPath = set_include_path(get_include_path() . PATH_SEPARATOR . EMAxSTATIC::$PATH_ZEND);
 		
 		require_once ('Zend/Loader.php');
 		Zend_Loader::loadClass('Zend_Gdata');

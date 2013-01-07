@@ -21,9 +21,6 @@
 		<td>Person</td>
 		<input type="hidden" id="PersonEvent" value="<?= $Person->getID() ?>" name="Person" />
 		<td id="person">
-			<select name="dropDownPerson" onchange="setPersonInForm(this)" id="PersonEventDropDown">
-			<!-- this is not sending information, how odd -->
-			</select>
 		</td>
 		<td></td>	
 	</tr>
@@ -100,7 +97,7 @@
 	<tr>	
 		<td>Room Reservation</td>
 		<td><input type="checkbox" name="roomReservationCB" id="roomReservationCB"  onchange="checkBoxFix(this, 'roomReservation')" />
-			 <input type="hidden" name="roomReservation" id="roomReservation" value="" />	
+			 <input type="hidden" name="roomReservation" id="roomReservation" value="<?= $roomRes ?>" />	
 		</td>	
 	</tr>
 	
@@ -125,35 +122,28 @@
 	</td>
 	</tr>	
 	<script type="text/javascript" > 
-		datepicker(); 
-	
-	
-//$('select[name="Organization"] option[selected="selected"]').each(
-//    function() {
-//        $(this).removeAttr('selected');
-//    }
-//);
-//$("select[name='Organization'] option:first").attr('selected','selected');	
-	
-	
-alert($('select[name="Organization"]').val() + " is the value of org");
-//personAssociatedWithOrg($('select[name="Organization"]')); //need to change
-
-
+		datepicker(); 	
+		personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
+		
 		<?php if($id):?>
 			setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);
-			personAssociatedWithOrg($('select[name="Organization"]'));
+			personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
 
 			<?php if($lunch): ?>
 			$("#LunchCB").prop("checked", true);
 			<?php endif; ?>
-			
+
+			<?php if($roomRes): ?>
+			$("#roomReservationCB").prop("checked", true);
+			<?php endif; ?>
+
 			<?php if($prepay): ?>
 			$("#PaidCB").prop("checked", true);
 			<?php endif; ?>
+			
 			setDropDownValue($('select[name="dropDownPerson"]', this.form), <?= $Person->getID() ?>);				
-			setPersonInForm($('#PersonEventDropDown')); 
-			$('#PersonEventDropDown').val(<?= $Person->getID() ?>);
+setPersonInForm($('#PersonEventDropDown')); 
+$('#PersonEventDropDown').val(<?= $Person->getID() ?>);
 			setDropDownValue($('select[name="RoomLocation"]', this.form), <?= $RoomLocation->getID() ?>); 
 			setDropDownValue($('select[name="attendance"]', this.form), <?= $Event->getattendance() ?>); 
 			setDropDownValue($('select[name="startTime"]', this.form), <?= $startTime ?>);	
@@ -161,7 +151,7 @@ alert($('select[name="Organization"]').val() + " is the value of org");
 		<?php endif; ?>
 		
 		<?php if(!$id):?>
-			setTimePlus2Hr($('#startTime'));  
+			setTimePlus2Hr($('select[name="startTime"]', this.form));  
 		<?php endif; ?>	
 	</script>
 </form>

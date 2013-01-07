@@ -29,6 +29,7 @@ class EventController
 		$roomList = $RoomLocation->getList();
 		$prepay = ($Event->gethasPaid()) ? 1 : 0;
 		$lunch = ($Event->gethavingLunch()) ? 1 : 0;
+		$roomRes = 0; // ($Event->getroomReservation()) ? 1 : 0;
 		$selectedOptions = implode(',', $Event->getOption());
 		$selectedGrades = implode(',', $Event->getGrade());
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
