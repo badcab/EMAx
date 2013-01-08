@@ -20,7 +20,7 @@ class WriteEventModule
 		
 		$Event = new EventModel((int)$dataArray['id']);
 		$Organization = new OrganizationModel((int)$dataArray['Organization']);
-		$Person = new PersonModel((int)$dataArray['Person']);
+		$Person = new PersonModel((int)$dataArray['dropDownPerson']);
 		$RoomLocation = new RoomLocationModel((int)$dataArray['RoomLocation']);
 		$Login = new LoginModel($_SESSION['user']);
 		

@@ -1,6 +1,5 @@
 function collectFormDataAjax(form)
 {
-alert($(form).serialize() + " is the serialized form");	
 	$.ajax
 	({
 		type: 'POST',
@@ -9,17 +8,17 @@ alert($(form).serialize() + " is the serialized form");
 		success:	function(result)
 		{
 			$("#tooltip").html("Data successfully send to data base");
-//			loadContent('RPC/DefaultViewRPC.php');
 
-alert(result + " is the id returned " + $('[name="table"]', form).val());
-if(result)
-{
-loadIsolatedContent(result, $('[name="table"]',this.form).val() );
-}
-else
-{
-alert('error collectFormDataAjax line 20');	
-}
+//alert(result + " is the id returned " + $('[name="table"]', form).val());
+			if(result)
+			{
+				loadIsolatedContent(result, $('[name="table"]',this.form).val() );
+			}
+			else
+			{
+				alert('error data not saved, make sure you filled everything out something proper!');
+				$("#tooltip").html('error data not saved, make sure you filled everything out something proper!');	
+			}
 		},
 		error: function()
 		{

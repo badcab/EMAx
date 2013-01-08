@@ -94,7 +94,8 @@ class EventModel
 	{
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-			
+
+		$googleURI - NULL;
 		$Organization = $this->getOrganization(); 
 		$Location = $this->getRoomLocation();
 		
@@ -187,21 +188,30 @@ class EventModel
 					". $connection->quote($this->ClassObjectArg['endTime']) .",
 					". $connection->quote($this->ClassObjectArg['attendance']) .",
 					". $connection->quote($this->ClassObjectArg['havingLunch']) .",
-					". $connection->quote($googleURI) ."',
+					". $connection->quote($googleURI) .",
 					". $connection->quote($this->ClassObjectArg['hasPaid']) .",
 					". $connection->quote($this->ClassObjectArg['notes']) .",
 					". $connection->quote($this->ClassObjectArg['roomReservation']) ."
 				);";
-			$connection->beginTransaction();
-				$connection->exec($sql);
-				$lastInsertedID = $connection->lastInsertId();
-			$connection->commit();
-			$this->ClassObjectArg['ID'] = (int)$lastInsertedID;
-			
-			$success = $lastInsertedID;
-//error_log($sql);
-//error_log($lastInsertedID . ' is the ID of the last inserted event' );
-
+	
+			$isRoomAvalible = $this->doubleBookProtection(
+				$this->ClassObjectArg['startTime'], 
+				$this->ClassObjectArg['endTime'], 
+				$this->ClassObjectArg['RoomLocation']
+			);	
+			if($isRoomAvalible)
+			{
+				$connection->beginTransaction();
+					$connection->exec($sql);
+					$lastInsertedID = $connection->lastInsertId();
+				$connection->commit();
+				$this->ClassObjectArg['ID'] = (int)$lastInsertedID;
+				$success = $lastInsertedID;
+			}
+			else 
+			{
+				$success = FALSE;	
+			}
 		}	
 
 /*		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
@@ -255,6 +265,12 @@ class EventModel
 //		$connection->exec("DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
 //		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
 		$connection->exec("DELETE FROM `EMAx_Event` WHERE `ID`=" . $connection->quote($this->getID()));
+	}	
+	
+	private function doubleBookProtection($startTime, $endTime, $roomID)
+	{
+		//do a quick check to see if room is already booked return true it there is going to be a problem and false if it is open
+		return TRUE; //for now we will always return true	
 	}	
 	
 	public function getOrganization() 

@@ -59,12 +59,12 @@ function setTimePlus2Hr(feild)
 {
 	var endTime = $('select[name="endTime"]', this.form);
 	var startTimePlus = parseInt(feild.value) + (900 * 8);
-	var maxTime = 1352997900;
+//	var maxTime = 1352997900;
 	
-	if(startTimePlus > maxTime)
-	{
-		endTime.value = maxTime;
-		return;
-	}	
+//	if(startTimePlus > maxTime)
+//	{
+//		endTime.value = maxTime;
+//		return;
+//	}	
 	endTime.value = startTimePlus;	
 }
