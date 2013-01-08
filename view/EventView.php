@@ -1,6 +1,7 @@
 <div>
-<table>
 <form id="eventForm">
+<table>
+
 <input type="hidden" name="id" value="<?= $Event->getID() ?>" />
 <input type="hidden" name="table" value="Event" />
 <input type="hidden" name="optionEventMapHiddenText" id="optionEventMapHiddenText" value="<?= $selectedOptions ?>" />
@@ -154,6 +155,7 @@ $('#PersonEventDropDown').val(<?= $Person->getID() ?>);
 			setTimePlus2Hr($('select[name="startTime"]', this.form));  
 		<?php endif; ?>	
 	</script>
-</form>
+
 </table>
+</form>
 </div>

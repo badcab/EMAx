@@ -38,11 +38,8 @@ class WritePersonModule
 		$Person->setCity($City);
 
 		$Person->writeData();
-		unset($Person);
-		unset($Organization);
-		unset($State);
-		unset($City);
-		unset($Zip);
+		
+		return $Person->getID();
 	}
 }
 ?>

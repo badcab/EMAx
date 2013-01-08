@@ -34,10 +34,7 @@ class WriteOrganizationModule
 		
 		$Organization->writeData();
 		
-		unset($Organization);
-		unset($City);
-		unset($State);
-		unset($Zip);
+		return $Organization->getID();
 
 	}
 }

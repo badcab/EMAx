@@ -1,6 +1,6 @@
 <div>
-<table>
 <form id="orgForm">
+<table>
 <input type="hidden" name="id" value="<?= $Organization->getID() ?>" />
 <input type="hidden" name="table" value="Organization" />
 	<tr>
@@ -66,6 +66,6 @@
 			setDropDownValue($('select[name="State"]', this.form), <?= $State->getID() ?>);				
 		</script>
 	<?php endif; ?>
-</form>
 </table>
+</form>
 </div>

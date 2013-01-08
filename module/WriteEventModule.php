@@ -41,12 +41,8 @@ class WriteEventModule
 		$Event->setLogin($Login);
 		
 		$Event->writeData();
-		
-		unset($Event);
-		unset($Organization);
-		unset($Person);
-		unset($RoomLocation);
-		unset($Login);
+error_log($Event->getID() . ' id in EventModule');		
+		return $Event->getID();
 	}
 	
 	private function make_Time($time, $day)

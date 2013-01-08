@@ -1,6 +1,6 @@
 <div>
-<table>
 <form id="personForm">
+<table>
 <input type="hidden" name="id" value="<?= $Person->getID() ?>" />
 <input type="hidden" name="table" value="Person" />
 	<tr>
@@ -73,7 +73,6 @@
 	</tr>
 	<tr>
 	<td>
-	
 		<input type="button" value="Save" class="crudPerson" onclick="collectFormDataAjax(this.form)"/>
 		<input type="button" value="Clear" class="crudPerson" onclick="clearFormData(this.form)"/> 
 
@@ -87,6 +86,6 @@
 			setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);						
 		</script>
 	<?php endif; ?>	
-</form>
 </table>
+</form>
 </div>
