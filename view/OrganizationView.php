@@ -10,7 +10,7 @@
 	
 	<tr>
 		<td>phoneNumber</td><!-- format validater js -->
-		<td><input type="text" name="phoneNumber" value="<?= $Organization->getphoneNumber() ?>" onblur="phoneValid(this)"/></td>	
+		<td><input type="text" name="phoneNumber" value="<?= $Organization->getphoneNumber() ?>" onblur="phoneValid(this, <?= $areaCode ?>)"/></td>	
 	</tr>
 	
 	<tr>

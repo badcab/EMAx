@@ -17,7 +17,7 @@ class PersonController
 			require_once('../view/LoginView.php');
 			return;
 		}
-		
+		$areaCode = EMAxSTATIC::$AREA_CODE;
 		$Person = new PersonModel($id);
 		$State = $Person->getState();
 		$Organization = $Person->getOrganization();

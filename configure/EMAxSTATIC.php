@@ -5,6 +5,7 @@ class EMAxSTATIC
 	public static $COUNTY = 'Outagamie';
 	public static $BASECOST = 0.00;
 	public static $DEFAULT_STATE = 'Wisconsin';
+	public static $AREA_CODE = '920';
 	
 	public static $USE__EMAIL = FALSE;
 		public static $USE_GOOGLE_EMAIL = FALSE;

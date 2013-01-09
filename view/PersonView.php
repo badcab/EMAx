@@ -20,12 +20,12 @@
 	
 	<tr>
 		<td>Phone Number</td><!-- valid check -->
-		<td><input type="text" name="phoneNumber" value="<?= $Person->getphoneNumber() ?>" onblur="phoneValid(this)"/></td>	
+		<td><input type="text" name="phoneNumber" value="<?= $Person->getphoneNumber() ?>" onblur="phoneValid(this, <?= $areaCode ?>)"/></td>	
 	</tr>
 	
 	<tr> 
 		<td>Secondary Phone</td><!-- valid check -->
-		<td><input type="text" name="secondPhoneNumber" value="<?= $Person->getsecondaryPhoneNumber() ?>" onblur="phoneValid(this)"/></td>	
+		<td><input type="text" name="secondPhoneNumber" value="<?= $Person->getsecondaryPhoneNumber() ?>" onblur="phoneValid(this, <?= $areaCode ?>)"/></td>	
 	</tr>
 	
 	<tr>

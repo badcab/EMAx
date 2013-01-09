@@ -1,8 +1,3 @@
-function changePassword(oldPass, newPass)//do i even use this?
-{
-	
-}
-
 function loadChangePasswordModal()
 {
 	$.ajax
@@ -15,7 +10,6 @@ function loadChangePasswordModal()
 			$(result).dialog({										
 				open: function()
 				{
-					
 				},
 				close: function()
 				{
@@ -47,7 +41,6 @@ function loadChangePasswordModal()
 								}
 							});					
 						$( this ).dialog( "close" );
-						
 					}
 				}
 			});

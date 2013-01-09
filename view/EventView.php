@@ -38,7 +38,7 @@
 	</tr>
 
 	<tr>
-		<td>Login</td>
+		<td>Booked By</td>
 		<td><?= $LoginUser ?></td><!-- session variable not working for some reason -->
 		<input type="hidden" name="Login" value="<?= $_SESSION['user'] ?>"/>
 	</tr>
@@ -117,14 +117,18 @@
 	<td>
 		<input type="button" value="Save" class="crudEvent" onclick="collectFormDataAjax(this.form)"/>
 		<input type="button" value="Clear" class="crudEvent" onclick="clearFormData(this.form)"/> 
+		<input type="text" value="Grades Selected: none" id="gradeShowPrint" class="showPrint" />
+		<input type="text" value="Options Selected: none" id="optionShowPrint" class="showPrint" />
 	</td>
 	<td >
-	
+		
 	</td>
 	</tr>	
 	<script type="text/javascript" > 
 		datepicker(); 	
 		personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
+		gradeHiddenForPrint($('#gradeEventMapHiddenText').val());
+		optionHiddenForPrint($('#optionEventMapHiddenText').val());
 		
 		<?php if($id):?>
 			setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);

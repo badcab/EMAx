@@ -18,7 +18,7 @@ class OrganizationController
 			require_once('../view/LoginView.php');
 			return;
 		}
-
+		$areaCode = EMAxSTATIC::$AREA_CODE;
 		$Organization = new OrganizationModel((int)$id);
 		$City = $Organization->getCity();
 		$State = $Organization->getState();

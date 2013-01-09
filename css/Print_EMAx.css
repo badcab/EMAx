@@ -1,0 +1,30 @@
+body 
+{
+	margin:0; 
+	padding:0; 
+	line-height: 1.4em; 
+	word-spacing:1px; 
+	letter-spacing:0.2px; 
+	font: 16px Arial, Helvetica,"Lucida Grande", serif; 
+	color: #000;
+}
+
+.noPrint
+{ 
+	display: none; 
+}
+
+input[type="text"], select, textarea, .showPrint 
+{
+	background:none!important;
+	border:none; 
+	padding:0!important;
+	font-size: small;
+	font-style: italic;
+	display: block;
+}
+
+input[type="button"]
+{
+	display: none;	
+}

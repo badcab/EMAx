@@ -9,7 +9,6 @@ function collectFormDataAjax(form)
 		{
 			$("#tooltip").html("Data successfully send to data base");
 
-//alert(result + " is the id returned " + $('[name="table"]', form).val());
 			if(result)
 			{
 				loadIsolatedContent(result, $('[name="table"]',this.form).val() );
