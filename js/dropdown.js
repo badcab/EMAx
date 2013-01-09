@@ -36,18 +36,12 @@ function setDropDownValue(dropDownObj, valueToSet)
 
 function setEndTimeAfterStartTime(endTime)
 {
-	var startTime = $('select[name="startTime"]', this.form);
+	var startTime = $('select[name="startTime"]', endTime.form);
 
-	if(startTime.value > endTime.value)
+	if(parseInt($(startTime).val()) > parseInt($(endTime).val()))
 	{
-		startTime.value = endTime.value;
+		$(startTime).val($(endTime).val());
 	}
-
-	if($('select[name="startTime"]', this.form).val() > $(endTime).val())
-	{
-		$('select[name="startTime"]', this.form).val($(endTime).val());
-	}		
-	
 }
 
 function setPersonInForm(dropdown)
@@ -56,15 +50,9 @@ function setPersonInForm(dropdown)
 }
 
 function setTimePlus2Hr(feild)
-{
-	var endTime = $('select[name="endTime"]', this.form);
-	var startTimePlus = parseInt(feild.value) + (900 * 8);
-//	var maxTime = 1352997900;
-	
-//	if(startTimePlus > maxTime)
-//	{
-//		endTime.value = maxTime;
-//		return;
-//	}	
-	endTime.value = startTimePlus;	
+{	
+	var endTime = parseInt($(feild).val()) + (900 * 8);
+var maxEndTime = parseInt($(":last", feild).val() );
+endTime = (endTime > maxEndTime) ? maxEndTime : endTime ;	
+	$('select[name="endTime"]', feild.form).val(endTime);
 }
