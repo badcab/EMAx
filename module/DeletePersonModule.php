@@ -9,6 +9,5 @@ class DeletePersonModule
 		$Person->deleteRecord();
 		unset($Person);
 	}
-
 }
 ?>

@@ -2,6 +2,21 @@
 require_once('../configure/EMAxSTATIC.php');
 class MailModule
 {
+	
+if(EMAxSTATIC::$USE_GOOGLE_EMAIL)
+{
+	require_once('../module/GoogleMailModule.php');
+	$GoogleMail = new GoogleMailModule();
+	$GoogleMail->activate($this->getID());
+}
+
+if(EMAxSTATIC::$USE_IMAP_EMAIL)
+{
+	//MHNC will need to go here
+}	
+	
+	
+	
 	require_once(EMAxSTATIC::$PATH_PHPMAILER);
 	$mail = new PHPMailer();
  
