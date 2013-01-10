@@ -1,12 +1,54 @@
-function eventAddGrade()
+function hiddenForPrint(table)
 {
-	unifiedEventAdd('Grade', 'gradeEventMapHiddenText');	
-	gradeHiddenForPrint($('#gradeEventMapHiddenText').val());
+	if(table == 'Option')
+	{
+		optionHiddenForPrint();
+	}
+	
+	if(table == 'Grade')
+	{
+		gradeHiddenForPrint();
+	}
 }
 function eventAddOption()
 {
 	unifiedEventAdd('Option', 'optionEventMapHiddenText');
-	optionHiddenForPrint($('#optionEventMapHiddenText').val());
+}
+function optionHiddenForPrint()
+{
+	if($('#optionEventMapHiddenText').val() != '')
+	{		
+		hiddenForPrintPrivate($('#optionEventMapHiddenText').val(), 'Option', 'optionShowPrint');
+	}
+}
+function eventAddGrade()
+{
+	unifiedEventAdd('Grade', 'gradeEventMapHiddenText');	
+}
+function gradeHiddenForPrint()
+{
+	if($('#gradeEventMapHiddenText').val() != '')
+	{
+		hiddenForPrintPrivate($('#gradeEventMapHiddenText').val(), 'Grade', 'gradeShowPrint');
+	}
+}
+function hiddenForPrintPrivate(IDstring, tableName, IDtarget)
+{
+	$('#' + IDtarget ).html(tableName + "s Selected: none");
+	$.ajax
+	({
+		type: 'POST',
+		url: 'RPC/HiddenPrintRPC.php' ,
+		data: {ids: IDstring, table: tableName},
+		success:	function(result)
+		{
+			$('#' + IDtarget ).html(tableName + "s Selected: " + result);
+		},
+		error: function()
+		{
+			$('#' + IDtarget ).html(tableName + "s Selected: Error");
+		}
+	});
 }
 function unifiedEventAdd(tableName, writeTargetHiddenID)
 {
@@ -47,7 +89,8 @@ function unifiedEventAdd(tableName, writeTargetHiddenID)
 						{ 
 							selectedArr.push(serialData[i].name);
 						}	
-						$('#' + writeTargetHiddenID ).val(selectedArr.toString());						
+						$('#' + writeTargetHiddenID ).val(selectedArr.toString());	
+						hiddenForPrint(tableName);		
 						$( this ).dialog( "close" );
 					}
 				}

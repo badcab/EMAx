@@ -44,7 +44,6 @@
 	<script type="text/javascript" src="js/SearchByDate.js"></script>
 	<script type="text/javascript" src="js/changePassword.js"></script>
 	<script type="text/javascript" src="js/loadIsolatedContent.js"></script>
-	<script type="text/javascript" src="js/hiddenForPrint.js"></script>
 	
 </head>
 <body>

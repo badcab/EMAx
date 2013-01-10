@@ -2,7 +2,6 @@ function loadContent(locationOfhtml, idVal, optionVal)
 {
 	idVal = typeof idVal !== 'undefined' ? idVal : 'none';
 	optionVal = typeof optionVal !== 'undefined' ? optionVal : 'none' ;
-		
 	$.ajax
 	({
 		type: 'POST',
@@ -16,7 +15,7 @@ function loadContent(locationOfhtml, idVal, optionVal)
 		},
 		error: function()
 		{
-			$("#tooltip").html("error load content");	
+			$("#tooltip").html("error load content");
 		}
 	});
 }

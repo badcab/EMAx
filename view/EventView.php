@@ -1,14 +1,13 @@
 <div>
 <form id="eventForm">
 <table>
-
-<input type="hidden" name="id" value="<?= $Event->getID() ?>" />
-<input type="hidden" name="table" value="Event" />
-<input type="hidden" name="optionEventMapHiddenText" id="optionEventMapHiddenText" value="<?= $selectedOptions ?>" />
-<input type="hidden" name="gradeEventMapHiddenText" id="gradeEventMapHiddenText" value="<?= $selectedGrades ?>" />
 	<tr>
 		<td>Organization</td>
 		<td>
+		<input type="hidden" name="id" value="<?= $Event->getID() ?>" />
+		<input type="hidden" name="table" value="Event" />
+		<input type="hidden" name="optionEventMapHiddenText" id="optionEventMapHiddenText" value="<?= $selectedOptions ?>" />
+		<input type="hidden" name="gradeEventMapHiddenText" id="gradeEventMapHiddenText" value="<?= $selectedGrades ?>" />
 		<select id="Organization" name="Organization" onchange="personAssociatedWithOrg(this)">
 			<?php foreach($orgList as $org): ?>
 				<option value="<?= $org['id'] ?>"><?= $org['name'] ?></option>
@@ -19,8 +18,10 @@
 	</tr>
 	
 	<tr>
-		<td>Person</td>
-		<input type="hidden" id="PersonEvent" value="<?= $Person->getID() ?>" name="Person" />
+		<td>Person
+			<input type="hidden" id="PersonEvent" value="<?= $Person->getID() ?>" name="Person" />		
+		</td>
+		
 		<td id="person">
 		</td>
 		<td></td>	
@@ -38,9 +39,11 @@
 	</tr>
 
 	<tr>
-		<td>Booked By</td>
+		<td>Booked By
+			<input type="hidden" name="Login" value="<?= $_SESSION['user'] ?>"/>
+		</td>
 		<td><?= $LoginUser ?></td><!-- session variable not working for some reason -->
-		<input type="hidden" name="Login" value="<?= $_SESSION['user'] ?>"/>
+		
 	</tr>
 	
 	<tr>
@@ -91,7 +94,7 @@
 	<tr>	
 		<td>Pre-Paid</td>
 		<td><input type="checkbox" name="hasPaid" id="PaidCB" value="" onchange="checkBoxFix(this, 'Paid')" />
-			<input type="hidden" name="Paid" id="Paid" value="<?= $prepay ?>"/>
+			 <input type="hidden" name="Paid" id="Paid" value="<?= $prepay ?>"/>
 		</td>	
 	</tr>	
 	
@@ -117,49 +120,48 @@
 	<td>
 		<input type="button" value="Save" class="crudEvent" onclick="collectFormDataAjax(this.form)"/>
 		<input type="button" value="Clear" class="crudEvent" onclick="clearFormData(this.form)"/> 
-		<input type="text" value="Grades Selected: none" id="gradeShowPrint" class="showPrint" />
-		<input type="text" value="Options Selected: none" id="optionShowPrint" class="showPrint" />
+		
 	</td>
 	<td >
-		
 	</td>
 	</tr>	
-	<script type="text/javascript" > 
-		datepicker(); 	
+</table>
+<p id="gradeShowPrint" class="showPrint" >Grades Selected: none</p>
+<p id="optionShowPrint" class="showPrint" > Options Selected: none </p>
+<script type="text/javascript" > 
+	datepicker(); 	
+	personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
+	gradeHiddenForPrint();
+	optionHiddenForPrint();
+	
+	<?php if($id):?>
+		setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);
 		personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
-		gradeHiddenForPrint($('#gradeEventMapHiddenText').val());
-		optionHiddenForPrint($('#optionEventMapHiddenText').val());
-		
-		<?php if($id):?>
-			setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);
-			personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
 
-			<?php if($lunch): ?>
-			$("#LunchCB").prop("checked", true);
-			<?php endif; ?>
+		<?php if($lunch): ?>
+		$("#LunchCB").prop("checked", true);
+		<?php endif; ?>
 
-			<?php if($roomRes): ?>
-			$("#roomReservationCB").prop("checked", true);
-			<?php endif; ?>
+		<?php if($roomRes): ?>
+		$("#roomReservationCB").prop("checked", true);
+		<?php endif; ?>
 
-			<?php if($prepay): ?>
-			$("#PaidCB").prop("checked", true);
-			<?php endif; ?>
-			
-			setDropDownValue($('select[name="dropDownPerson"]', this.form), <?= $Person->getID() ?>);				
-setPersonInForm($('#PersonEventDropDown')); 
-$('#PersonEventDropDown').val(<?= $Person->getID() ?>);
-			setDropDownValue($('select[name="RoomLocation"]', this.form), <?= $RoomLocation->getID() ?>); 
-			setDropDownValue($('select[name="attendance"]', this.form), <?= $Event->getattendance() ?>); 
-			setDropDownValue($('select[name="startTime"]', this.form), <?= $startTime ?>);	
-			setDropDownValue($('select[name="endTime"]', this.form), <?= $endTime ?>);	
+		<?php if($prepay): ?>
+		$("#PaidCB").prop("checked", true);
 		<?php endif; ?>
 		
-		<?php if(!$id):?>
-			setTimePlus2Hr($('select[name="startTime"]', this.form));  
-		<?php endif; ?>	
-	</script>
-
-</table>
+		setDropDownValue($('select[name="dropDownPerson"]', this.form), <?= $Person->getID() ?>);				
+		setPersonInForm($('#PersonEventDropDown')); 
+		$('#PersonEventDropDown').val(<?= $Person->getID() ?>);
+		setDropDownValue($('select[name="RoomLocation"]', this.form), <?= $RoomLocation->getID() ?>); 
+		setDropDownValue($('select[name="attendance"]', this.form), <?= $Event->getattendance() ?>); 
+		setDropDownValue($('select[name="startTime"]', this.form), <?= $startTime ?>);	
+		setDropDownValue($('select[name="endTime"]', this.form), <?= $endTime ?>);	
+	<?php endif; ?>
+	
+	<?php if(!$id):?>
+		setTimePlus2Hr($('select[name="startTime"]', this.form));  
+	<?php endif; ?>	
+</script>
 </form>
 </div>

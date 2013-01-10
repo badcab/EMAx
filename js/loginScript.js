@@ -45,4 +45,3 @@ data: { user: 'mike', password: 'blizzard' },
 		}
 	});	
 }
-
