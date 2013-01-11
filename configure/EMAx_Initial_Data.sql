@@ -1,4 +1,8 @@
-INSERT INTO `EMA_Login` (`userName`,`password`) VALUES ('admin', 'admin');
+INSERT INTO `EMAx_Login` (`userName`,`password`) VALUES ('admin', 'admin');
+
+INSERT INTO `EMAx_CostSettings` (`property`,`moneyValue`) VALUES 
+('inCounty', 1.00),
+('outCounty', 2.00);
 
 INSERT INTO `EMAx_State` (`Name`) VALUES
 ('Alabama'),
@@ -76,10 +80,10 @@ INSERT INTO `EMAx_Zip` (`Name`) VALUES
 ('34567'),
 ('89898');
 
-INSERT INTO `EMAx_Organization` (`name`, `phoneNumber`, `emailAddress`, `EMAx_City_ID`, `EMAx_State_ID`, `EMAx_Zip_ID`, `address`, `notes`, `sameCounty`) VALUES
-('Company A', '1 (920) 982 2526', 'email@home.org', 1, 20, 1, '123 Fake St', 'notes', 0),
-('Company B', '1 (920) 982 3357', 'mike@email.uk.co', 2, 30, 1, '321 Fakest street', 'more notes', 1),
-('Company C', '1 (920) 654 3285', 'noreply@mail.us', 3, 40, 1, '1234 E main st', 'less notes', 0);
+INSERT INTO `EMAx_Organization` (`name`, `phoneNumber`, `emailAddress`, `EMAx_City_ID`, `EMAx_State_ID`, `EMAx_Zip_ID`, `address`, `notes`) VALUES
+('Company A', '1 (920) 982 2526', 'email@home.org', 1, 20, 1, '123 Fake St', 'notes'),
+('Company B', '1 (920) 982 3357', 'mike@email.uk.co', 2, 30, 1, '321 Fakest street', 'more notes'),
+('Company C', '1 (920) 654 3285', 'noreply@mail.us', 3, 40, 1, '1234 E main st', 'less notes');
 
 INSERT INTO `EMAx_Person` (`fName`, `mName`, `lName`, `phoneNumber`, `secondaryPhoneNumber`, `emailAddress`, `address`, `notes`, `EMAx_City_ID`, `EMAx_State_ID`, `EMAx_Zip_ID`, `EMAx_Organization_ID`) VALUES
 ('Michael', 'R', 'Spear', '1 (982) 288 2135', '1 (920) 982 3357', 'email@home.org', 'emailE@home.org', 'notes for some', 1, 19, 1, 1),

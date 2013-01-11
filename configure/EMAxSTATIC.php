@@ -27,7 +27,7 @@ class EMAxSTATIC
 	
 	public static $passwordSalt = 'ghger67irs6&^Sfukl5324f6cfja';
 	
-	public static $googleUserName = '';//we can morph email/userName and password into one thing
+	public static $googleUserName = '';
 	public static $googlePassword = '';
 	
 	public static $smtpPassword = '';
