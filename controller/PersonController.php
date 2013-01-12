@@ -1,15 +1,14 @@
-<?php 
+<?php
 require_once('../model/PersonModel.php');
 class PersonController
 {
 	function __construct()
 	{
-		if(!isset($_SESSION)) 
-		{ 
+		if(!isset($_SESSION))
+		{
 			session_start();
-		} 	
+		}
 	}
-	
 	public function activate($id = NULL)
 	{
 		if(!$_SESSION['isLoggedIn'])
@@ -26,11 +25,10 @@ class PersonController
 		$stateList = $State->getList();
 		$cityList = $City->getList();
 		$Zip = $Person->getZip();
-		
 		$stateDropDown = '';
 		foreach($stateList as $state)
 		{
-			if($state['name'] == EMAxSTATIC::$DEFAULT_STATE) 
+			if($state['name'] == EMAxSTATIC::$DEFAULT_STATE)
 			{
 				$stateDropDown .= "<option selected='selected' value='{$state['id']}'> {$state['name']} </option>";
 			}
@@ -38,9 +36,7 @@ class PersonController
 			{
 				$stateDropDown .= "<option value='{$state['id']}'>{$state['name']}</option>";
 			}
-			
-		}			
-		
+		}
 		require_once('../view/PersonView.php');
 	}
 }

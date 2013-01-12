@@ -25,7 +25,7 @@
 	
 	<tr>
 		<td>City</td>
-		<td><input type="text" name="City"  id="city" value="<?= $City->getCity() ?>" onfocus="autoCompleteCity('Idea')"/></td>
+		<td><input type="text" name="City"  id="city" value="<?= $City->getCity() ?>" onclick="autoCompleteCity()"/></td>
 	</tr>
 	<tr>
 		<td>State</td>

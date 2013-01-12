@@ -9,7 +9,6 @@ class ReportController
 			session_start();
 		} 
 	}
-	
 	public function activate($id = NULL)
 	{
 		if(!$_SESSION['isLoggedIn'])
