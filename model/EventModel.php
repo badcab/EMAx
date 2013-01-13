@@ -264,7 +264,7 @@ class EventModel
 	private function doubleBookProtection($startTime, $endTime, $roomID)
 	{
 		require_once('DoubleBookModule.php');
-		$doubleBook = new DoubleBookModule($startTime, $endTime, $roomID)
+		$doubleBook = new DoubleBookModule($startTime, $endTime, $roomID);
 		return $doubleBook->activate();
 	}
 

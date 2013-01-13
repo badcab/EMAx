@@ -62,7 +62,7 @@
 		<td>
 		<select name="Organization" id="PersonOrganizationDropDown">
 			<?php foreach($orgList as $org): ?>
-				<option value="<?php echo(array_search($org, $orgList)) ?>"><?= $org ?></option>
+				<option value="<?= $org['id'] ?>"><?= $org['name'] ?></option>
 			<?php endforeach; ?>		
 		</select>
 		</td>	

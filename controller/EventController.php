@@ -2,7 +2,7 @@
 require_once('../model/EventModel.php');
 require_once('../configure/EMAxSTATIC.php');
 class EventController
-{//Hi Calvin!
+{
 	function __construct()
 	{
 		if(!isset($_SESSION))
