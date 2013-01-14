@@ -7,11 +7,11 @@
 //if install file exist then run that
 	if(!isset($_SESSION))
 	{		
-		if($_SERVER["HTTPS"] != "on" && EMAxSTATIC::$USE_SSL)
-		{
-			header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-	   	exit();
-		}
+//		if($_SERVER["HTTPS"] != "on" && EMAxSTATIC::$USE_SSL)
+//		{
+//			header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+//	   	exit();
+//		}
 
 		session_start();
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE); 

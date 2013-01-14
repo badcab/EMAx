@@ -94,7 +94,7 @@ class EventModel
 
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 
-		$googleURI - NULL;
+		$googleURI = NULL;
 		$Organization = $this->getOrganization();
 		$Location = $this->getRoomLocation();
 
@@ -263,7 +263,7 @@ class EventModel
 
 	private function doubleBookProtection($startTime, $endTime, $roomID)
 	{
-		require_once('DoubleBookModule.php');
+		require_once('../module/DoubleBookModule.php');
 		$doubleBook = new DoubleBookModule($startTime, $endTime, $roomID);
 		return $doubleBook->activate();
 	}

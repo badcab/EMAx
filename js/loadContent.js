@@ -12,6 +12,9 @@ function loadContent(locationOfhtml, idVal, optionVal)
 		{
 			$("#content").html(result);
 			$("#search").val(null);
+				/* may need to add this to the tail of the load content script */
+			$('#editButton').remove();
+			$(":input").removeProp("disabled");
 		},
 		error: function()
 		{

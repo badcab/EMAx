@@ -12,10 +12,12 @@ function loadIsolatedContent(id, tableName)
 function editPage(form)
 {
 	$(":input", form).prop("disabled", true);
-	$("td:last", form).html('<input type="button" value="Edit" onclick="editButtonClick(form)" />');
+	$("td:last", form).html('<input type="button" value="Edit" id="editButton" onclick="editButtonClick(this.form, this)" />');
 }
-function editButtonClick(form)
+function editButtonClick(form, eButton)
 {
 	$("td:last", form).html("");
-	$(":input", form).prop("disabled", false);
+//	$(":input", form).prop("disabled", false);
+	$(":input", form).removeProp("disabled");
+	$(eButton).remove();
 }

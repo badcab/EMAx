@@ -57,17 +57,16 @@ class OrganizationModel
 	public function writeData()
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$zip = ($this->ClassObjectArg['Zip']) ? "'" . $this->ClassObjectArg['Zip'] . "'" : 'NULL' ;
-		$city = ($this->ClassObjectArg['City']) ? "'" . $this->ClassObjectArg['City'] . "'" : 'NULL' ;
+
 		if($this->ClassObjectArg['ID'])
 		{
 			$sql = "
 				UPDATE `EMAx_Organization` SET `name`=". $connection->quote($this->ClassObjectArg['name'])
 				.",`phoneNumber`=". $connection->quote($this->ClassObjectArg['phoneNumber'])
 				.",`emailAddress`=". $connection->quote($this->ClassObjectArg['emailAddress'])
-				.",`EMAx_City_ID`=". $connection->quote($city)
+				.",`EMAx_City_ID`=". $connection->quote($this->ClassObjectArg['City'])
 				.",`EMAx_State_ID`=". $connection->quote($this->ClassObjectArg['State'])
-				.",`EMAx_Zip_ID`=". $connection->quote($zip)
+				.",`EMAx_Zip_ID`=". $connection->quote($this->ClassObjectArg['Zip'])
 				.",`address`=". $connection->quote($this->ClassObjectArg['address'])
 				.",`notes`=". $connection->quote($this->ClassObjectArg['notes'])
 				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']);
@@ -88,9 +87,9 @@ class OrganizationModel
 					". $connection->quote($this->ClassObjectArg['name']) .",
 					". $connection->quote($this->ClassObjectArg['phoneNumber']) .",
 					". $connection->quote($this->ClassObjectArg['emailAddress']) .",
-					". $connection->quote($city) .",
+					". $connection->quote($this->ClassObjectArg['City']) .",
 					". $connection->quote($this->ClassObjectArg['State']) .",
-					". $connection->quote($zip) .",
+					". $connection->quote($this->ClassObjectArg['Zip']) .",
 					". $connection->quote($this->ClassObjectArg['address']) .",
 					". $connection->quote($this->ClassObjectArg['notes']) ."
 				)";
@@ -102,7 +101,12 @@ class OrganizationModel
 		$this->ClassObjectArg['ID'] = (int)$lastInsertedID;
 		$success = $lastInsertedID;
 		$connection = NULL;
-		return $success;
+
+error_log("the id is: " . $lastInsertedID );
+error_log($sql);
+
+		return $success; //maybe I shall remove this line and just use get ID?
+		
 	}
 	public function getID()
 	{

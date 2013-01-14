@@ -40,7 +40,7 @@
 	
 	<tr>
 		<td>City</td>
-		<td><input type="text" name="City"  id="city" value="<?= $City->getCity() ?>" onclick="autoCompleteCity()"/></td>	
+		<td><input type="text" name="City"  id="city" value="<?= $City->getCity() ?>" onfocus="autoCompleteCity()"/></td>	
 	</tr>	
 	
 	<tr>

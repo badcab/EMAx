@@ -67,8 +67,7 @@ class PersonModel
 	public function writeData()
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$zip = ($this->ClassObjectArg['Zip']) ? "'" . $this->ClassObjectArg['Zip'] . "'" : 'NULL' ;
-		$city = ($this->ClassObjectArg['City']) ? "'" . $this->ClassObjectArg['City'] . "'" : 'NULL' ;
+
 		if($this->ClassObjectArg['ID'])
 		{
 			$sql = "UPDATE `EMAx_Person` SET `fName`=". $connection->quote($this->ClassObjectArg['fName'])
@@ -79,9 +78,9 @@ class PersonModel
 				.",`emailAddress`=". $connection->quote($this->ClassObjectArg['emailAddress'])
 				.",`address`=". $connection->quote($this->ClassObjectArg['address'])
 				.",`notes`=". $connection->quote($this->ClassObjectArg['notes'])
-				.",`EMAx_City_ID`=". $connection->quote($city)
+				.",`EMAx_City_ID`=". $connection->quote($this->ClassObjectArg['City'])
 				.",`EMAx_State_ID`=". $connection->quote($this->ClassObjectArg['State'])
-				.",`EMAx_Zip_ID`=". $connection->quote($zip)
+				.",`EMAx_Zip_ID`=". $connection->quote($this->ClassObjectArg['Zip'])
 				.",`EMAx_Organization_ID`=". $connection->quote($this->ClassObjectArg['Organization'])
 				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']) . "'";
 		}
@@ -110,9 +109,9 @@ class PersonModel
 					". $connection->quote($this->ClassObjectArg['emailAddress']) .",
 					". $connection->quote($this->ClassObjectArg['address']) .",
 					". $connection->quote($this->ClassObjectArg['notes']) .",
-					". $connection->quote($city) .",
+					". $connection->quote($this->ClassObjectArg['City']) .",
 					". $connection->quote($this->ClassObjectArg['State']) .",
-					". $connection->quote($zip) .",
+					". $connection->quote($this->ClassObjectArg['Zip']) .",
 					". $connection->quote($this->ClassObjectArg['Organization']) ."
 				)";
 		}
