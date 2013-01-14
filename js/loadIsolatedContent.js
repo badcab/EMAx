@@ -2,6 +2,7 @@ function loadIsolatedContent(id, tableName)
 {
 	var RPClocation = 'RPC/' + tableName + 'RPC.php';
 	loadContent(RPClocation, id);
+//should not be called if a fresh call	inotherwords this should be removed after it is run
 	$("html").on({
 	    ajaxStop: function()
 	    {

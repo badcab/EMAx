@@ -1,5 +1,7 @@
 function loadContent(locationOfhtml, idVal, optionVal)
 {
+	$('#content form').remove();  //not sure if this is necessary at this juncture but we shall find out.
+	
 	idVal = typeof idVal !== 'undefined' ? idVal : 'none';
 	optionVal = typeof optionVal !== 'undefined' ? optionVal : 'none' ;
 	$.ajax
@@ -12,9 +14,6 @@ function loadContent(locationOfhtml, idVal, optionVal)
 		{
 			$("#content").html(result);
 			$("#search").val(null);
-				/* may need to add this to the tail of the load content script */
-			$('#editButton').remove();
-			$(":input").removeProp("disabled");
 		},
 		error: function()
 		{

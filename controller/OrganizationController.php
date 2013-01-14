@@ -24,6 +24,7 @@ class OrganizationController
 		$Zip = $Organization->getZip();
 		$orgList = $Organization->getList();
 		$stateList = $State->getList();
+		$sameCounty = ($Organization->getsameCounty()) ? 1 : 0;
 		$stateDropDown = '';
 		foreach($stateList as $state)
 		{

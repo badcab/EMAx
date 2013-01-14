@@ -4,7 +4,6 @@
 <?php
 	set_include_path(dirname(__FILE__));
 	require_once('configure/EMAxSTATIC.php');
-//if install file exist then run that
 	if(!isset($_SESSION))
 	{		
 //		if($_SERVER["HTTPS"] != "on" && EMAxSTATIC::$USE_SSL)

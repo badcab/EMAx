@@ -29,6 +29,7 @@ class OrganizationModel
 			$emailAddress = $currentDBvalues->emailAddress;
 			$address = $currentDBvalues->address;
 			$notes = $currentDBvalues->notes;
+			$sameCounty = $currentDBvalues->sameCounty;
 		}
 		else
 		{
@@ -41,6 +42,7 @@ class OrganizationModel
 			$Zip = NULL;
 			$address = NULL;
 			$notes = NULL;
+			$sameCounty = NULL;
 		}
 		$this->ClassObjectArg = array(
 			'ID' => $id,
@@ -51,7 +53,8 @@ class OrganizationModel
 			'State' => $State,
 			'Zip' => $Zip,
 			'address' => $address,
-			'notes' => $notes
+			'notes' => $notes,
+			'sameCounty' => $sameCounty
 		);
 	}
 	public function writeData()
@@ -69,6 +72,7 @@ class OrganizationModel
 				.",`EMAx_Zip_ID`=". $connection->quote($this->ClassObjectArg['Zip'])
 				.",`address`=". $connection->quote($this->ClassObjectArg['address'])
 				.",`notes`=". $connection->quote($this->ClassObjectArg['notes'])
+				.",`sameCounty`=". $connection->quote($this->ClassObjectArg['sameCounty'])
 				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']);
 		}
 		else
@@ -82,7 +86,8 @@ class OrganizationModel
 					`EMAx_State_ID`,
 					`EMAx_Zip_ID`,
 					`address`,
-					`notes`
+					`notes`,
+					`sameCounty`
 				) VALUES (
 					". $connection->quote($this->ClassObjectArg['name']) .",
 					". $connection->quote($this->ClassObjectArg['phoneNumber']) .",
@@ -91,7 +96,8 @@ class OrganizationModel
 					". $connection->quote($this->ClassObjectArg['State']) .",
 					". $connection->quote($this->ClassObjectArg['Zip']) .",
 					". $connection->quote($this->ClassObjectArg['address']) .",
-					". $connection->quote($this->ClassObjectArg['notes']) ."
+					". $connection->quote($this->ClassObjectArg['notes']) .",
+					". $connection->quote($this->ClassObjectArg['sameCounty']) ."
 				)";
 		}
 		$connection->beginTransaction();
@@ -102,8 +108,8 @@ class OrganizationModel
 		$success = $lastInsertedID;
 		$connection = NULL;
 
-error_log("the id is: " . $lastInsertedID );
-error_log($sql);
+//error_log("the id is: " . $lastInsertedID );
+//error_log($sql);
 
 		return $success; //maybe I shall remove this line and just use get ID?
 		
@@ -157,17 +163,17 @@ error_log($sql);
 	public function setname($value)
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['name'] = ($value);
+		$this->ClassObjectArg['name'] = $value;
 	}
 	public function setphoneNumber($value)
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['phoneNumber'] = ($value);
+		$this->ClassObjectArg['phoneNumber'] = $value;
 	}
 	public function setemailAddress($value)
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['emailAddress'] = ($value);
+		$this->ClassObjectArg['emailAddress'] = $value;
 	}
 	public function setCity(CityModel $value)
 	{
@@ -184,12 +190,12 @@ error_log($sql);
 	public function setaddress($value)
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['address'] = ($value);
+		$this->ClassObjectArg['address'] = $value;
 	}
 	public function setnotes($value)
 	{
 		$value = ($value == '') ? NULL : $value;
-		$this->ClassObjectArg['notes'] = ($value);
+		$this->ClassObjectArg['notes'] = $value;
 	}
 	public function getList()
 	{
@@ -200,5 +206,15 @@ error_log($sql);
 		}
 		return $listArr;
 	}
+	public function getsameCounty()
+	{
+		return $this->ClassObjectArg['sameCounty'];
+	}
+
+	public function setsameCounty($value)
+	{
+		$value = ($value == '') ? NULL : $value;
+		$this->ClassObjectArg['sameCounty'] = (int)$value;
+	}	
 }
 ?>

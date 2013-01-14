@@ -18,6 +18,7 @@ class WriteOrganizationModule
 //allow to be null		
 		$Organization = new OrganizationModel((int)$dataArray['id']);
 //in name modules ignore empty strings
+//county
 		$City = new CityModel($dataArray['City']);
 		$Zip = new ZipModel($dataArray['Zip']);
 		$State = new StateModel((int)$dataArray['State']);//==not defined
@@ -27,6 +28,7 @@ class WriteOrganizationModule
 		$Organization->setemailAddress($dataArray['emailAddress']);
 		$Organization->setaddress($dataArray['address']);
 		$Organization->setnotes($dataArray['notes']);
+		$Organization->setsameCounty($dataArray['county']);
 		
 		$Organization->setCity($City);
 		$Organization->setZip($Zip);

@@ -44,7 +44,7 @@
 	<tr>
 		<td>In <?= $county ?> County</td>
 		<td><input type="checkbox" name="countyCB" id="countyCB" value="" onchange="checkBoxFix(this, 'county')" />
-			<input type="hidden" name="county" id="county" value="" />		
+			<input type="hidden" name="county" id="county" value="<?= $sameCounty ?>" />		
 		</td>	
 	</tr>
 	
@@ -65,6 +65,9 @@
 		<script type="text/javascript" > 
 			setDropDownValue($('select[name="State"]', this.form), <?= $State->getID() ?>);				
 		</script>
+	<?php endif; ?>
+	<?php if($sameCounty): ?>
+		$("#countyCB").prop("checked", true);
 	<?php endif; ?>
 </table>
 </form>

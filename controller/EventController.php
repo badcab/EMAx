@@ -21,6 +21,8 @@ class EventController
 		$Organization = $Event->getOrganization();
 		$Person = $Event->getPerson();
 		$Login = $Event->getLogin();
+error_log( $_SESSION['user'] . " is the logged in user");
+$_SESSION['user'] = ($_SESSION['user']) ? $_SESSION['user'] : 'UNDEFINED USER ERROR';		
 		$LoginUser = ($Login->getuserName()) ? $Login->getuserName() : $_SESSION['user'] ;
 		$RoomLocation = $Event->getRoomLocation();
 		$orgList = $Organization->getList();
