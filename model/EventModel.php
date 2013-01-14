@@ -213,8 +213,8 @@ class EventModel
 			}
 		}
 
-		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
-		$connection->exec("DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
+		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = ". $connection->quote($this->getID()) );
+		$connection->exec("DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID` = ". $connection->quote($this->getID()) );
 
 		foreach($this->ClassObjectArg['grades'] as $record)
 		{
@@ -256,8 +256,8 @@ class EventModel
 		$Google = new GoogleCalanderModule();
 		$Google->Delete_gCal_Event( $this->ClassObjectArg['googlURI'] );
 
-		$connection->exec("DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
-		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = '". $this->getID() ."'");
+		$connection->exec("DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID` = ". $connection->quote($this->getID()));
+		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = ". $connection->quote($this->getID()));
 		$connection->exec("DELETE FROM `EMAx_Event` WHERE `ID`=" . $connection->quote($this->getID()));
 	}
 
