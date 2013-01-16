@@ -36,8 +36,6 @@
 	<script type="text/javascript" src="js/loadContent.js"></script>	
 	<script type="text/javascript" src="js/collectFormDataAjax.js"></script> 
 	<script type="text/javascript" src="js/loginScript.js"></script> 
-	<script type="text/javascript" src="js/SearchByDate.js"></script>
-
 	
 </head>
 <body>

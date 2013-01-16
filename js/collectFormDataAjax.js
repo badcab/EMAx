@@ -1,3 +1,4 @@
+//we should rename this file to be more fitting for what it now is
 function collectFormDataAjax(form)
 {
 	$.ajax
@@ -47,4 +48,3 @@ function clearFormData(form)
 	});
 }
 
-/* we will need to objectify this */

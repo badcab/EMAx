@@ -1,3 +1,14 @@
+//may need to rename etera or something
+$("html").on({
+    ajaxStart: function() 
+    { 
+        $(this).addClass("loading");
+    },
+    ajaxStop: function() 
+    { 
+        $(this).removeClass("loading"); 
+    }    
+});
 function autoCompleteCity()
 {   
 	$.ajax
@@ -13,7 +24,6 @@ function autoCompleteCity()
 		}
 	});	
 }
-
 function autoCompleteSearch()
 {    
 	$.ajax
@@ -28,33 +38,19 @@ function autoCompleteSearch()
 			});
 		}
 	});
-
 }
-
 function datepicker()
 {
 	$( "#datepicker" ).datepicker();
 }
-
 function reloadTabs()
 {
 	$( "#tabs" ).tabs();
 }
 
-$("html").on({
-    ajaxStart: function() 
-    { 
-        $(this).addClass("loading");
-    },
-    ajaxStop: function() 
-    { 
-        $(this).removeClass("loading"); 
-    }    
-});
 function miscellaneousScript(tableName, Action, stringValue, cost)
 {
 	cost = typeof cost !== 'undefined' ? cost : 'none' ;
-
 	$.ajax
 	({
 		type: 'POST',
@@ -82,7 +78,7 @@ function checkBoxFix(field, idOfHiddenInput)
 		$('#' + idOfHiddenInput).val(0);
 	}
 }
-function showSearchResults(var searchString)
+function showSearchResults(searchString)
 {
 	var searchArr = searchString.split(" ");
 	$.ajax
@@ -103,7 +99,6 @@ function SearchByDate(checkBox)
 		$( "#search" ).datepicker();
 		$( "#search" ).autocomplete({ disabled: true });
 	}
-	
 	else
 	{
 		$( "#search" ).val('');
@@ -112,4 +107,3 @@ function SearchByDate(checkBox)
 		$( "#search" ).autocomplete({ disabled: false });
 	}
 }
-/* we will need to objectify this */

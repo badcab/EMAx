@@ -169,4 +169,3 @@ function loadChangePasswordModal()
 		}
 	});
 }
-/* we will need to objectify this */

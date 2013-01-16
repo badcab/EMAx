@@ -36,9 +36,6 @@ function editPage(form)
 function editButtonClick(form, eButton)
 {
 	$("td:last", form).html("");
-//	$(":input", form).prop("disabled", false);
 	$(":input", form).removeProp("disabled");
 	$(eButton).remove();
 }
-/* we will need to objectify this */
-/* we will need to objectify this */
