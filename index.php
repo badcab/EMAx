@@ -34,15 +34,10 @@
 	<script type="text/javascript" src="js/dropdown.js"></script> 
 	
 	<script type="text/javascript" src="js/loadContent.js"></script>	
-	<script type="text/javascript" src="js/clearFormData.js"></script> 
 	<script type="text/javascript" src="js/collectFormDataAjax.js"></script> 
 	<script type="text/javascript" src="js/loginScript.js"></script> 
-	<script type="text/javascript" src="js/createNewUser.js"></script>
-	<script type="text/javascript" src="js/checkBoxFix.js"></script>
-	<script type="text/javascript" src="js/miscellaneousScript.js"></script>
 	<script type="text/javascript" src="js/SearchByDate.js"></script>
-	<script type="text/javascript" src="js/changePassword.js"></script>
-	<script type="text/javascript" src="js/loadIsolatedContent.js"></script>
+
 	
 </head>
 <body>
