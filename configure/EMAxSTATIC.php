@@ -36,5 +36,14 @@ class EMAxSTATIC
 	
 	public static $nameOfSender = '';
 	public static $replyEmail = '';
+	
+public static $EMAIL_LINK_ALL = '';	
+	public static $EMAIL_LINK_ROOMRES = '';
+	public static $EMAIL_LINK_FEILD_TRIP_SUMMER = '';
+	public static $EMAIL_LINK_FEILD_TRIP_FALL = '';
+public static $EMAIL_LINK_FEILD_TRIP_WINTER = '';
+public static $EMAIL_LINK_FEILD_TRIP_SPRING = '';
+
+
 }
 ?>

@@ -97,7 +97,7 @@ class _SearchModel
 	public function getPersonSearch($id = NULL)
 	{
 		$id = ($id == '') ? NULL : (int)$id;
-		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Person` WHERE `ID`='". $this->connection->quote($id) ."'");
+		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Person` WHERE `ID`=". $this->connection->quote($id) );
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)	
 		{
@@ -145,7 +145,7 @@ class _SearchModel
 	public function getEventSearch($id = NULL)
 	{	
 		$id = ($id == '') ? NULL : (int)$id;
-		
+error_log($id . ' is the id passed to getEventSearch in _SearchModel');		
 		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Event` WHERE `ID`=". $this->connection->quote($id) );
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)	
@@ -156,7 +156,7 @@ class _SearchModel
 		$sqlPerson = $this->sqlBasePerson . " AND `EMAx_Person`.`ID` = ". 
 			$this->connection->quote($objectToGetForienKey['EMAx_Person_ID']) 
 		;
-		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`ID`='" . $this->connection->quote($id) . "'";
+		$sqlEvent = $this->sqlBaseEvent . " AND `EMAx_Event`.`ID`=" . $this->connection->quote($id) ;
 		$sqlOrganization = $this->sqlBaseOrganization . " AND `EMAx_Organization`.`ID` = ". 
 			$this->connection->quote($objectToGetForienKey['EMAx_Organization_ID']) 
 		;

@@ -82,7 +82,7 @@ class PersonModel
 				.",`EMAx_State_ID`=". $connection->quote($this->ClassObjectArg['State'])
 				.",`EMAx_Zip_ID`=". $connection->quote($this->ClassObjectArg['Zip'])
 				.",`EMAx_Organization_ID`=". $connection->quote($this->ClassObjectArg['Organization'])
-				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']) . "'";
+				." WHERE `ID`=" . $connection->quote($this->ClassObjectArg['ID']) ;
 		}
 		else
 		{
