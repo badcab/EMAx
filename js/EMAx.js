@@ -1,6 +1,5 @@
 var EMAx = function()
 {
-
 	var EventAdd = function()
 	{
 		var ret =
@@ -9,33 +8,33 @@ var EMAx = function()
 			{
 				if(table == 'Option')
 				{
-					optionHiddenForPrint();
+					ret.optionHiddenForPrint();
 				}
 				if(table == 'Grade')
 				{
-					gradeHiddenForPrint();
+					ret.gradeHiddenForPrint();
 				}
 			},
 			eventAddOption:function()
 			{
-				unifiedEventAdd('Option', 'optionEventMapHiddenText');
+				ret.unifiedEventAdd('Option', 'optionEventMapHiddenText');
 			},
 			optionHiddenForPrint:function()
 			{
 				if($('#optionEventMapHiddenText').val() != '')
 				{
-					hiddenForPrintPrivate($('#optionEventMapHiddenText').val(), 'Option', 'optionShowPrint');
+					ret.hiddenForPrintPrivate($('#optionEventMapHiddenText').val(), 'Option', 'optionShowPrint');
 				}
 			},
 			eventAddGrade:function()
 			{
-				unifiedEventAdd('Grade', 'gradeEventMapHiddenText');
+				ret.unifiedEventAdd('Grade', 'gradeEventMapHiddenText');
 			},
 			gradeHiddenForPrint:function()
 			{
 				if($('#gradeEventMapHiddenText').val() != '')
 				{
-					hiddenForPrintPrivate($('#gradeEventMapHiddenText').val(), 'Grade', 'gradeShowPrint');
+					ret.hiddenForPrintPrivate($('#gradeEventMapHiddenText').val(), 'Grade', 'gradeShowPrint');
 				}
 			},
 			hiddenForPrintPrivate:function(IDstring, tableName, IDtarget)
@@ -96,7 +95,7 @@ var EMAx = function()
 										selectedArr.push(serialData[i].name);
 									}
 									$('#' + writeTargetHiddenID ).val(selectedArr.toString());
-									hiddenForPrint(tableName);
+									ret.hiddenForPrint(tableName);
 									$( this ).dialog( "close" );
 								}
 							}
@@ -111,59 +110,7 @@ var EMAx = function()
 		}
 		return ret;
 	}();
-	var FormDataAjax = function()
-	{
-		var ret =
-		{
-			collectFormDataAjax:function(form)
-			{
-				$.ajax
-				({
-					type: 'POST',
-					url: 'RPC/WriteToDataBaseRPC.php' ,
-					data: {formData: $(form).serialize()},
-					success:	function(result)
-					{
-						$("#tooltip").html("Data successfully send to data base");
-						if(result)
-						{
-							loadIsolatedContent(result, $('[name="table"]',this.form).val() );
-						}
-						else
-						{
-							alert('error data not saved, make sure you filled everything out something proper!');
-							$("#tooltip").html('error data not saved, make sure you filled everything out something proper!');
-						}
-					},
-					error: function()
-					{
-						$("#tooltip").html("Data could not be saved, wait a while and try again");
-						alert("Data could not be saved, wait a while and try again");
-					}
-				});
-			},
-			clearFormData:function(form)
-			{
-				$.ajax
-				({
-					type: 'POST',
-					url: 'RPC/DeleteFromDataBaseRPC.php' ,
-					data: {formData: $(form).serialize()},
-					success:	function()
-					{
-						$("#tooltip").html("Data successfully removed");
-						loadContent('RPC/DefaultViewRPC.php');
-					},
-					error: function()
-					{
-						$("#tooltip").html("Data could not be deleted, wait a while and try again");
-						alert("Data could not be deleted, wait a while and try again");
-					}
-				});
-			}
-		}
-		return ret;
-	}();
+
 	var DropDown = function()
 	{
 		var ret = {
@@ -252,7 +199,7 @@ var EMAx = function()
 			loadIsolatedContent:function(id, tableName)
 			{
 				var RPClocation = 'RPC/' + tableName + 'RPC.php';
-				loadContent(RPClocation, id, null, function(){editPage($('form', '#content'));});
+				ret.loadContent(RPClocation, id, null, function(){editPage($('form', '#content'));});
 			},
 			editPage:function(form)
 			{
@@ -264,6 +211,52 @@ var EMAx = function()
 				$("td:last", form).html("");
 				$(":input", form).removeProp("disabled");
 				$(eButton).remove();
+			},
+			collectFormDataAjax:function(form)
+			{
+				$.ajax
+				({
+					type: 'POST',
+					url: 'RPC/WriteToDataBaseRPC.php' ,
+					data: {formData: $(form).serialize()},
+					success:	function(result)
+					{
+						$("#tooltip").html("Data successfully send to data base");
+						if(result)
+						{
+							ret.loadIsolatedContent(result, $('[name="table"]',this.form).val() );
+						}
+						else
+						{
+							alert('error data not saved, make sure you filled everything out something proper!');
+							$("#tooltip").html('error data not saved, make sure you filled everything out something proper!');
+						}
+					},
+					error: function()
+					{
+						$("#tooltip").html("Data could not be saved, wait a while and try again");
+						alert("Data could not be saved, wait a while and try again");
+					}
+				});
+			},
+			clearFormData:function(form)
+			{
+				$.ajax
+				({
+					type: 'POST',
+					url: 'RPC/DeleteFromDataBaseRPC.php' ,
+					data: {formData: $(form).serialize()},
+					success:	function()
+					{
+						$("#tooltip").html("Data successfully removed");
+						ret.loadContent('RPC/DefaultViewRPC.php');
+					},
+					error: function()
+					{
+						$("#tooltip").html("Data could not be deleted, wait a while and try again");
+						alert("Data could not be deleted, wait a while and try again");
+					}
+				});
 			}
 		}
 		return ret;
@@ -280,15 +273,15 @@ var EMAx = function()
 				({
 			  		type: "POST",
 			  		url: "RPC/LoginCheckRPC.php",
-			//   	data: { user: user.value, password: password.value },
-			data: { user: 'mike', password: 'blizzard' },
+//   	data: { user: user.value, password: password.value },
+data: { user: 'mike', password: 'blizzard' },
 			 		dataType: "html",
 					success:	function(result)
 					{
 						$("#content").html("");
 						if(result != "FALSE")
 						{
-							var DefaultViewDiv = loadContent('RPC/DefaultViewRPC.php');
+							var DefaultViewDiv = loadContent('RPC/DefaultViewRPC.php');	/* function call */
 							$(".isLogin").show( "fold", 1000,function() {
 								$("#content").html(DefaultViewDiv);
 								$("#userStatus").html(
@@ -300,7 +293,7 @@ var EMAx = function()
 						}
 						else
 						{
-							password.value = null;
+							$(password).val(null);
 							alert("check your user name and password and try again")
 						}
 					},
@@ -354,18 +347,15 @@ var EMAx = function()
 							{
 								'Add User': function()
 								{
-									var userName = document.getElementById("userName");
-									var password1 = document.getElementById("password1");
-									var password2 = document.getElementById("password2");
-									if(password1.value == password2.value)
+									if($("#password1").val() == $("#password2").val())
 									{
-										createNewUserSecondAJAX(userName.value , password1.value);
+										ret.createNewUserSecondAJAX($("#userName").val() , $("#password1").val());
 									}
 									else
 									{
-										alert(password1.value + " != " + password2.value);
-										password1.value = null;
-										password2.value = null;
+										alert($("#password1").val() + " != " + $("#password2").val());
+										$("#password1").val(null);
+										$("#password2").val(null);
 									}
 									$( this ).dialog( "close" );
 								}
@@ -531,7 +521,7 @@ var EMAx = function()
 				{
 					$( "#search" ).val('');
 					$( "#search" ).datepicker( "destroy" );
-					autoCompleteSearch();
+					ret.autoCompleteSearch();
 					$( "#search" ).autocomplete({ disabled: false });
 				}
 			}
@@ -615,12 +605,37 @@ var EMAx = function()
 
 	/*
 var EventAdd = function()
-var FormDataAjax = function()
 var DropDown = function()
 var LoadContent = function()
 var Login = function()
 var Etera = function()
 var Valid = function()
 	*/
+	
+/*	
+	EventAdd : EventAdd,
+	DropDown : DropDown,
+	LoadContent : LoadContent,
+	Login : Login,
+	Etera : Etera,
+	Valid : Valid
+*/
+
+	this.EventAdd = EventAdd;
+	this.DropDown = DropDown;
+	this.LoadContent = LoadContent;
+	this.Login = Login;
+	this.Etera = Etera;
+	this.Valid = Valid;
 
 }();
+$("html").on({
+    ajaxStart: function() 
+    { 
+        $(this).addClass("loading");
+    },
+    ajaxStop: function() 
+    { 
+        $(this).removeClass("loading"); 
+    }    
+});
