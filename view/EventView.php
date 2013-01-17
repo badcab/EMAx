@@ -48,7 +48,7 @@
 	
 	<tr>
 		<td>Date</td>
-		<td><input type="text" name="Date" id="Etera.datepicker" value="<?= $date ?>"/></td>	
+		<td><input type="text" name="Date" id="datepicker" value="<?= $date ?>"/></td>	
 	</tr>
 	
 	<tr>

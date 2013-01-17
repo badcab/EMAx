@@ -198,7 +198,7 @@
 			loadIsolatedContent:function(id, tableName)
 			{
 				var RPClocation = 'RPC/' + tableName + 'RPC.php';
-				ret.loadContent(RPClocation, id, null, function(){editPage($('form', '#content'));});
+				ret.loadContent(RPClocation, id, null, function(){ret.editPage($('form', '#content'));});
 			},
 			editPage:function(form)
 			{
@@ -280,7 +280,7 @@ data: { user: 'mike', password: 'blizzard' },
 						$("#content").html("");
 						if(result != "FALSE")
 						{
-							var DefaultViewDiv = loadContent('RPC/DefaultViewRPC.php');	/* function call */
+							var DefaultViewDiv = LoadContent.loadContent('RPC/DefaultViewRPC.php');
 							$(".isLogin").show( "fold", 1000,function() {
 								$("#content").html(DefaultViewDiv);
 								$("#userStatus").html(
