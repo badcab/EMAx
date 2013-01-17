@@ -1,5 +1,5 @@
-var EMAx = function()
-{
+//var EMAx = function()
+//{
 	var EventAdd = function()
 	{
 		var ret =
@@ -495,19 +495,6 @@ data: { user: 'mike', password: 'blizzard' },
 					$('#' + idOfHiddenInput).val(0);
 				}
 			},
-			showSearchResults:function(searchString)
-			{
-				var searchArr = searchString.split(" ");
-				$.ajax
-				({
-			  		type: "POST",
-			  		url: "RPC/SearchResultsRPC.php",
-			 		data: { searchArr }
-				}).done(function( html )
-				{
-			  		$("#content").html(html);
-				});
-			},
 			SearchByDate:function(checkBox)
 			{
 				if($(checkBox).prop("checked"))
@@ -601,13 +588,13 @@ data: { user: 'mike', password: 'blizzard' },
 		}
 		return ret;
 	}();
-	this.EventAdd = EventAdd;
-	this.DropDown = DropDown;
-	this.LoadContent = LoadContent;
-	this.Login = Login;
-	this.Etera = Etera;
-	this.Valid = Valid;
-}();
+//	this.EventAdd = EventAdd;
+//	this.DropDown = DropDown;
+//	this.LoadContent = LoadContent;
+//	this.Login = Login;
+//	this.Etera = Etera;
+//	this.Valid = Valid;
+//}();
 /*
 $("html").on({
     ajaxStart: function() 

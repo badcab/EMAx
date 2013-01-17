@@ -9,7 +9,7 @@
 	<td><input id="password" type="password" name="password"/></td>
 </tr>
 <tr>
-	<td><input type="button" value="login" onclick="loginScript()" /></td>
+	<td><input type="button" value="login" onclick="Login.loginScript()" /></td>
 	<td></td>
 </tr>			
 </table>

@@ -20,17 +20,17 @@
 	
 	<tr>
 		<td>Phone Number</td><!-- valid check -->
-		<td><input type="text" name="phoneNumber" value="<?= $Person->getphoneNumber() ?>" onblur="phoneValid(this, <?= $areaCode ?>)"/></td>	
+		<td><input type="text" name="phoneNumber" value="<?= $Person->getphoneNumber() ?>" onblur="Valid.phoneValid(this, <?= $areaCode ?>)"/></td>	
 	</tr>
 	
 	<tr> 
 		<td>Secondary Phone</td><!-- valid check -->
-		<td><input type="text" name="secondPhoneNumber" value="<?= $Person->getsecondaryPhoneNumber() ?>" onblur="phoneValid(this, <?= $areaCode ?>)"/></td>	
+		<td><input type="text" name="secondPhoneNumber" value="<?= $Person->getsecondaryPhoneNumber() ?>" onblur="Valid.phoneValid(this, <?= $areaCode ?>)"/></td>	
 	</tr>
 	
 	<tr>
 		<td>Email Address</td><!-- valid check -->
-		<td><input type="text" name="emailAddress" value="<?= $Person->getemailAddress() ?>" onblur="emailValid(this)"/></td>	
+		<td><input type="text" name="emailAddress" value="<?= $Person->getemailAddress() ?>" onblur="Valid.emailValid(this)"/></td>	
 	</tr>	
 	
 	<tr>
@@ -40,7 +40,7 @@
 	
 	<tr>
 		<td>City</td>
-		<td><input type="text" name="City"  id="city" value="<?= $City->getCity() ?>" onfocus="autoCompleteCity()"/></td>	
+		<td><input type="text" name="City"  id="city" value="<?= $City->getCity() ?>" onfocus="Etera.autoCompleteCity()"/></td>	
 	</tr>	
 	
 	<tr>
@@ -54,7 +54,7 @@
 	
 	<tr>
 		<td>Zip</td>
-		<td><input type="text" name="Zip" value="<?= $Zip->getZip() ?>" onblur="zipValid(this)"/></td>	
+		<td><input type="text" name="Zip" value="<?= $Zip->getZip() ?>" onblur="Valid.zipValid(this)"/></td>	
 	</tr>	
 	
 	<tr>
@@ -73,8 +73,8 @@
 	</tr>
 	<tr>
 	<td>
-		<input type="button" value="Save" class="crudPerson" onclick="collectFormDataAjax(this.form)"/>
-		<input type="button" value="Clear" class="crudPerson" onclick="clearFormData(this.form)"/> 
+		<input type="button" value="Save" class="crudPerson" onclick="LoadContent.collectFormDataAjax(this.form)"/>
+		<input type="button" value="Clear" class="crudPerson" onclick="LoadContent.clearFormData(this.form)"/> 
 
 	</td><td >
 		
@@ -82,8 +82,8 @@
 	</tr>
 	<?php if($id):?>
 		<script type="text/javascript" > 
-			setDropDownValue($('select[name="State"]', this.form), <?= $State->getID() ?>);
-			setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);						
+			DropDown.setDropDownValue($('select[name="State"]', this.form), <?= $State->getID() ?>);
+			DropDown.setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);						
 		</script>
 	<?php endif; ?>	
 </table>

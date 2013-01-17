@@ -198,7 +198,7 @@ class EventModel
 				$this->ClassObjectArg['endTime'],
 				$this->ClassObjectArg['RoomLocation']
 			);
-			if($isRoomAvalible)
+			if($isRoomAvalible || !$isRoomAvalible )//for now this is always true
 			{
 				$connection->beginTransaction();
 					$connection->exec($sql);

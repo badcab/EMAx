@@ -33,7 +33,7 @@ foreach($upcomingEvents as $record):
 			<td> <?= $record['emailAddress'] ?> </td> 
 			<td> <?= $record['phoneNumber'] ?> </td>
 
-	<td> <input type="button" value="select" onclick="loadContent(
+	<td> <input type="button" value="select" onclick="LoadContent.loadContent(
 		'RPC/SearchResultsRPC.php', 
 		<?= $record['ID'] ?> ,
 		'Event')" /> 
