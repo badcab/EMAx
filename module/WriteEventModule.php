@@ -41,7 +41,9 @@ class WriteEventModule
 		$Event->setLogin($Login);
 		
 		$Event->writeData();
+		
 error_log($Event->getID() . ' id in EventModule');		
+
 		return $Event->getID();
 	}
 	

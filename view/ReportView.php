@@ -13,5 +13,5 @@
     <div id="tabs-School">
         <p>School</p>
     </div>
-    <script type="text/javascript" > reloadTabs(); </script>
+    <script type="text/javascript" > Etera.reloadTabs(); </script>
 </div>	

@@ -6,7 +6,7 @@ $id = (is_numeric($id)) ? abs((int)$id) : NULL;
 $Organization = new OrganizationModel($id);
 $Person = new PersonModel();
 $personList = $Person->getListByOrganization($Organization);
-echo('<select name="dropDownPerson" onchange="setPersonInForm(this)" id="PersonEventDropDown">');
+echo('<select name="dropDownPerson" onchange="DropDown.setPersonInForm(this)" id="PersonEventDropDown">');
 echo('<option value="defultBlank"></option>');
 foreach($personList as $person):
 ?>

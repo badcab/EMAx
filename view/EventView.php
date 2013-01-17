@@ -8,7 +8,7 @@
 		<input type="hidden" name="table" value="Event" />
 		<input type="hidden" name="optionEventMapHiddenText" id="optionEventMapHiddenText" value="<?= $selectedOptions ?>" />
 		<input type="hidden" name="gradeEventMapHiddenText" id="gradeEventMapHiddenText" value="<?= $selectedGrades ?>" />
-		<select id="Organization" name="Organization" onchange="personAssociatedWithOrg(this)">
+		<select id="Organization" name="Organization" onchange="DropDown.personAssociatedWithOrg(this)">
 			<?php foreach($orgList as $org): ?>
 				<option value="<?= $org['id'] ?>"><?= $org['name'] ?></option>
 			<?php endforeach; ?>		
@@ -48,13 +48,13 @@
 	
 	<tr>
 		<td>Date</td>
-		<td><input type="text" name="Date" id="datepicker" value="<?= $date ?>"/></td>	
+		<td><input type="text" name="Date" id="Etera.datepicker" value="<?= $date ?>"/></td>	
 	</tr>
 	
 	<tr>
 		<td>Start Time</td>
 		<td>
-		<select id="startTime" name="startTime" onchange="setTimePlus2Hr(this)">
+		<select id="startTime" name="startTime" onchange="DropDown.setTimePlus2Hr(this)">
 			<?php foreach($timeOfEvent as $sta): ?>
 				<option value="<?php echo(array_search($sta, $timeOfEvent)) ?>"><?= $sta ?></option>
 			<?php endforeach; ?>		
@@ -65,7 +65,7 @@
 	<tr>
 		<td>End Time</td>
 		<td>
-		<select id="endTime" name="endTime" onchange="setEndTimeAfterStartTime(this)">
+		<select id="endTime" name="endTime" onchange="DropDown.setEndTimeAfterStartTime(this)">
 			<?php foreach($timeOfEvent as $end): ?>
 				<option value="<?php echo(array_search($end, $timeOfEvent)) ?>"><?= $end ?></option>
 			<?php endforeach; ?>		
@@ -86,21 +86,21 @@
 	
 	<tr>
 		<td>Lunch</td>
-		<td><input type="checkbox" name="havingLunch" id="LunchCB" value="" onchange="checkBoxFix(this, 'Lunch')" />
+		<td><input type="checkbox" name="havingLunch" id="LunchCB" value="" onchange="Etera.checkBoxFix(this, 'Lunch')" />
 			<input type="hidden" name="Lunch" id="Lunch" value="<?= $lunch ?>" />		
 		</td>	
 	</tr>
 	
 	<tr>	
 		<td>Pre-Paid</td>
-		<td><input type="checkbox" name="hasPaid" id="PaidCB" value="" onchange="checkBoxFix(this, 'Paid')" />
+		<td><input type="checkbox" name="hasPaid" id="PaidCB" value="" onchange="Etera.checkBoxFix(this, 'Paid')" />
 			 <input type="hidden" name="Paid" id="Paid" value="<?= $prepay ?>"/>
 		</td>	
 	</tr>	
 	
 	<tr>	
 		<td>Room Reservation</td>
-		<td><input type="checkbox" name="roomReservationCB" id="roomReservationCB"  onchange="checkBoxFix(this, 'roomReservation')" />
+		<td><input type="checkbox" name="roomReservationCB" id="roomReservationCB"  onchange="Etera.checkBoxFix(this, 'roomReservation')" />
 			 <input type="hidden" name="roomReservation" id="roomReservation" value="<?= $roomRes ?>" />	
 		</td>	
 	</tr>
@@ -108,8 +108,8 @@
 	<tr>
 		<td></td>
 		<td>
-			<input type="button" value="Grades Coming" onclick="eventAddGrade()"/>
-			<input type="button" value="Options" onclick="eventAddOption()"/>
+			<input type="button" value="Grades Coming" onclick="EventAdd.eventAddGrade()"/>
+			<input type="button" value="Options" onclick="EventAdd.eventAddOption()"/>
 		</td>	
 	</tr>
 	<tr>
@@ -118,8 +118,8 @@
 	</tr>	
 	<tr>
 	<td>
-		<input type="button" value="Save" class="crudEvent" onclick="collectFormDataAjax(this.form)"/>
-		<input type="button" value="Clear" class="crudEvent" onclick="clearFormData(this.form)"/> 
+		<input type="button" value="Save" class="crudEvent" onclick="LoadContent.collectFormDataAjax(this.form)"/>
+		<input type="button" value="Clear" class="crudEvent" onclick="LoadContent.clearFormData(this.form)"/> 
 		
 	</td>
 	<td >
@@ -129,14 +129,14 @@
 <p id="gradeShowPrint" class="showPrint" >Grades Selected: none</p>
 <p id="optionShowPrint" class="showPrint" > Options Selected: none </p>
 <script type="text/javascript" > 
-	datepicker(); 	
-	personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
-	gradeHiddenForPrint();
-	optionHiddenForPrint();
+	Etera.datepicker(); 	
+	DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
+	EventAdd.gradeHiddenForPrint();
+	EventAdd.optionHiddenForPrint();
 	
 	<?php if($id):?>
-		setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);
-		personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
+		DropDown.setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);
+		DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
 
 		<?php if($lunch): ?>
 		$("#LunchCB").prop("checked", true);
@@ -150,17 +150,17 @@
 		$("#PaidCB").prop("checked", true);
 		<?php endif; ?>
 		
-		setDropDownValue($('select[name="dropDownPerson"]', this.form), <?= $Person->getID() ?>);				
-		setPersonInForm($('#PersonEventDropDown')); 
+		DropDown.setDropDownValue($('select[name="dropDownPerson"]', this.form), <?= $Person->getID() ?>);				
+		DropDown.setPersonInForm($('#PersonEventDropDown')); 
 		$('#PersonEventDropDown').val(<?= $Person->getID() ?>);
-		setDropDownValue($('select[name="RoomLocation"]', this.form), <?= $RoomLocation->getID() ?>); 
-		setDropDownValue($('select[name="attendance"]', this.form), <?= $Event->getattendance() ?>); 
-		setDropDownValue($('select[name="startTime"]', this.form), <?= $startTime ?>);	
-		setDropDownValue($('select[name="endTime"]', this.form), <?= $endTime ?>);	
+		DropDown.setDropDownValue($('select[name="RoomLocation"]', this.form), <?= $RoomLocation->getID() ?>); 
+		DropDown.setDropDownValue($('select[name="attendance"]', this.form), <?= $Event->getattendance() ?>); 
+		DropDown.setDropDownValue($('select[name="startTime"]', this.form), <?= $startTime ?>);	
+		DropDown.setDropDownValue($('select[name="endTime"]', this.form), <?= $endTime ?>);	
 	<?php endif; ?>
 	
 	<?php if(!$id):?>
-		setTimePlus2Hr($('select[name="startTime"]', this.form));  
+		DropDown.setTimePlus2Hr($('select[name="startTime"]', this.form));  
 	<?php endif; ?>	
 </script>
 </form>

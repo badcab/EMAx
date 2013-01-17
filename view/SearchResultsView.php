@@ -52,7 +52,7 @@
 							<td> <?= $record['emailAddress'] ?> </td>
 							<td> <?= $record['phoneNumber'] ?> </td>
 
-							<td> <input type="button" value="select" onclick="loadContent(
+							<td> <input type="button" value="select" onclick="LoadContent.loadContent(
 								'RPC/SearchResultsRPC.php', 
 								<?= $record['ID'] ?> , 
 								'Event')" />
@@ -103,7 +103,7 @@
 							<td> <?= $record['Zip'] ?> </td>
 							<td> <?= $record['State'] ?> </td>
 							<td> <?= $record['City'] ?> </td>
-							<td> <input type="button" value="select" onclick="loadContent(
+							<td> <input type="button" value="select" onclick="LoadContent.loadContent(
 								'RPC/SearchResultsRPC.php',
 								<?= $record['ID'] ?>,
 								'Organization')" />
@@ -160,7 +160,7 @@
 							<td> <?= $record['emailAddress'] ?> </td>
 							<td> <?= $record['phoneNumber'] ?> </td>
 							<td> <?= $record['Organization'] ?> </td>
-							<td> <input type="button" value="select" onclick="loadContent(
+							<td> <input type="button" value="select" onclick="LoadContent.loadContent(
 								'RPC/SearchResultsRPC.php',
 								<?= $record['ID'] ?>,
 								'Person')" />
@@ -174,5 +174,5 @@
         	?>
         	</p>
     </div>
-    <script type="text/javascript" > reloadTabs(); </script>
+    <script type="text/javascript" > Etera.reloadTabs(); </script>
 </div>	
