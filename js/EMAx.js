@@ -110,7 +110,6 @@ var EMAx = function()
 		}
 		return ret;
 	}();
-
 	var DropDown = function()
 	{
 		var ret = {
@@ -602,33 +601,14 @@ data: { user: 'mike', password: 'blizzard' },
 		}
 		return ret;
 	}();
-
-	/*
-var EventAdd = function()
-var DropDown = function()
-var LoadContent = function()
-var Login = function()
-var Etera = function()
-var Valid = function()
-	*/
-	
-/*	
-	EventAdd : EventAdd,
-	DropDown : DropDown,
-	LoadContent : LoadContent,
-	Login : Login,
-	Etera : Etera,
-	Valid : Valid
-*/
-
 	this.EventAdd = EventAdd;
 	this.DropDown = DropDown;
 	this.LoadContent = LoadContent;
 	this.Login = Login;
 	this.Etera = Etera;
 	this.Valid = Valid;
-
 }();
+/*
 $("html").on({
     ajaxStart: function() 
     { 
@@ -639,3 +619,4 @@ $("html").on({
         $(this).removeClass("loading"); 
     }    
 });
+*/

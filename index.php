@@ -26,6 +26,7 @@
 
 	<script src="<?= EMAxSTATIC::$PATH_JQUERY ?>"></script>
 	<script src="<?= EMAxSTATIC::$PATH_JQUERY_UI ?>"></script>
+	<script type="text/javascript" src="js/EMAx.js"></script>
 	<link type="text/css" href="<?= EMAxSTATIC::$PATH_JQUERY_UI_CSS ?>" rel="stylesheet" />
 	
 	<script type="text/javascript" src="js/valid.js"></script>
