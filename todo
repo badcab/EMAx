@@ -1,14 +1,9 @@
 these are some things I need to do
 KEY - = partly done, -- = done but not full tested
 
-
-update event and org to handle extra checkbox
-
-add is outagame county CB to org
-
 event model needs cost (get only)
 
-county alter in org needs model update
+event view print needs to include contact information for contact person
 
 fix the issue with no zip (maybe in the return NULL line inside of the zip model?)
 
@@ -20,8 +15,6 @@ add double book protection
 
 tool tip niceify
 
-on save redirect to view of the saved event
-
 --default admin login, accept any password
 
 -password salting should involve the user name
@@ -32,8 +25,9 @@ abitlity to delete users (admin only)
 
 -remove programatic fk resolution
 
-instead of default view on save the isolated view should be called
-
-we will need to have the big three return ID also
-
--make all js into one or two large objects
+add reports 
+	by date range
+		show cost and attend of all
+		show all with selected option, grade
+		
+event needs to add things like stuff

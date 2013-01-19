@@ -22,17 +22,6 @@
 	<link rel="stylesheet" href="css/Print_EMAx.css" type="text/css" media="print" />
 	<!-- 
 		<link rel="stylesheet" href="css/Mobile_EMAx.css" type="text/css" media="handheld" />
-		
-		
-		
-	<script type="text/javascript" src="js/valid.js"></script>
-	<script type="text/javascript" src="js/eventAdd.js"></script> 
-	<script type="text/javascript" src="js/quickie.js"></script> 
-	<script type="text/javascript" src="js/dropdown.js"></script> 
-	
-	<script type="text/javascript" src="js/LoadContent.loadContent.js"></script>	
-	<script type="text/javascript" src="js/collectFormDataAjax.js"></script> 
-	<script type="text/javascript" src="js/loginScript.js"></script> 
 	-->
 
 	<script src="<?= EMAxSTATIC::$PATH_JQUERY ?>"></script>
@@ -46,7 +35,7 @@
 		<div id="searchBar">
 			<input type="text" name="search" id="search" class="isLogin" onclick=""/>
 			<input type="button" value="Search" class="isLogin" onclick="LoadContent.loadContent('RPC/SearchResultsRPC.php', $('#search').val())"/>
-			<input type="checkbox" id="searchByDate" class="isLogin" onchange="SearchByDate(this)" > 
+			<input type="checkbox" id="searchByDate" class="isLogin" onchange="Etera.SearchByDate(this)" > 
 				<span class="isLogin"  class="noPrint"> Search By Date </span> 
 			</input>
 			<script type="text/javascript" > Etera.SearchByDate($('#searchByDate')) </script>

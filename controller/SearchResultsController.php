@@ -1,5 +1,4 @@
 <?php
-//require('../module/SearchModule.php'); this file should ultimately be deleted
 require_once('../model/_SearchModel.php');
 class SearchResultsController
 {
