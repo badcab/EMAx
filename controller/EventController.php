@@ -20,6 +20,9 @@ class EventController
 		$Event = new EventModel($id);
 		$Organization = $Event->getOrganization();
 		$Person = $Event->getPerson();
+		$person_phoneNumber = $Person->getphoneNumber();
+		$person_phoneNumberAlt = $Person->getsecondaryPhoneNumber();
+		$person_email = $Person->getemailAddress();
 		$Login = $Event->getLogin();
 error_log( $_SESSION['user'] . " is the logged in user");
 $_SESSION['user'] = ($_SESSION['user']) ? $_SESSION['user'] : 'UNDEFINED USER ERROR';		

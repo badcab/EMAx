@@ -63,7 +63,7 @@
 	</tr>
 	<?php if($id):?>
 		<script type="text/javascript" > 
-			DropDown.setDropDownValue($('select[name="State"]', this.form), <?= $State->getID() ?>);				
+			$('select[name="State"]', this.form).val(<?= $State->getID() ?>);				
 		</script>
 	<?php endif; ?>
 	<?php if($sameCounty): ?>

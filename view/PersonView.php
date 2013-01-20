@@ -75,15 +75,14 @@
 	<td>
 		<input type="button" value="Save" class="crudPerson" onclick="LoadContent.collectFormDataAjax(this.form)"/>
 		<input type="button" value="Clear" class="crudPerson" onclick="LoadContent.clearFormData(this.form)"/> 
-
-	</td><td >
-		
+	</td>
+	<td >	
 	</td>
 	</tr>
 	<?php if($id):?>
 		<script type="text/javascript" > 
-			DropDown.setDropDownValue($('select[name="State"]', this.form), <?= $State->getID() ?>);
-			DropDown.setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);						
+			$('select[name="State"]', this.form).val(<?= $State->getID() ?>);
+			$('select[name="Organization"]', this.form).val(<?= $Organization->getID() ?>);						
 		</script>
 	<?php endif; ?>	
 </table>

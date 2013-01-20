@@ -586,6 +586,32 @@ var Valid = function()
 	}
 	return ret;
 }();
+var Report = function()
+{
+	var ret =
+	{
+		showReportOption:function(form)
+		{
+			var start = $('[name="start"]', form).val();
+			var end = $('[name="end"]', form).val();
+			var filterBy = $('[name="filterBy"]', form).val();
+			var optionSelect = $('[name="optionSelect"]', form).val();
+			var roomSelect = $('[name="roomSelect"]', form).val();
+		},	
+		radioChange:function(selectObj)
+		{
+			$('.ReportViewOptions').hide();
+			$(selectObj).show();		
+		},	
+		showReportAttendance:function(form)
+		{
+			var start = $('[name="start"]', form).val();
+			var end = $('[name="end"]', form).val();
+		}
+	}
+	return ret;
+}();
+
 $("html").on({
     ajaxStart: function() 
     { 

@@ -120,7 +120,6 @@
 	<td>
 		<input type="button" value="Save" class="crudEvent" onclick="LoadContent.collectFormDataAjax(this.form)"/>
 		<input type="button" value="Clear" class="crudEvent" onclick="LoadContent.clearFormData(this.form)"/> 
-		
 	</td>
 	<td >
 	</td>
@@ -128,6 +127,9 @@
 </table>
 <p id="gradeShowPrint" class="showPrint" >Grades Selected: none</p>
 <p id="optionShowPrint" class="showPrint" > Options Selected: none </p>
+<p class="showPrint">Phone: <?= $person_phoneNumber ?></p>
+<p class="showPrint">Alt Phone: <?= $person_phoneNumberAlt ?></p>
+<p class="showPrint">Email: <?= $person_email ?></p>
 <script type="text/javascript" > 
 	Etera.datepicker(); 	
 	DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
@@ -135,7 +137,7 @@
 	EventAdd.optionHiddenForPrint();
 	
 	<?php if($id):?>
-		DropDown.setDropDownValue($('select[name="Organization"]', this.form), <?= $Organization->getID() ?>);
+		$('select[name="Organization"]', this.form).val(<?= $Organization->getID() ?>);
 		DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
 
 		<?php if($lunch): ?>
@@ -150,13 +152,13 @@
 		$("#PaidCB").prop("checked", true);
 		<?php endif; ?>
 		
-		DropDown.setDropDownValue($('select[name="dropDownPerson"]', this.form), <?= $Person->getID() ?>);				
+		$('select[name="dropDownPerson"]', this.form).val(<?= $Person->getID() ?>);				
 		DropDown.setPersonInForm($('#PersonEventDropDown')); 
 		$('#PersonEventDropDown').val(<?= $Person->getID() ?>);
-		DropDown.setDropDownValue($('select[name="RoomLocation"]', this.form), <?= $RoomLocation->getID() ?>); 
-		DropDown.setDropDownValue($('select[name="attendance"]', this.form), <?= $Event->getattendance() ?>); 
-		DropDown.setDropDownValue($('select[name="startTime"]', this.form), <?= $startTime ?>);	
-		DropDown.setDropDownValue($('select[name="endTime"]', this.form), <?= $endTime ?>);	
+		$('select[name="RoomLocation"]', this.form).val(<?= $RoomLocation->getID() ?>); 
+		$('select[name="attendance"]', this.form).val(<?= $Event->getattendance() ?>); 
+		$('select[name="startTime"]', this.form).val(<?= $startTime ?>);	
+		$('select[name="endTime"]', this.form).val(<?= $endTime ?>);	
 	<?php endif; ?>
 	
 	<?php if(!$id):?>

@@ -1,5 +1,6 @@
 <?php 
-//require_once('../model/ReportModel.php');
+require_once('../model/OptionModel.php');
+require_once('../model/RoomLocationModel.php');
 class ReportController
 {
 	function __construct()
@@ -11,12 +12,18 @@ class ReportController
 	}
 	public function activate($id = NULL)
 	{
-		if(!$_SESSION['isLoggedIn'])
+		if(!$_SESSION['isLoggedIn'])//maybe change this to be user name...
 		{
 			require_once('../view/LoginView.php');
 			return;
 		}
-//		$Report = new ReportModel($id);
+
+		$RoomLocation = new RoomLocationModel();
+		$Option = new OptionModel();
+		
+		$OptionList = $Option->getList();
+		$RoomList = $RoomLocation->getList();
+
 		require_once('../view/ReportView.php');
 	}
 }
