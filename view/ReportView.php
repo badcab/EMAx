@@ -22,10 +22,10 @@
 	        <input type="button" value="lookup" onclick="Report.showReportOption(this.form)"/>
 	        <br/>
 		
-				<input type="radio" name="filterBy" value="Option" onselect="Report.radioChange($('#optionSelect'))" checked>Option </input>
+				<input type="radio" name="filterBy" value="Option" onclick="Report.radioChange($('#optionSelect'))" checked>Option </input>
 				<br/>
-				<input type="radio" name="filterBy" value="Room" onselect="Report.radioChange($('#roomSelect'))">Room </input>
-			  		    
+				<input type="radio" name="filterBy" value="Room" onclick="Report.radioChange($('#roomSelect'))">Room </input>
+			  	<br/>	    
 	         <select id="optionSelect" class="ReportViewOptions">
 				<?php foreach($OptionList as $option): ?>
 					<option value="<?= $option['id'] ?>"><?= $option['name'] ?></option>
@@ -46,5 +46,6 @@
     <script type="text/javascript" > 
     	Etera.reloadTabs(); 
 		$('.datepicker').datepicker();
+		Report.radioChange($('#optionSelect'))
     </script>
 </div>	

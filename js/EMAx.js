@@ -43,11 +43,11 @@ var EventAdd = function()
 				type: 'POST',
 				url: 'RPC/HiddenPrintRPC.php' ,
 				data: {ids: IDstring, table: tableName},
-				success:	function(result)
+				success:function(result)
 				{
 					$('#' + IDtarget ).html(tableName + "s Selected: " + result);
 				},
-				error: function()
+				error:function()
 				{
 					$('#' + IDtarget ).html(tableName + "s Selected: Error");
 				}
@@ -60,10 +60,10 @@ var EventAdd = function()
 				type: 'POST',
 				url: 'RPC/' + tableName + 'TableRPC.php' ,
 				dataType: "html",
-				success:	function(result)
+				success:function(result)
 				{
 					$(result).dialog({
-						open: function()
+						open:function()
 						{
 							var alreadyChecked = $('#' + writeTargetHiddenID ).val();
 							var alreadyCheckedArr = alreadyChecked.split(",");
@@ -72,7 +72,7 @@ var EventAdd = function()
 								$('input[name=' + alreadyCheckedArr[i] + ']').prop('checked', true);
 							}
 						},
-						close: function()
+						close:function()
 						{
 							$( this ).dialog( "destroy" ).remove();
 						},
@@ -84,7 +84,7 @@ var EventAdd = function()
 						modal: true,
 						buttons:
 						{
-							'Save': function()
+							'Save':function()
 							{
 								var serialData = $('form', this).serializeArray();
 								var selectedArr = new Array();
@@ -99,7 +99,7 @@ var EventAdd = function()
 						}
 					});
 				},
-				error: function()
+				error:function()
 				{
 					alert('error add ' + tableName);
 				}
@@ -111,7 +111,7 @@ var EventAdd = function()
 var DropDown = function()
 {
 	var ret = {
-		personAssociatedWithOrg: function(organization)
+		personAssociatedWithOrg:function(organization)
 		{
 			var orgValue;
 			if(typeof(organization)=='string')
@@ -128,12 +128,12 @@ var DropDown = function()
 		  		url: "RPC/PeopleInOrganizationRPC.php",
 		 		data: { orgID: orgValue },
 		 		dataType: "html",
-				success:	function(result)
+				success:function(result)
 				{
 					$('select[name="dropDownPerson"]', this.form).remove();
 					$("#person").html(result);
 				},
-				error: function()
+				error:function()
 				{
 					$("#tooltip").html("something went wrong in person associated with org");
 				}
@@ -181,13 +181,13 @@ var LoadContent = function()
 				url: locationOfhtml ,
 				data: {id: idVal, option: optionVal},
 				dataType: "html",
-				success:	function(result)
+				success:function(result)
 				{
 					$("#content").html(result);
 					$("#search").val(null);
 					if(isolation) isolation();
 				},
-				error: function()
+				error:function()
 				{
 					$("#tooltip").html("error load content");
 				}
@@ -216,7 +216,7 @@ var LoadContent = function()
 				type: 'POST',
 				url: 'RPC/WriteToDataBaseRPC.php' ,
 				data: {formData: $(form).serialize()},
-				success:	function(result)
+				success:function(result)
 				{
 					$("#tooltip").html("Data successfully send to data base");
 					if(result)
@@ -229,7 +229,7 @@ var LoadContent = function()
 						$("#tooltip").html('error data not saved, make sure you filled everything out something proper!');
 					}
 				},
-				error: function()
+				error:function()
 				{
 					$("#tooltip").html("Data could not be saved, wait a while and try again");
 					alert("Data could not be saved, wait a while and try again");
@@ -243,12 +243,12 @@ var LoadContent = function()
 				type: 'POST',
 				url: 'RPC/DeleteFromDataBaseRPC.php' ,
 				data: {formData: $(form).serialize()},
-				success:	function()
+				success:function()
 				{
 					$("#tooltip").html("Data successfully removed");
 					ret.loadContent('RPC/DefaultViewRPC.php');
 				},
-				error: function()
+				error:function()
 				{
 					$("#tooltip").html("Data could not be deleted, wait a while and try again");
 					alert("Data could not be deleted, wait a while and try again");
@@ -266,14 +266,15 @@ var Login = function()
 		{
 			var user = $("#userName").val();
 			var password = $("#password").val();
+user= 'mike';
+password = 'blizzard';			
 			$.ajax
 			({
 		  		type: "POST",
 		  		url: "RPC/LoginCheckRPC.php",
-//   	data: { user: user.value, password: password.value },
-data: { user: 'mike', password: 'blizzard' },
+		   	data: { user: user, password: password },
 		 		dataType: "html",
-				success:	function(result)
+				success:function(result)
 				{
 					$("#content").html("");
 					if(result != "FALSE")
@@ -294,7 +295,7 @@ data: { user: 'mike', password: 'blizzard' },
 						alert("check your user name and password and try again")
 					}
 				},
-				error: function()
+				error:function()
 				{
 					alert("Login Failed");
 				}
@@ -307,11 +308,11 @@ data: { user: 'mike', password: 'blizzard' },
 				type: 'POST',
 				url: 'RPC/CreateNewUser_WriteToDataBaseRPC.php',
 				data: {userName: userName, password: password},
-				success:	function(result)
+				success:function(result)
 				{
 					$("#tooltip").html("New User " + userName + " added");
 				},
-				error: function()
+				error:function()
 				{
 					alert("failed second ajax");
 				}
@@ -327,10 +328,10 @@ data: { user: 'mike', password: 'blizzard' },
 				success:	function(result)
 				{
 					$(result).dialog({
-						open: function()
+						open:function()
 						{
 						},
-						close: function()
+						close:function()
 						{
 							$( this ).dialog( "destroy" );
 						},
@@ -342,7 +343,7 @@ data: { user: 'mike', password: 'blizzard' },
 						modal: true,
 						buttons:
 						{
-							'Add User': function()
+							'Add User':function()
 							{
 								if($("#password1").val() == $("#password2").val())
 								{
@@ -375,10 +376,10 @@ data: { user: 'mike', password: 'blizzard' },
 				success:	function(result)
 				{
 					$(result).dialog({
-						open: function()
+						open:function()
 						{
 						},
-						close: function()
+						close:function()
 						{
 							$( this ).dialog( "destroy" );
 						},
@@ -390,7 +391,7 @@ data: { user: 'mike', password: 'blizzard' },
 						modal: true,
 						buttons:
 						{
-							'Save': function()
+							'Save':function()
 							{
 								$.ajax
 									({
@@ -398,11 +399,11 @@ data: { user: 'mike', password: 'blizzard' },
 										url: 'RPC/ChangePasswordWriteRPC.php' ,
 										data: {formData: $('form', this).serialize()},
 										dataType: "html",
-										success:	function(result)
+										success:function(result)
 										{
 											alert(result);
 										},
-										error: function()
+										error:function()
 										{
 											alert("password not changed");
 										}
@@ -412,7 +413,7 @@ data: { user: 'mike', password: 'blizzard' },
 						}
 					});
 				},
-				error: function()
+				error:function()
 				{
 					alert("error change password");
 				}
@@ -432,7 +433,7 @@ var Etera = function()
 				type: 'POST',
 				url: "RPC/AutoCompleteCityRPC.php" ,
 				dataType: "html",
-				success:	function(result)
+				success:function(result)
 				{
 					$( "#city" ).autocomplete({
 						source: result.split(",")
@@ -447,7 +448,7 @@ var Etera = function()
 				type: 'POST',
 				url: "RPC/AutoCompleteSearchRPC.php" ,
 				dataType: "html",
-				success:	function(result)
+				success:function(result)
 				{
 					$( "#search" ).autocomplete({
 						source: result.split(",")
@@ -471,12 +472,12 @@ var Etera = function()
 				type: 'POST',
 				url: 'RPC/MiscellaneousWriteRPC.php' ,
 				data: {tableName: tableName, Action: Action, stringValue: stringValue, cost: cost},
-				success:	function()
+				success:function()
 				{
 					loadContent('RPC/MiscellaneousRPC.php');
 					$("#tooltip").html("Add and remove various things");
 				},
-				error: function()
+				error:function()
 				{
 					alert("it failed miscellaneous");
 				}
@@ -605,11 +606,11 @@ var Report = function()
 				type: 'POST',
 				url: 'RPC/ReportOptionRPC.php' ,
 				data: {start: start, end: end, filter: filter, filterID: filterID},
-				success:	function(result)
+				success:function(result)
 				{
 					$('#tabs-Options-Results').html(result);
 				},
-				error: function()
+				error:function()
 				{
 					alert("it failed showReportOption");
 				}
@@ -629,11 +630,11 @@ var Report = function()
 				type: 'POST',
 				url: 'RPC/ReportAttendanceRPC.php' ,
 				data: {start: start, end: end},
-				success:	function(result)
+				success:function(result)
 				{
 					$('#tabs-Attendance-Results').html(result);
 				},
-				error: function()
+				error:function()
 				{
 					alert("it failed showReportAttendance");
 				}
@@ -644,11 +645,11 @@ var Report = function()
 }();
 
 $("html").on({
-    ajaxStart: function() 
+    ajaxStart:function() 
     { 
         $(this).addClass("loading");
     },
-    ajaxStop: function() 
+    ajaxStop:function() 
     { 
         $(this).removeClass("loading"); 
     }    

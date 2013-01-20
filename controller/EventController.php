@@ -12,7 +12,7 @@ class EventController
 	}
 	public function activate($id = NULL)
 	{
-		if(!$_SESSION['isLoggedIn'])
+		if(!$_SESSION['isLoggedIn'])//maybe change this to $_SESSION['user']
 		{
 			require_once('../view/LoginView.php');
 			return;
