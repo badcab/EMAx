@@ -597,6 +597,23 @@ var Report = function()
 			var filterBy = $('[name="filterBy"]', form).val();
 			var optionSelect = $('[name="optionSelect"]', form).val();
 			var roomSelect = $('[name="roomSelect"]', form).val();
+			
+			var filter;
+			var filterID;
+			$.ajax
+			({
+				type: 'POST',
+				url: 'RPC/ReportOptionRPC.php' ,
+				data: {start: start, end: end, filter: filter, filterID: filterID},
+				success:	function(result)
+				{
+					$('#tabs-Options-Results').html(result);
+				},
+				error: function()
+				{
+					alert("it failed showReportOption");
+				}
+			});
 		},	
 		radioChange:function(selectObj)
 		{
@@ -607,6 +624,20 @@ var Report = function()
 		{
 			var start = $('[name="start"]', form).val();
 			var end = $('[name="end"]', form).val();
+			$.ajax
+			({
+				type: 'POST',
+				url: 'RPC/ReportAttendanceRPC.php' ,
+				data: {start: start, end: end},
+				success:	function(result)
+				{
+					$('#tabs-Attendance-Results').html(result);
+				},
+				error: function()
+				{
+					alert("it failed showReportAttendance");
+				}
+			});
 		}
 	}
 	return ret;
