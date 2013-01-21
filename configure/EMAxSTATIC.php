@@ -6,6 +6,7 @@ class EMAxSTATIC
 	public static $BASECOST = 0.00;
 	public static $DEFAULT_STATE = 'Wisconsin';
 	public static $AREA_CODE = '920';
+	public static $NAME_OF_ORG = 'Mosquito Hill Nature Center';
 	
 	public static $USE__EMAIL = FALSE;
 		public static $USE_GOOGLE_EMAIL = FALSE;
@@ -38,6 +39,10 @@ class EMAxSTATIC
 	public static $replyEmail = '';
 	
 	public static $EMAIL_LINK_ALL = array(
+		'discription' => 'url',
+	);
+	
+	public static $EMAIL_LINK_FEILD_TRIP_ALL = array(
 		'discription' => 'url',
 	);
 	

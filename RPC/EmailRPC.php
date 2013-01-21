@@ -6,6 +6,8 @@ $result = $Email->activate();
 ?>
 <div>
 <a href="mailto:<?= $result['address']?>"> Click to compose mail to <?= $result['address'] ?> </a>
+<br/>
+<p>Subject: <?= $result['subject'] ?></p>
 <textarea>
 <?= $result['body']?>
 </textarea>
