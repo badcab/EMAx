@@ -599,8 +599,8 @@ var Report = function()
 			var optionSelect = $('[name="optionSelect"]', form).val();
 			var roomSelect = $('[name="roomSelect"]', form).val();
 			
-			var filter;
-			var filterID;
+			var filter = (optionSelect == 'Option') ? 'Option' : 'Room' ;
+			var filterID = (filter == 'Option') ? optionSelect : roomSelect ;
 			$.ajax
 			({
 				type: 'POST',
@@ -643,7 +643,49 @@ var Report = function()
 	}
 	return ret;
 }();
-
+var Email = function()
+{
+	var ret =
+	{
+		emailDialog:function(eventID)
+		{
+			$.ajax
+			({
+				type: 'POST',
+				url: 'RPC/EmailRPC.php' ,
+				data: {id: eventID},
+				success:function(result)
+				{
+					$(result).dialog({
+						open:function()
+						{
+							
+						},
+						close:function()
+						{
+							$( this ).dialog( "destroy" ).remove();
+						},
+						closeOnEscape: true,
+						draggable: false,
+						title: 'Email',
+						width: 500,
+						resizable: false,
+						modal: true,
+						buttons:
+						{
+							//none yet
+						}
+					});
+				},
+				error:function()
+				{
+					alert("it failed 682 EMAx.js");
+				}
+			});
+		}
+	}
+	return ret;
+}();
 $("html").on({
     ajaxStart:function() 
     { 
