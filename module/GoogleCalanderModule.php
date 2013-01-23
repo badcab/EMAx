@@ -46,28 +46,7 @@ class GoogleCalanderModule
 	{
 		/* Does nothing, only here for consistency */
 	}
-	
-	private function get_timezone_offset($remote_tz, $origin_tz = null) 
-	{
-	   if($origin_tz === null) 
-	   {
-	      $origin_tz = 'Etc/GMT';
-	   }
-		$origin_dtz = new DateTimeZone($origin_tz);
-		$remote_dtz = new DateTimeZone($remote_tz);
-		$origin_dt = new DateTime("now", $origin_dtz);
-		$remote_dt = new DateTime("now", $remote_dtz);
-		$offset = $origin_dtz->getOffset($origin_dt) - $remote_dtz->getOffset($remote_dt);
-		$offset = ($offset / 60) / 60;
-		if($offset < 10)
-		{
-			return '-0' . $offset;	
-		}
-		
-		return '-' . $offset;
-	}
 
-	
 	public function Add_gCal_Event($event_date, $starttime, $endtime, $location, $name, $discr)
 	{
 		try
@@ -80,7 +59,7 @@ class GoogleCalanderModule
 			$event_date = date('Y-m-d', strtotime($event_date));
 			$starttime = date('H:i', strtotime($starttime));
 			$endtime = date('H:i', strtotime($endtime));
-			$tzOffset = $this->get_timezone_offset(date_default_timezone_get()); //timezone auto fix should go here might be 6
+			$tzOffset = $this->offsetON( $event_date )
 
 			$when = $this->service->newWhen();
 			$when->startTime 	= "{$event_date}T{$starttime}:00.000{$tzOffset}:00"; 
@@ -124,5 +103,15 @@ class GoogleCalanderModule
 		}
 		return FALSE;
 	}	
+	
+	private function offsetON( $date )
+	{
+		$timeZone = EMAxSTATIC::$TIMEZONE;
+		date_default_timezone_set($timeZone);
+		$DateTimeObject = new DateTime(date('Y-m-d', strtotime($date)), new DateTimeZone($timeZone));
+		$offsetRAW_HOUR = date_offset_get($DateTimeObject) / 60 / 60; //we need to turn that into hours.
+		$charOperand = ($offsetRAW_HOUR < 0) ? '-' : '+' ;
+		return $charOperand . str_pad(abs($offsetRAW_HOUR), 2, "0", STR_PAD_LEFT);
+	}
 }
 ?>

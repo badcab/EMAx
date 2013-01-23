@@ -7,8 +7,15 @@ class EMAxSTATIC
 	public static $DEFAULT_STATE = 'Wisconsin';
 	public static $AREA_CODE = '920';
 	public static $NAME_OF_ORG = 'Mosquito Hill Nature Center';
+	public static $PHONE_OF_ORG = '(920) 779-6433';
+	public static $EMAIL_OF_ORG = '';
+	public static $ADDRESS_OF_ORG = 'N3880 County Road Nc, New London, WI 54961';
 	
-	public static $USE__EMAIL = FALSE;
+	public static $FEILD_TRIP_EVENT = 0;
+	public static $ROOM_RESERVATION_NON_PROFIT = 1;
+	public static $ROOM_RESERVATION_FOR_PROFIT = 2;
+	
+	public static $USE__EMAIL = FALSE; //I can likely get rid of this for now
 		public static $USE_GOOGLE_EMAIL = FALSE;
 		public static $USE_SMTP_EMAIL = FALSE;
 		public static $USE_EXCHANGE_EMAIL = FALSE;
@@ -65,5 +72,10 @@ class EMAxSTATIC
 	public static $EMAIL_LINK_FEILD_TRIP_SPRING = array(
 		'discription' => 'url',
 	);
+	
+	public static $EMAIL_BODY_ADD_ON_SUMMER = '';
+	public static $EMAIL_BODY_ADD_ON_FALL = '';
+	public static $EMAIL_BODY_ADD_ON_WINTER = '';
+	public static $EMAIL_BODY_ADD_ON_SPRING = '';
 }
 ?>
