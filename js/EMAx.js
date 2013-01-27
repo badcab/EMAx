@@ -456,6 +456,10 @@ var Etera = function()
 				}
 			});
 		},
+		radioSetHidden:function(radio, hiddenName)
+		{
+			$(":hidden[name=" + hiddenName + "]").val($(radio).val());
+		},
 		datepicker:function()
 		{
 			$( "#datepicker" ).datepicker();
@@ -474,7 +478,7 @@ var Etera = function()
 				data: {tableName: tableName, Action: Action, stringValue: stringValue, cost: cost},
 				success:function()
 				{
-					loadContent('RPC/MiscellaneousRPC.php');
+					LoadContent.loadContent('RPC/MiscellaneousRPC.php');
 					$("#tooltip").html("Add and remove various things");
 				},
 				error:function()
@@ -594,13 +598,9 @@ var Report = function()
 		showReportOption:function(form)
 		{
 			var start = $('[name="start"]', form).val();
-			var end = $('[name="end"]', form).val();
-			var filterBy = $('[name="filterBy"]', form).val();
-			var optionSelect = $('[name="optionSelect"]', form).val();
-			var roomSelect = $('[name="roomSelect"]', form).val();
-			
-			var filter = (optionSelect == 'Option') ? 'Option' : 'Room' ;
-			var filterID = (filter == 'Option') ? optionSelect : roomSelect ;
+			var end = $('[name="end"]', form).val();			
+			var filter = $(':radio[name="filterBy"]:checked', form).val();
+			var filterID = (filter == 'Option') ? $('[name="optionSelect"]', form).val() : $('[name="roomSelect"]', form).val() ;
 			$.ajax
 			({
 				type: 'POST',
@@ -612,14 +612,9 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed showReportOption");
+					alert("it failed showReportOption line 619 js");
 				}
 			});
-		},	
-		radioChange:function(selectObj)
-		{
-			$('.ReportViewOptions').hide();
-			$(selectObj).show();		
 		},	
 		showReportAttendance:function(form)
 		{
@@ -636,9 +631,14 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed showReportAttendance");
+					alert("it failed showReportAttendance line 638 js");
 				}
 			});
+		},
+		radioChange:function(selectObj)
+		{
+			$('.ReportViewOptions').hide();
+			$(selectObj).show();		
 		}
 	}
 	return ret;

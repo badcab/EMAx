@@ -102,11 +102,13 @@
 	<tr>	
 		<td>Room Reservation</td>
 		<td>
-			<input type="radio" name="roomReservation" value="<?= EMAxSTATIC::$FEILD_TRIP_EVENT ?>">Field Trip </input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$FEILD_TRIP_EVENT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation')">Field Trip </input>
 			<br/>		
-			<input type="radio" name="roomReservation" value="<?= EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ?>">Room Reservation Non-Profit</input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation')">Room Reservation Non-Profit</input>
 			<br/>	
-			<input type="radio" name="roomReservation" value="<?= EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT ?>">Room Reservation For-Profit</input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation')">Room Reservation For-Profit</input>
+
+			<input type="hidden" name="roomReservation" value="<?= $roomRes ?>" />
 		</td>	
 	</tr>
 	
@@ -140,7 +142,7 @@
 	DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
 	EventAdd.gradeHiddenForPrint();
 	EventAdd.optionHiddenForPrint();
-	$(":radio[value=<?= $roomRes ?>]").attr('checked', 'checked');
+	$(":radio[value=<?= $roomRes ?>]").prop("checked", true);
 	<?php if($id):?>
 		$('select[name="Organization"]', this.form).val(<?= $Organization->getID() ?>);
 		DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());

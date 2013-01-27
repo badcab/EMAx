@@ -15,7 +15,7 @@ class _ReportModel
 			'Total_Room_Reservations' => 0,
 			'Total_income_Room_Reservations' => 0,
 		);
-
+		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
 		$startDate = date('Y-m-d', strtotime($start));
 		$endDate = date('Y-m-d', strtotime($end));
 
@@ -37,23 +37,25 @@ class _ReportModel
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
+		$feildTrip = EMAxSTATIC::$FEILD_TRIP_EVENT;
+		$notProfit = EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT;
+		$forProfit = EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT;
+		$sqlKidAttend = "SELECT SUM(attendance),  SUM(cost) FROM `EMAx_Event` WHERE `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}' AND `roomReservation` = {$feildTrip}";
 
-		$sqlKidAttend = "SELECT SUM(attendance),  SUM(cost) FROM `EMAx_Event` WHERE `startTime` < {$formatedStartDate} AND `endTime` > {$formatedEndDate} AND `roomReservation` = 0";
+		$sqlRoomReservation = "SELECT COUNT(*), SUM(cost) FROM `EMAx_Event` WHERE `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}' AND `roomReservation` = {$notProfit} OR `roomReservation` = {$forProfit}";
 
-		$sqlRoomReservation = "SELECT COUNT(*), SUM(cost) FROM `EMAx_Event` WHERE `startTime` < {$formatedStartDate} AND `endTime` > {$formatedEndDate} AND `roomReservation` = 1";
-
-error_log($sqlKidAttend . ' line 45 _ReportModel ' . $sqlRoomReservation);
+//error_log($sqlKidAttend . ' line 45 _ReportModel ' . $sqlRoomReservation);
 
 		$sqlKidAttendQuery = $connection->query($sqlKidAttend);
 		$sqlRoomReservationQuery = $connection->query($sqlRoomReservation);
 
-		$KidAttendResult = $sqlKidAttendQuery->fetch(PDO::FETCH_ASSOC);
-		$RoomResResult = $sqlRoomReservationQuery->fetch(PDO::FETCH_ASSOC);
+		$KidAttendResult = ($sqlKidAttendQuery) ? $sqlKidAttendQuery->fetch(PDO::FETCH_ASSOC): NULL;
+		$RoomResResult = ($sqlRoomReservationQuery) ? $sqlRoomReservationQuery->fetch(PDO::FETCH_ASSOC): NULL;
 
-		$result['Total_Kids_Field_Trip'] = $KidAttendResult[0];
-		$result['Total_income_Field_Trip'] = $KidAttendResult[1];
-		$result['Total_Room_Reservations'] = $RoomResResult[0];
-		$result['Total_income_Room_Reservations'] = $RoomResResult[1];
+		$result['Total_Kids_Field_Trip'] = ($KidAttendResult['SUM(attendance)']) ? $KidAttendResult['SUM(attendance)']: 0;
+		$result['Total_income_Field_Trip'] = ($KidAttendResult['SUM(cost)']) ? $KidAttendResult['SUM(cost)']: 0.00;
+		$result['Total_Room_Reservations'] = ($RoomResResult['COUNT(*)']) ? $RoomResResult['COUNT(*)'] : 0;
+		$result['Total_income_Room_Reservations'] = ($RoomResResult['SUM(cost)']) ? $RoomResResult['SUM(cost)'] : 0.00;
 
 		$connection = NULL;
 		return $result;
@@ -85,7 +87,8 @@ error_log('_ReportModel line 75 one of the dates is not valid');
 
 		$formatedStartDate = $this->make_Time( 0 , $startDate );
 		$formatedEndDate = $this->make_Time( (60 * 60 * 24) - 1 , $endDate );
-
+//		AND {$filterTable} = {$filterID}
+//remove from query for now, needs to be put back in.
 		$sql = "SELECT
 			`EMAx_Event`.`ID`,
 			`EMAx_Event`.`startTime`,
@@ -99,9 +102,10 @@ error_log('_ReportModel line 75 one of the dates is not valid');
 		JOIN  `EMAx_Organization` , `EMAx_Person`
 		WHERE `EMAx_Person`.`ID` = `EMAx_Event`.`EMAx_Person_ID`
 		AND `EMAx_Organization`.`ID` = `EMAx_Event`.`EMAx_Organization_ID`
-		AND `EMAx_Event`.`startTime` < {$formatedStartDate}
-		AND `EMAx_Event`.`endTime` > {$formatedEndDate}
-		AND {$filterTable} = {$filterID}";
+		AND `EMAx_Event`.`startTime` > '{$formatedStartDate}'
+		AND `EMAx_Event`.`endTime` < '{$formatedEndDate}'
+
+		ORDER BY `EMAx_Event`.`startTime` ASC";
 
 error_log($sql . ' line 106 _ReportModel');
 		$result = array();

@@ -30,6 +30,8 @@ body
 	right: 0;
 }
 
+
+
 #header
 {
 	width: 100%;
@@ -167,6 +169,12 @@ body
 {
 	overflow:auto;	
 	height: 420px;
+}
+
+#tabs-Options-Results
+{
+	overflow:auto;	
+	height: 320px;
 }
 
 .modal 

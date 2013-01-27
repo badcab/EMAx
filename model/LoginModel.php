@@ -123,12 +123,12 @@ class LoginModel
 
 	public function getauthorityLevel()
 	{
-		$this->ClassObjectArg['authorityLevel']
+		return $this->ClassObjectArg['authorityLevel'];
 	}	
 	
-	public function setauthorityLevel((int)$value)
+	public function setauthorityLevel($value)
 	{
-		$this->ClassObjectArg['authorityLevel'] = $value;
+		$this->ClassObjectArg['authorityLevel'] = (int)$value;
 	}
 	
 	public function getList()
