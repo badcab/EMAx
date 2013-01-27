@@ -38,15 +38,18 @@ class LoginModel
 			$id = NULL;
 			$userName = NULL;
 			$password = NULL;
+			$authorityLevel = NULL;
 		}
 		$this->ClassObjectArg = array(
 			'ID' => $id,
 			'userName' => $userName,
-			'password' => $password
+			'password' => $password,
+			'authorityLevel' => $authorityLevel
 		);
 	}
 	public function writeData()
 	{
+		/*At this point in time writing the authorityLevel is not allowed*/
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		if($this->ClassObjectArg['ID'])
 		{
@@ -117,6 +120,17 @@ class LoginModel
 		//$hashedPassword = sha1($plainTextPassword . EMAxSTATIC::$passwordSalt . $this->getuserName());
 		return $hashedPassword;
 	}
+
+	public function getauthorityLevel()
+	{
+		$this->ClassObjectArg['authorityLevel']
+	}	
+	
+	public function setauthorityLevel((int)$value)
+	{
+		$this->ClassObjectArg['authorityLevel'] = $value;
+	}
+	
 	public function getList()
 	{
 		$listArr = array();

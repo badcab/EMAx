@@ -104,12 +104,17 @@ error_log('_ReportModel line 75 one of the dates is not valid');
 		AND {$filterTable} = {$filterID}";
 
 error_log($sql . ' line 106 _ReportModel');
-		$query = $connection->query($sql);
-		$result = $query->fetch(PDO::FETCH_ASSOC);
+		$result = array();
+		$queryResult = $connection->query($sql);
+		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
+		foreach($queryArr as $record)	
+		{
+			$result[] = $record;
+		}	
 		$connection = NULL;
 		return $result;
 	}
-
+		
 	private function make_Time($time, $day)
 	{
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);

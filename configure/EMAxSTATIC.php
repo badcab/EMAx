@@ -15,6 +15,10 @@ class EMAxSTATIC
 	public static $ROOM_RESERVATION_NON_PROFIT = 1;
 	public static $ROOM_RESERVATION_FOR_PROFIT = 2;
 	
+	public static $AUTH_LEVEL_LOGIN = 0;
+	public static $AUTH_LEVEL_ADMIN = 1;
+
+	
 	public static $USE__EMAIL = FALSE; //I can likely get rid of this for now
 		public static $USE_GOOGLE_EMAIL = FALSE;
 		public static $USE_SMTP_EMAIL = FALSE;

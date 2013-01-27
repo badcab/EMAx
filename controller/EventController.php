@@ -32,7 +32,7 @@ $_SESSION['user'] = ($_SESSION['user']) ? $_SESSION['user'] : 'UNDEFINED USER ER
 		$roomList = $RoomLocation->getList();
 		$prepay = ($Event->gethasPaid()) ? 1 : 0;
 		$lunch = ($Event->gethavingLunch()) ? 1 : 0;
-		$roomRes = ($Event->getroomReservation()) ? 1 : 0;
+		$roomRes = ($Event->getroomReservation()) ? $Event->getroomReservation() : EMAxSTATIC::$FEILD_TRIP_EVENT;
 		$selectedOptions = implode(',', $Event->getOption());
 		$selectedGrades = implode(',', $Event->getGrade());
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);

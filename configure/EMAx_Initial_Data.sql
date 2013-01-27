@@ -1,4 +1,4 @@
-INSERT INTO `EMAx_Login` (`userName`,`password`) VALUES ('admin', 'admin');
+INSERT INTO `EMAx_Login` (`userName`,`password`,`authorityLevel`) VALUES ('admin', 'admin', 1);
 
 INSERT INTO `EMAx_CostSettings` (`property`,`moneyValue`) VALUES 
 ('inCounty', 1.00),

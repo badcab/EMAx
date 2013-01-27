@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `EMAx_Login` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(25) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `authorityLevel` int(2) DEFAULT 0,
   UNIQUE (userName),
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

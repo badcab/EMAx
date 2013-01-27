@@ -1,3 +1,4 @@
+<?php require_once('../configure/EMAxSTATIC.php'); /*not needed but makes this clear*/?>
 <div>
 <form id="eventForm">
 <table>
@@ -100,8 +101,12 @@
 	
 	<tr>	
 		<td>Room Reservation</td>
-		<td><input type="checkbox" name="roomReservationCB" id="roomReservationCB"  onchange="Etera.checkBoxFix(this, 'roomReservation')" />
-			 <input type="hidden" name="roomReservation" id="roomReservation" value="<?= $roomRes ?>" />	
+		<td>
+			<input type="radio" name="roomReservation" value="<?= EMAxSTATIC::$FEILD_TRIP_EVENT ?>">Field Trip </input>
+			<br/>		
+			<input type="radio" name="roomReservation" value="<?= EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ?>">Room Reservation Non-Profit</input>
+			<br/>	
+			<input type="radio" name="roomReservation" value="<?= EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT ?>">Room Reservation For-Profit</input>
 		</td>	
 	</tr>
 	
@@ -135,7 +140,7 @@
 	DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());
 	EventAdd.gradeHiddenForPrint();
 	EventAdd.optionHiddenForPrint();
-	
+	$(":radio[value=<?= $roomRes ?>]").attr('checked', 'checked');
 	<?php if($id):?>
 		$('select[name="Organization"]', this.form).val(<?= $Organization->getID() ?>);
 		DropDown.personAssociatedWithOrg($('select[name="Organization"]', this.form).val());

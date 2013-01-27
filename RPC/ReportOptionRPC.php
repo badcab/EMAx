@@ -8,5 +8,10 @@ $filterID = (isset($_POST['filterID'])) ? (int)$_POST['filterID'] : NULL;
 
 $report = new _ReportModel();
 $reportResult = $report->optionReport($start, $end, $filter, $filterID);
+//some logic here to skip loop and echo text "nothing"
+foreach($reportResult as $record):
 ?>
-<p>it works up to this point</p>
+<p>it works up to this point should become a list of events</p>
+<?php 
+endforeach;
+?>
