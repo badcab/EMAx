@@ -145,7 +145,7 @@ class _SearchModel
 	public function getEventSearch($id = NULL)
 	{	
 		$id = ($id == '') ? NULL : (int)$id;
-error_log($id . ' is the id passed to getEventSearch in _SearchModel' . "line 148 _SearchModel");		
+//error_log($id . ' is the id passed to getEventSearch in _SearchModel' . "line 148 _SearchModel");		
 		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Event` WHERE `ID`=". $this->connection->quote($id) );
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)	
@@ -164,6 +164,7 @@ error_log($id . ' is the id passed to getEventSearch in _SearchModel' . "line 14
 		$Person = array();
 		$Event = array();
 		$Organization = array();
+/*
 error_log(
 "{\n} EVENT {\n}" .
 $sqlEvent
@@ -172,7 +173,8 @@ $sqlPerson
 . "{\n} ORG {\n}" .
 $sqlOrganization
  . "line 175 _SearchModel"
-);		
+);
+*/		
 		$queryResult = $this->connection->query($sqlEvent);
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)	
@@ -270,45 +272,45 @@ $sqlOrganization
 		
 			foreach($searchStringArray as $search)
 			{
-				$search = $this->connection->quote($search);
+				$search = $this->connection->quote( '%' . $search . '%' );
 				$sqlPerson .= " 
 				AND (
-					`EMAx_Person`.`fName` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`mName` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`lName` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`address` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`emailAddress` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`secondaryPhoneNumber` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`phoneNumber` LIKE '%" . $search . "%' OR
-					`EMAx_Organization`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_Zip`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_State`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_City`.`name` LIKE '%" . $search . "%'
+					`EMAx_Person`.`fName` LIKE " . $search . " OR
+					`EMAx_Person`.`mName` LIKE " . $search . " OR
+					`EMAx_Person`.`lName` LIKE " . $search . " OR
+					`EMAx_Person`.`address` LIKE " . $search . " OR
+					`EMAx_Person`.`emailAddress` LIKE " . $search . " OR
+					`EMAx_Person`.`secondaryPhoneNumber` LIKE " . $search . " OR
+					`EMAx_Person`.`phoneNumber` LIKE " . $search . " OR
+					`EMAx_Organization`.`name` LIKE " . $search . " OR
+					`EMAx_Zip`.`name` LIKE " . $search . " OR
+					`EMAx_State`.`name` LIKE " . $search . " OR
+					`EMAx_City`.`name` LIKE " . $search . "
 				)						
 				";	
 				
 				$sqlEvent .= "
 				AND (
-					`EMAx_Login`.`userName` LIKE '%" . $search . "%' OR
-					`EMAx_RoomLocation`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_Organization`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`fName` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`mName` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`lName` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`phoneNumber` LIKE '%" . $search . "%' OR
-					`EMAx_Person`.`emailAddress` LIKE '%" . $search . "%' 
+					`EMAx_Login`.`userName` LIKE " . $search . " OR
+					`EMAx_RoomLocation`.`name` LIKE " . $search . " OR
+					`EMAx_Organization`.`name` LIKE " . $search . " OR
+					`EMAx_Person`.`fName` LIKE " . $search . " OR
+					`EMAx_Person`.`mName` LIKE " . $search . " OR
+					`EMAx_Person`.`lName` LIKE " . $search . " OR
+					`EMAx_Person`.`phoneNumber` LIKE " . $search . " OR
+					`EMAx_Person`.`emailAddress` LIKE " . $search . " 
 				)			
 				";
 				
 				$sqlOrganization .= "
 				AND (
-					`EMAx_Organization`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_Organization`.`address` LIKE '%" . $search . "%' OR
-					`EMAx_Organization`.`emailAddress` LIKE '%" . $search . "%' OR
-					`EMAx_Organization`.`phoneNumber` LIKE '%" . $search . "%' OR
-					`EMAx_Zip`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_State`.`name` LIKE '%" . $search . "%' OR
-					`EMAx_City`.`name` LIKE '%" . $search . "%' 
+					`EMAx_Organization`.`name` LIKE " . $search . " OR
+					`EMAx_Organization`.`address` LIKE " . $search . " OR
+					`EMAx_Organization`.`emailAddress` LIKE " . $search . " OR
+					`EMAx_Organization`.`phoneNumber` LIKE " . $search . " OR
+					`EMAx_Zip`.`name` LIKE " . $search . " OR
+					`EMAx_State`.`name` LIKE " . $search . " OR
+					`EMAx_City`.`name` LIKE " . $search . " 
 				)			
 				";
 			}
@@ -343,6 +345,16 @@ $sqlOrganization
 		$this->results['Person'] = $Person ; 
 		$this->results['Event'] = $Event ;
 		$this->results['Organization'] = $Organization ;
+
+error_log(
+"\n EVENT \n" .
+$sqlEvent
+. "\n PERSON \n" .
+$sqlPerson
+. "\n ORG \n" .
+$sqlOrganization
+ . "line 356 _SearchModel"
+);
 		
 		return $this->getCurrentResult();
 	}

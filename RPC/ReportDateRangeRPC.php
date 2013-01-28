@@ -7,7 +7,7 @@ $end = (isset($_POST['end'])) ? $_POST['end'] : NULL;
 
 $report = new _ReportModel();
 $reportResult = $report->dateRangeReport($start, $end);
-//some logic here to skip loop and echo text "nothing"
+
 ?>
 <div class="reportOverflow">
 <table class="searchTable">
