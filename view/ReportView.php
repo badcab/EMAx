@@ -2,6 +2,7 @@
     <ul>
         <li><a href="#tabs-Attendance">Attendance</a></li>
         <li><a href="#tabs-Options">Options</a></li>
+        <li><a href="#tabs-Time">Date Range</a></li>
     </ul>
     <div id="tabs-Attendance">    
      <form>
@@ -19,13 +20,12 @@
         <form>
 	        From: <input type="text" name="start" class="datepicker"/>
 	        To: <input type="text" name="end" class="datepicker"/>
-	        <input type="button" value="lookup" onclick="Report.showReportOption(this.form)"/>
-	        <br/>
-		
+	      	<input type="button" value="lookup" onclick="Report.showReportOption(this.form)"/>
+
 				<input type="radio" name="filterBy" value="Option" onclick="Report.radioChange($('#optionSelect'))" checked>Option </input>
-				<br/>
+				
 				<input type="radio" name="filterBy" value="Room" onclick="Report.radioChange($('#roomSelect'))">Room </input>
-			  	<br/>	    
+			  	<br/>   
 	         <select id="optionSelect" class="ReportViewOptions">
 				<?php foreach($OptionList as $option): ?>
 					<option value="<?= $option['id'] ?>"><?= $option['name'] ?></option>
@@ -39,7 +39,20 @@
 	        </select>
 			</form>  
      
-        <div id="tabs-Options-Results">
+        <div id="tabs-Options-Results" >
+        	<!-- I don't need any stuff her as the onclick js will populate -->
+        </div>
+    </div>
+    <div id="tabs-Time">
+     
+        <form>
+	        From: <input type="text" name="start" class="datepicker"/>
+	        To: <input type="text" name="end" class="datepicker"/>
+	        <input type="button" value="lookup" onclick="Report.showReportDateRange(this.form)"/>
+	        <br/>
+			</form>  
+     
+        <div id="tabs-Time-Results" >
         	<!-- I don't need any stuff her as the onclick js will populate -->
         </div>
     </div>

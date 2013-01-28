@@ -67,14 +67,15 @@ class _ReportModel
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
 
-		$filterTable = ($filter == 'Option') ? 'EMAx_Option_ID' : 'EMAx_RoomLocation_ID' ;
+		$filterTable = ($filter == 'Option') ? 'EMAx_OptionEventMap`.`EMAx_Option_ID' : 'EMAx_RoomLocation_ID' ;
+//these are not valid filter options		
 		$filterID = (int)$filterID;
 		$startDate = date('Y-m-d', strtotime($start));
 		$endDate = date('Y-m-d', strtotime($end));
 
 		if(!$startDate || !$endDate)
 		{
-error_log('_ReportModel line 75 one of the dates is not valid');
+error_log('_ReportModel line 77 one of the dates is not valid');
 			return $result;
 		}
 
@@ -87,8 +88,62 @@ error_log('_ReportModel line 75 one of the dates is not valid');
 
 		$formatedStartDate = $this->make_Time( 0 , $startDate );
 		$formatedEndDate = $this->make_Time( (60 * 60 * 24) - 1 , $endDate );
-//		AND {$filterTable} = {$filterID}
-//remove from query for now, needs to be put back in.
+
+		$sql = "SELECT
+			`EMAx_Event`.`ID`,
+			`EMAx_Event`.`startTime`,
+			`EMAx_Event`.`endTime`,
+			`EMAx_Organization`.`name`,
+			`EMAx_Person`.`phoneNumber`,
+			`EMAx_Person`.`emailAddress`,
+			`EMAx_Person`.`fName`,
+			`EMAx_Person`.`lName`
+		FROM `EMAx_Event`
+		JOIN  `EMAx_Organization` , `EMAx_Person`, `EMAx_OptionEventMap`
+		WHERE `EMAx_Person`.`ID` = `EMAx_Event`.`EMAx_Person_ID`
+		AND `EMAx_OptionEventMap`.`EMAx_Event_ID` = `EMAx_Event`.`ID`
+		AND `EMAx_Organization`.`ID` = `EMAx_Event`.`EMAx_Organization_ID`
+		AND `EMAx_Event`.`startTime` > '{$formatedStartDate}'
+		AND `EMAx_Event`.`endTime` < '{$formatedEndDate}'
+		AND `{$filterTable}` = '{$filterID}'
+		ORDER BY `EMAx_Event`.`startTime` ASC";
+
+error_log($sql . ' line 109 _ReportModel');
+		$result = array();
+		$queryResult = $connection->query($sql);
+		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
+		foreach($queryArr as $record)	
+		{
+			$result[] = $record;
+		}	
+		$connection = NULL;
+		return $result;
+	}
+	
+	public function dateRangeReport($start, $end)
+	{
+		$result = NULL;
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
+		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
+
+		$startDate = date('Y-m-d', strtotime($start));
+		$endDate = date('Y-m-d', strtotime($end));
+
+		if(!$startDate || !$endDate)
+		{
+			return $result;
+		}
+
+		if($startDate > $endDate)
+		{
+			$temp = $startDate;
+			$startDate = $endDate;
+			$endDate = $temp;
+		}
+
+		$formatedStartDate = $this->make_Time( 0 , $startDate );
+		$formatedEndDate = $this->make_Time( (60 * 60 * 24) - 1 , $endDate );
+
 		$sql = "SELECT
 			`EMAx_Event`.`ID`,
 			`EMAx_Event`.`startTime`,
@@ -104,10 +159,8 @@ error_log('_ReportModel line 75 one of the dates is not valid');
 		AND `EMAx_Organization`.`ID` = `EMAx_Event`.`EMAx_Organization_ID`
 		AND `EMAx_Event`.`startTime` > '{$formatedStartDate}'
 		AND `EMAx_Event`.`endTime` < '{$formatedEndDate}'
-
 		ORDER BY `EMAx_Event`.`startTime` ASC";
 
-error_log($sql . ' line 106 _ReportModel');
 		$result = array();
 		$queryResult = $connection->query($sql);
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();

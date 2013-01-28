@@ -79,7 +79,7 @@ var EventAdd = function()
 						closeOnEscape: true,
 						draggable: false,
 						title: 'Add ' + tableName,
-						width: 300,
+						width: 400,
 						resizable: false,
 						modal: true,
 						buttons:
@@ -201,7 +201,7 @@ var LoadContent = function()
 		editPage:function(form)
 		{
 			$(":input", form).prop("disabled", true);
-			$("td:last", form).html('<input type="button" value="Edit" id="editButton" onclick="editButtonClick(this.form, this)" />');
+			$("td:last", form).html('<input type="button" value="Edit" id="editButton" onclick="ret.editButtonClick(this.form, this)" />');
 		},
 		editButtonClick:function(form, eButton)
 		{
@@ -600,7 +600,7 @@ var Report = function()
 			var start = $('[name="start"]', form).val();
 			var end = $('[name="end"]', form).val();			
 			var filter = $(':radio[name="filterBy"]:checked', form).val();
-			var filterID = (filter == 'Option') ? $('[name="optionSelect"]', form).val() : $('[name="roomSelect"]', form).val() ;
+			var filterID = (filter == 'Option') ? $("#optionSelect", form).val() : $("#roomSelect", form).val() ;
 			$.ajax
 			({
 				type: 'POST',
@@ -623,7 +623,7 @@ var Report = function()
 			$.ajax
 			({
 				type: 'POST',
-				url: 'RPC/ReportAttendanceRPC.php' ,
+				url: 'RPC/ReportAttendanceRPC.php',
 				data: {start: start, end: end},
 				success:function(result)
 				{
@@ -632,6 +632,25 @@ var Report = function()
 				error:function()
 				{
 					alert("it failed showReportAttendance line 638 js");
+				}
+			});
+		},
+		showReportDateRange:function(form)
+		{
+			var start = $('[name="start"]', form).val();
+			var end = $('[name="end"]', form).val();
+			$.ajax
+			({
+				type: 'POST',
+				url: 'RPC/ReportDateRangeRPC.php',
+				data: {start: start, end: end},
+				success:function(result)
+				{
+					$('#tabs-Time-Results').html(result);
+				},
+				error:function()
+				{
+					alert("it failed tabs-Time-Results line 653 js");
 				}
 			});
 		},
