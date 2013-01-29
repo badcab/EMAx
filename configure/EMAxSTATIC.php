@@ -3,7 +3,6 @@ class EMAxSTATIC
 {
 	public static $TIMEZONE = 'America/Chicago';
 	public static $COUNTY = 'Outagamie';
-	public static $BASECOST = 0.00;
 	public static $DEFAULT_STATE = 'Wisconsin';
 	public static $AREA_CODE = '920';
 	public static $NAME_OF_ORG = 'Mosquito Hill Nature Center';
@@ -11,19 +10,30 @@ class EMAxSTATIC
 	public static $EMAIL_OF_ORG = '';
 	public static $ADDRESS_OF_ORG = 'N3880 County Road Nc, New London, WI 54961';
 	
+	public static $BASECOST_FEILD_TRIP_IN_COUNTY = 0.00;
+	public static $BASECOST_FEILD_TRIP_OUT_OF_COUNTY = 1.00;
+	
+	public static $BASECOST_NON_PROFIT = 1.00;
+	public static $BASECOST_NON_PROFIT_EXTRA_2HR = 1.00;
+	
+	public static $BASECOST_FOR_PROFIT = 10.00;
+	public static $BASECOST_FOR_PROFIT_EXTRA_2HR = 10.00;
+		
+	public static $AUTH_LEVEL_LOGIN = 0;
+	public static $AUTH_LEVEL_ADMIN = 1;
+	
+	public static $IMPOSSIBLE_PK_NUMBER = 0;
+	
 	public static $FEILD_TRIP_EVENT = 0;
 	public static $ROOM_RESERVATION_NON_PROFIT = 1;
 	public static $ROOM_RESERVATION_FOR_PROFIT = 2;
-	
-	public static $AUTH_LEVEL_LOGIN = 0;
-	public static $AUTH_LEVEL_ADMIN = 1;
 
-	
+/*	
 	public static $USE__EMAIL = FALSE; //I can likely get rid of this for now
 		public static $USE_GOOGLE_EMAIL = FALSE;
 		public static $USE_SMTP_EMAIL = FALSE;
 		public static $USE_EXCHANGE_EMAIL = FALSE;
-	
+*/	
 	public static $USE_GOOGLE_CAL = FALSE;
 	public static $USE_SSL = FALSE;
 	public static $PATH_ZEND = '../../ZendGdata-1.10.5/library';

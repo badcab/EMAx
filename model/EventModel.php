@@ -11,7 +11,6 @@ class EventModel
 
 	function __construct($id = NULL)
 	{
-
     	$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$sql = "SELECT * FROM `EMAx_Event` WHERE ID=" . $connection->quote($id);
 		$result = $connection->query($sql);
@@ -232,12 +231,12 @@ class EventModel
 			$connection->exec($sql);
 		}
 
-		if(EMAxSTATIC::$USE__EMAIL)
-		{
-			require_once('../module/MailModule.php');
-			$mail = new MailModule();
-			$mail->activate();	
-		}
+//		if(EMAxSTATIC::$USE__EMAIL)
+//		{
+//			require_once('../module/MailModule.php');
+//			$mail = new MailModule();
+//			$mail->activate();	
+//		}
 
 		$connection = NULL;
 		return $success;
@@ -252,10 +251,12 @@ class EventModel
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 
-		require_once('../module/GoogleCalanderModule.php');
-		$Google = new GoogleCalanderModule();
-		$Google->Delete_gCal_Event( $this->ClassObjectArg['googlURI'] );
-
+		if(EMAxSTATIC::$USE_GOOGLE_CAL)
+		{
+			require_once('../module/GoogleCalanderModule.php');
+			$Google = new GoogleCalanderModule();
+			$Google->Delete_gCal_Event( $this->ClassObjectArg['googlURI'] );
+		}
 		$connection->exec("DELETE FROM `EMAx_OptionEventMap` WHERE `EMAx_Event_ID` = ". $connection->quote($this->getID()));
 		$connection->exec("DELETE FROM `EMAx_GradeEventMap` WHERE `EMAx_Event_ID` = ". $connection->quote($this->getID()));
 		$connection->exec("DELETE FROM `EMAx_Event` WHERE `ID`=" . $connection->quote($this->getID()));
