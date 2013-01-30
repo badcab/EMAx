@@ -3,11 +3,9 @@ KEY - = partly done, -- = done but not full tested
 
 event model needs cost (get only)
 
-event view print needs to include contact information for contact person
-
 fix the issue with no zip (maybe in the return NULL line inside of the zip model?)
 
-add warnings for unacceptable form fill outed ness
+add warnings for unacceptable form fill outedness
 
 add double book protection
 
@@ -19,15 +17,10 @@ tool tip niceify
 
 -password salting should involve the user name
 
-add event cost to views but it is not dirrectly editable
+add event cost to views but it is not directly editable
 
-abitlity to delete users (admin only)
+ability to delete users (admin only)
 
--remove programatic fk resolution
+-remove programmatic fk resolution
 
-add reports 
-	by date range
-		show cost and attend of all
-		show all with selected option, grade
-		
-event needs to add things like stuff
+for misslanious fix so that tabs do not reset every time a query is made (note keep this behavior for search as this is an event centeric program)

@@ -30,6 +30,7 @@ class EventModel
 			$googlURI = $currentDBvalues->googlURI;
 			$hasPaid = $currentDBvalues->hasPaid;
 			$notes = $currentDBvalues->notes;
+			$cost = $currentDBvalues->cost;
 			$grades = array();
 			$option = array();
 
@@ -65,6 +66,7 @@ class EventModel
 			$googlURI = NULL;
 			$hasPaid = NULL;
 			$notes = NULL;
+			$cost = 0.00;
 			$grades = array();
 			$option = array();
 		}
@@ -84,7 +86,8 @@ class EventModel
 			'notes' => $notes,
 			'grades' => $grades,
 			'option' => $option,
-			'roomReservation' => $roomReservation
+			'roomReservation' => $roomReservation,
+			'cost' => $cost
 		);
 	}
 
@@ -301,6 +304,11 @@ class EventModel
 	public function getendTime()
 	{
 		return $this->ClassObjectArg['endTime'];
+	}
+	
+	public function getcost()
+	{
+		return $this->ClassObjectArg['cost'];
 	}
 
 	public function getOption()

@@ -19,6 +19,7 @@ class EventController
 		}
 		$Event = new EventModel($id);
 		$Organization = $Event->getOrganization();
+		$cost = $Event->getcost();
 		$Person = $Event->getPerson();
 		$person_phoneNumber = $Person->getphoneNumber();
 		$person_phoneNumberAlt = $Person->getsecondaryPhoneNumber();
