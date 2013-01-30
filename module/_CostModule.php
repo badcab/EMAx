@@ -3,22 +3,35 @@ require_once('../model/EventModel.php');
 require_once('../configure/EMAxSTATIC.php');
 class _CostModule
 {
+	public function writeCost($cost, $eventID)
+	{
+		$cost = (double)$cost;
+		$eventID = (int)$eventID;		
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);			
+		$sql = "UPDATE `EMAx_Event` SET `cost`= " . $connection->quote($cost) . " WHERE `ID` = " . $connection->quote($eventID);
+		$connection->exec($sql);	
+	}
 	public function singleEventCost($eventID)
 	{
-		$Event = new EventModel((int)$eventID)
+		$Event = new EventModel((int)$eventID);
 		$Room = $Event->getRoomLocation();
 		$sum = 0.00;
+		$gradeCost = 0.00;
+		$optionCost = 0.00;
+		$baseCost = 0.00;
+		
 		if( $Event->getroomReservation() == EMAxSTATIC::$FEILD_TRIP_EVENT )
 		{
 			/*
 			Field Trips will take the flat rate (base cost) determined based on county of residence and add the costs for all
-			selected events and the Highest cost grade coming. This is them multiplied by attendance. Room cost is not a factor
+			selected events and the Highest cost grade coming. This is the per person cost, attendance is manually factored in
+			at a later time. Room cost is not a factor
 			*/
 			$Org = $Event->getOrganization();
 			$baseCost = ($Org->getsameCounty()) ? EMAxSTATIC::$BASECOST_FEILD_TRIP_IN_COUNTY : EMAxSTATIC::$BASECOST_FEILD_TRIP_OUT_OF_COUNTY ;
 			$optionCost = $this->getOptionTotal($Event->getOption());
 			$gradeCost = $this->getGradeTotal($Event->getGrade());
-			$sum = ($gradeCost + $optionCost + $baseCost) * $Event->getattendance();
+			$sum = $gradeCost + $optionCost + $baseCost;
 		}
 		if( $Event->getroomReservation() == EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT )
 		{
@@ -44,6 +57,8 @@ class _CostModule
 			$optionCost = $this->getOptionTotal($Event->getOption());
 			$sum = $baseCost + $roomCost + $optionCost;
 		}
+echo("========Summery========== \n");			
+echo(" Grade Cost: \t" . $gradeCost ."\n Option Cost: \t". $optionCost ."\n Base Cost: \t". $baseCost ."\n Total: \t" . $sum . "\n");		
 		return (double)$sum;
 	}
 	public function multiEventCost(array $eventID = array())
@@ -71,20 +86,33 @@ class _CostModule
 			$sql .= " OR `ID` = " . $connection->quote($option);
 		}
 		$result = $connection->query($sql);
-		$sum = $result->fetchAll(PDO::FETCH_ASSOC);
+		$sum = $result->fetch(PDO::FETCH_ASSOC);
+/*
+echo("==========Options============ \n");		
+echo(var_dump($options) . " var dump option \n");
+echo(var_dump($sum) . " var dump sum \n");
+echo((double)$sum['SUM(`cost`)']. " return value \n");
+echo("\n");
+*/
 		return (double)$sum['SUM(`cost`)'];
 	}
 	private function getGradeTotal(array $grades = array())
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$sum = 0.00;
 		$sql = "SELECT MAX(`cost`) FROM `EMAx_Grade` WHERE `ID`= " . EMAxSTATIC::$IMPOSSIBLE_PK_NUMBER;
 		foreach($grades as $grade)
 		{
 			$sql .= " OR `ID` = " . $connection->quote($grade);
 		}
 		$result = $connection->query($sql);
-		$sum = $result->fetchAll(PDO::FETCH_ASSOC);
+		$sum = $result->fetch(PDO::FETCH_ASSOC);
+/*
+echo("==========Grades============ \n");		
+echo(var_dump($grades) . " var dump grades \n");
+echo(var_dump($sum) . " var dump sum \n");
+echo((double)$sum['MAX(`cost`)']. " return value \n");
+echo("\n");
+*/
 		return (double)$sum['MAX(`cost`)'];
 	}
 }

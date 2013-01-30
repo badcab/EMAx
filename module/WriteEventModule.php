@@ -17,6 +17,7 @@ class WriteEventModule
 		require_once('../model/PersonModel.php');
 		require_once('../model/RoomLocationModel.php');
 		require_once('../model/LoginModel.php');
+		require_once('_CostModule.php');
 		
 		$Event = new EventModel((int)$dataArray['id']);
 		$Organization = new OrganizationModel((int)$dataArray['Organization']);
@@ -41,8 +42,13 @@ class WriteEventModule
 		$Event->setLogin($Login);
 		
 		$Event->writeData();
-
-		return $Event->getID();
+		$eventID = $Event->getID();
+		
+		$CostModule = new _CostModule();
+		$cost = $CostModule->singleEventCost($eventID);
+		$CostModule->writeCost($cost, $eventID);
+				
+		return $eventID;
 	}
 	
 	private function make_Time($time, $day)
