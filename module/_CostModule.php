@@ -57,8 +57,8 @@ class _CostModule
 			$optionCost = $this->getOptionTotal($Event->getOption());
 			$sum = $baseCost + $roomCost + $optionCost;
 		}
-echo("========Summery========== \n");			
-echo(" Grade Cost: \t" . $gradeCost ."\n Option Cost: \t". $optionCost ."\n Base Cost: \t". $baseCost ."\n Total: \t" . $sum . "\n");		
+error_log("========Summery========== \n");			
+error_log(" Grade Cost: \t" . $gradeCost ."\n Option Cost: \t". $optionCost ."\n Base Cost: \t". $baseCost ."\n Total: \t" . $sum . "\n");		
 		return (double)$sum;
 	}
 	public function multiEventCost(array $eventID = array())

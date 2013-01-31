@@ -5,10 +5,10 @@ $Email = new EmailModule($id);
 $result = $Email->activate();
 ?>
 <div>
-<a href="mailto:<?= $result['address']?>"> Click to compose mail to <?= $result['address'] ?> </a>
+<a href="mailto:<?= $result['address']?>"> <?= $result['address'] ?> </a>
 <br/>
-<p>Subject: <?= $result['subject'] ?></p>
-<textarea>
+<p><strong>Subject:</strong> <?= $result['subject'] ?></p>
+<div id="emailBody">
 <?= $result['body']?>
-</textarea>
+</div>
 </div>

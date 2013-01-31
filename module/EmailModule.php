@@ -5,9 +5,9 @@ class EmailModule
 {
 	private $Event;
 	
-	function __construct((int)$eventID)
+	function __construct($eventID)
 	{
-		$this->Event = new EventModel($eventID);
+		$this->Event = new EventModel((int)$eventID);
 	}
 	
 	public function activate()
@@ -21,11 +21,10 @@ class EmailModule
 		$eventDate = date('Y-m-d', strtotime($Event->getstartTime()));	
 		$eventTime = date("H:i:s", strtotime($Event->getstartTime()));	
 		$links = EMAxSTATIC::$EMAIL_LINK_ALL;
-//list of grades and options for event
-//figure out the relevent links to display below
 
+		$orgName = EMAxSTATIC::$NAME_OF_ORG;
 		$emailAddress = ( $Person->getemailAddress() ) ? $Person->getemailAddress() : $Organization->getemailAddress() ; 
-		$emailSubjectLine = "Conformation of Event at {EMAxSTATIC::$NAME_OF_ORG} on {$eventDate}";	
+		$emailSubjectLine = "Conformation of Event at {$orgName} on {$eventDate}";	
 		$emailBodySeason = '';
 
 		$january = 1;
@@ -74,7 +73,7 @@ class EmailModule
 		
 		foreach($links as $link)
 		{
-			$linkEmailBody .=	key($link) . " {$link} \n";
+			$linkEmailBody .= "<li> {$link} </li>";
 		}
 		$email = array(
 			'body' => '',
@@ -83,14 +82,15 @@ class EmailModule
 		);
 		
 		$email['body'] = "
-			To {$Person->getfName()} {$Person->getlName()},
+			To {$Person->getfName()} {$Person->getlName()}, <br/>
 			
-			This email is conformation that you have sucsessfully booked an event at the {EMAxSTATIC::$NAME_OF_ORG} on {$eventDate} at {$eventTime}.	
+			This email is conformation that you have sucsessfully booked an event at the {$orgName} on {$eventDate} at {$eventTime}.	
 			{$emailBodySeason}
 			Here are some documents you will need for your event to be successful 
+			<ul>
 			{$linkEmailBody}
-			
-			Thank you for your interest in {EMAxSTATIC::$NAME_OF_ORG} we look forward to serving you	
+			</ul>
+			Thank you for your interest in {$orgName} we look forward to serving you	
 		";
 	
 		return $email;

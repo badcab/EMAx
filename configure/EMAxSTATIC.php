@@ -60,7 +60,8 @@ class EMAxSTATIC
 	public static $replyEmail = '';
 	
 	public static $EMAIL_LINK_ALL = array(
-		'discription' => 'url',
+		'discription' => 'yahoo.com',
+		'another one' => 'google.com'
 	);
 	
 	public static $EMAIL_LINK_FEILD_TRIP_ALL = array(

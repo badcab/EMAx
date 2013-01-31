@@ -200,8 +200,10 @@ var LoadContent = function()
 		},
 		editPage:function(form)
 		{
+//			var formID = $('input[name="id"]',form).val();
+//alert(formID);
 			$(":input", form).prop("disabled", true);
-			$("td:last", form).html('<input type="button" value="Edit" id="editButton" onclick="ret.editButtonClick(this.form, this)" />');
+			$("td:last", form).html('<input type="button" value="Edit" id="editButton" onclick="LoadContent.editButtonClick(this.form, this)" /><input type="button" value="Email" id="emailButton" onclick="Email.emailDialog( this.form )" />');
 		},
 		editButtonClick:function(form, eButton)
 		{
@@ -666,8 +668,9 @@ var Email = function()
 {
 	var ret =
 	{
-		emailDialog:function(eventID)
+		emailDialog:function(form)
 		{
+			var eventID = $('input[name="id"]',form).val();
 			$.ajax
 			({
 				type: 'POST',

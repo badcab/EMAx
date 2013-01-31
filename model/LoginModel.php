@@ -32,6 +32,7 @@ class LoginModel
 		{
 			$userName = $currentDBvalues->userName;
 			$password = $currentDBvalues->password;
+			$authorityLevel = $currentDBvalues->authorityLevel;
 		}
 		else
 		{

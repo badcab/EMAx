@@ -30,7 +30,10 @@ body
 	right: 0;
 }
 
-
+#emailBody
+{
+	font-size: small;
+}
 
 #header
 {
