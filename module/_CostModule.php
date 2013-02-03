@@ -57,8 +57,6 @@ class _CostModule
 			$optionCost = $this->getOptionTotal($Event->getOption());
 			$sum = $baseCost + $roomCost + $optionCost;
 		}
-error_log("========Summery========== \n");			
-error_log(" Grade Cost: \t" . $gradeCost ."\n Option Cost: \t". $optionCost ."\n Base Cost: \t". $baseCost ."\n Total: \t" . $sum . "\n");		
 		return (double)$sum;
 	}
 	public function multiEventCost(array $eventID = array())
@@ -87,13 +85,6 @@ error_log(" Grade Cost: \t" . $gradeCost ."\n Option Cost: \t". $optionCost ."\n
 		}
 		$result = $connection->query($sql);
 		$sum = $result->fetch(PDO::FETCH_ASSOC);
-/*
-echo("==========Options============ \n");		
-echo(var_dump($options) . " var dump option \n");
-echo(var_dump($sum) . " var dump sum \n");
-echo((double)$sum['SUM(`cost`)']. " return value \n");
-echo("\n");
-*/
 		return (double)$sum['SUM(`cost`)'];
 	}
 	private function getGradeTotal(array $grades = array())
@@ -106,13 +97,6 @@ echo("\n");
 		}
 		$result = $connection->query($sql);
 		$sum = $result->fetch(PDO::FETCH_ASSOC);
-/*
-echo("==========Grades============ \n");		
-echo(var_dump($grades) . " var dump grades \n");
-echo(var_dump($sum) . " var dump sum \n");
-echo((double)$sum['MAX(`cost`)']. " return value \n");
-echo("\n");
-*/
 		return (double)$sum['MAX(`cost`)'];
 	}
 }
