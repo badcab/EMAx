@@ -137,7 +137,7 @@
 <p class="showPrint">Phone: <?= $person_phoneNumber ?></p>
 <p class="showPrint">Alt Phone: <?= $person_phoneNumberAlt ?></p>
 <p class="showPrint">Email: <?= $person_email ?></p>
-<p class="showPrint">Cost*: <?= $cost ?></p>
+<p class="showPrint" id="CostOfEventInPrint">Cost*: <?= $cost ?></p>
 <p class="showPrint">*cost is total if for room reservation and cost per person if field trip</p>
 <script type="text/javascript" > 
 	Etera.datepicker(); 	
