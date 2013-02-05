@@ -73,7 +73,6 @@ class RoomLocationModel
 		return (int)$this->ClassObjectArg['ID'];
 	}
 	
-	/*
 	public function writeChanges()
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
@@ -86,8 +85,6 @@ class RoomLocationModel
 		$connection->exec($sql);
 		$connection = NULL;	
 	}
-
-	*/
 	
 	public function deleteRecord()
 	{

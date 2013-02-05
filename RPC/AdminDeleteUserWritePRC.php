@@ -1,4 +1,8 @@
 <?php
-//AdminDeleteUserWritePRC
-//remember to use the session variable to establish if user is allowed to do this operation, do not do if they don't
+require_once('../module/DeleteUser_WriteToDataBaseModule.php');
+$formData = (isset($_POST['formData'])) ? $_POST['formData'] : NULL;
+parse_str($formData, $writeToDB);
+$user = $writeToDB['user'];
+$DeleteUser = new DeleteUser_WriteToDataBaseModule();
+$DeleteUser->activate($user);
 ?>

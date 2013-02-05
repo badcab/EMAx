@@ -63,7 +63,6 @@ at this point we will use the session variable to spawn a login object and then 
 				<li>
 					<input type="button" class="isLogin" value="Logout" onclick="LoadContent.loadContent('RPC/LogoutRPC.php')" />
 				</li>
-<!-- need to turn the following off if -->
 <?php if(TRUE): ?>				
 				<li>
 					<input type="button" class="isLogin" value="Miscellaneous" onclick="LoadContent.loadContent('RPC/MiscellaneousRPC.php')" />
@@ -72,7 +71,7 @@ at this point we will use the session variable to spawn a login object and then 
 					<input type="button" class="isLogin" value="Create User" onclick="Login.createNewUser()" />				
 				</li>
 				<li>
-					<input type="button" class="isLogin" value="Delete User" onclick="Login.deleteUser()" />	<!-- add to the js this pop up -->			
+					<input type="button" class="isLogin" value="Delete User" onclick="Login.deleteUser()" />			
 				</li>
 				<li>
 					<input type="button" class="isLogin" value="Change User Password" onclick="Login.setUserPassword()" />				

@@ -59,31 +59,28 @@ if($Action == "ADD")
 	}
 }
 
-if($Action == "DELETE")//here is where we need to add the hooks to the module
+if($Action == "DELETE")
 {
 	switch($tableName) 
 	{
 		case "GRADE":
 			require_once('../model/GradeModel.php');
 			$Grade = new GradeModel($stringValue);
-			/*
 			$Grade->setCost(0.00);
 			$Grade->writeChanges();				
 			$UpdateCost = new _UpdateCostModule();
 			$UpdateCost->fkGrade($Grade->getID());
-			*/
 			$Grade->deleteRecord();
 		break;
 		
 		case "OPTION":
 			require_once('../model/OptionModel.php');
 			$Option = new OptionModel($stringValue);
-			/*
+
 			$Option->setCost(0.00);
 			$Option->writeChanges();				
 			$UpdateCost = new _UpdateCostModule();
 			$UpdateCost->fkOption($Option->getID());
-			*/
 			$Option->deleteRecord();
 		break;
 		

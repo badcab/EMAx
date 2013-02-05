@@ -71,7 +71,6 @@ class OptionModel
 		return (int)$this->ClassObjectArg['ID'];
 	}
 	
-	/*
 
 	public function writeChanges()
 	{
@@ -84,7 +83,6 @@ class OptionModel
 		$connection->exec($sql);
 		$connection = NULL;	
 	}
-	*/
 	
 	public function deleteRecord()
 	{

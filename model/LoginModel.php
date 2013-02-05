@@ -137,7 +137,7 @@ class LoginModel
 		$listArr = array();
 		foreach($this->LoginList as $list)
 		{
-			$listArr[$list['ID']] = $list['userName'];
+			$listArr[] = array( 'id' => $list['ID'], 'name' => $list['userName']);
 		}
 		return $listArr;
 	}

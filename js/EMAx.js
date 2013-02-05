@@ -373,12 +373,112 @@ password = 'blizzard';
 			alert("delete user clicked");	
 			//AdminDeleteUserPRC
 			//AdminDeleteUserWritePRC
+			$.ajax
+			({
+				type: 'POST',
+				url: 'RPC/AdminDeleteUserPRC.php' ,
+				dataType: "html",
+				success:	function(result)
+				{
+					$(result).dialog({
+						open:function()
+						{
+						},
+						close:function()
+						{
+							$( this ).dialog( "destroy" );
+						},
+						closeOnEscape: true,
+						draggable: false,
+						title: 'Delete User',
+						width: 500,
+						resizable: false,
+						modal: true,
+						buttons:
+						{
+							'Save':function()
+							{
+								$.ajax
+									({
+										type: 'POST',
+										url: 'RPC/AdminDeleteUserWritePRC.php' ,
+										data: {formData: $('form', this).serialize()},
+										dataType: "html",
+										success:function(result)
+										{
+											alert(result);
+										},
+										error:function()
+										{
+											alert("User not deleted");
+										}
+									});
+								$( this ).dialog( "close" );
+							}
+						}
+					});
+				},
+				error:function()
+				{
+					alert("error change password");
+				}
+			});
 		},
 		setUserPassword:function()
 		{
 			alert("set user password clicked");	
 			//AdminChangePassWordPRC
 			//AdminChangePassWordWritePRC
+						$.ajax
+			({
+				type: 'POST',
+				url: 'RPC/AdminChangePassWordPRC.php' ,
+				dataType: "html",
+				success:	function(result)
+				{
+					$(result).dialog({
+						open:function()
+						{
+						},
+						close:function()
+						{
+							$( this ).dialog( "destroy" );
+						},
+						closeOnEscape: true,
+						draggable: false,
+						title: 'Change Selected User Password',
+						width: 500,
+						resizable: false,
+						modal: true,
+						buttons:
+						{
+							'Save':function()
+							{
+								$.ajax
+									({
+										type: 'POST',
+										url: 'RPC/AdminChangePassWordWritePRC.php' ,
+										data: {formData: $('form', this).serialize()},
+										dataType: "html",
+										success:function(result)
+										{
+											alert(result);
+										},
+										error:function()
+										{
+											alert("target users password not changed");
+										}
+									});
+								$( this ).dialog( "close" );
+							}
+						}
+					});
+				},
+				error:function()
+				{
+					alert("error change password");
+				}
+			});
 		},
 		loadChangePasswordModal:function()
 		{

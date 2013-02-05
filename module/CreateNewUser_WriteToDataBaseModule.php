@@ -1,14 +1,13 @@
 <?php
+require_once('../configure/EMAxSTATIC.php');
+require_once('../model/LoginModel.php');
 class CreateNewUser_WriteToDataBaseModule
 {
-	function __construct() 
+	function __construct()
 	{
-		
 	}
-	
-	public function activate($userName, $password)
+	public function activate($userName, $password, $authorizeUser = $_SESSION['user'])
 	{
-		require_once('../model/LoginModel.php');
 		$Login = new LoginModel();
 		//check if name already exists
 		if(in_array(ucwords(strtolower($userName)), $Login->getList()))
@@ -16,13 +15,15 @@ class CreateNewUser_WriteToDataBaseModule
 			/*do nothing*/
 			error_log("User Name already Exists");
 		}
-		
 		else
 		{
-			$Login->setuserName($userName);
-			$Login->setpassword($password);
-			$Login->writeData();
-			unset($Login);
+			$CurrentUser = new LoginModel($authorizeUser);
+			if($CurrentUser->getauthorityLevel() == EMAxSTATIC::$AUTH_LEVEL_ADMIN)
+			{
+				$Login->setuserName($userName);
+				$Login->setpassword($password);
+				$Login->writeData();
+			}
 		}
 	}
 }

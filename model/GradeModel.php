@@ -66,7 +66,6 @@ class GradeModel
 		);
 	}
 	
-	/*
 
 	public function writeChanges()
 	{
@@ -79,7 +78,6 @@ class GradeModel
 		$connection->exec($sql);
 		$connection = NULL;	
 	}
-	*/
 	
 	public function getID()
 	{
