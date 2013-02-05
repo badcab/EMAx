@@ -9,17 +9,17 @@
 	</tr>
 	
 	<tr>
-		<td>phoneNumber</td><!-- format validater js -->
+		<td>Phone Number</td><!-- format validater js -->
 		<td><input type="text" name="phoneNumber" value="<?= $Organization->getphoneNumber() ?>" onblur="Valid.phoneValid(this, <?= $areaCode ?>)"/></td>	
 	</tr>
 	
 	<tr>
-		<td>emailAddress</td><!-- format validater js -->
+		<td>Email Address</td><!-- format validater js -->
 		<td><input type="text" name="emailAddress" value="<?= $Organization->getemailAddress() ?>" onblur="Valid.emailValid(this)"/></td>	
 	</tr>
 	
 	<tr>
-		<td>address</td>
+		<td>Address</td>
 		<td><input type="text" name="address" value="<?= $Organization->getaddress() ?>"/></td>	
 	</tr>
 	
@@ -49,7 +49,7 @@
 	</tr>
 	
 	<tr>
-		<td>notes</td>
+		<td>Notes</td>
 		<td><textarea rows="4" cols="25" name="notes" ><?= $Organization->getnotes() ?></textarea> </td>	
 	</tr>
 	<tr>

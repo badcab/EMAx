@@ -1,4 +1,4 @@
-<?php //MailModule.php can likely be removed
+<?php
 require_once('../model/EventModel.php');
 require_once('../configure/EMAxSTATIC.php');
 class EmailModule

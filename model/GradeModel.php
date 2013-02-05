@@ -66,6 +66,21 @@ class GradeModel
 		);
 	}
 	
+	/*
+
+	public function writeChanges()
+	{
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
+		$name = $connection->quote($this->getGrade());
+		$cost = $connection->quote($this->getCost());
+		$id = $connection->quote($this->getID());
+		
+		$sql = "UPDATE `EMAx_Grade` SET `name`={$name},`cost`={$cost} WHERE `ID` = {$id}";
+		$connection->exec($sql);
+		$connection = NULL;	
+	}
+	*/
+	
 	public function getID()
 	{
 		return (int)$this->ClassObjectArg['ID'];
@@ -85,7 +100,7 @@ class GradeModel
 	
 	public function getCost()
 	{
-		return $this->ClassObjectArg['cost'];	
+		return $this->ClassObjectArg['cost'];	//remember to cast as double
 	}
 	
 	public function setCost($value)

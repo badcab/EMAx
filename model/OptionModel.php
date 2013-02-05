@@ -71,6 +71,21 @@ class OptionModel
 		return (int)$this->ClassObjectArg['ID'];
 	}
 	
+	/*
+
+	public function writeChanges()
+	{
+		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
+		$name = $connection->quote($this->getOption());
+		$cost = $connection->quote($this->getCost());
+		$id = $connection->quote($this->getID());
+		
+		$sql = "UPDATE `EMAx_Option` SET `name`={$name},`cost`={$cost} WHERE `ID` = {$id}";
+		$connection->exec($sql);
+		$connection = NULL;	
+	}
+	*/
+	
 	public function deleteRecord()
 	{
 		

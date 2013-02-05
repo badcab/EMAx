@@ -29,7 +29,7 @@
 	</tr>
 	
 	<tr>
-		<td>RoomLocation</td>
+		<td>Room Location</td>
 		<td>
 		<select name="RoomLocation">
 			<?php foreach($roomList as $room): ?>

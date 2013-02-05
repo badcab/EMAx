@@ -68,7 +68,7 @@
 		</td>	
 	</tr>
 	<tr>
-		<td>notes</td>
+		<td>Notes</td>
 		<td><textarea rows="4" cols="20" name="notes"><?= $Person->getnotes() ?></textarea> </td>	
 	</tr>
 	<tr>

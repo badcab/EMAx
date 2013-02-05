@@ -128,9 +128,3 @@ CREATE TABLE IF NOT EXISTS `EMAx_GradeEventMap` (
   FOREIGN KEY (EMAx_Grade_ID) REFERENCES EMAx_Grade (ID),
   UNIQUE (EMAx_Event_ID, EMAx_Grade_ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
-
-CREATE TABLE IF NOT EXISTS `EMAx_CostSettings` (
-  `property` varchar(25) NOT NULL,
-  `moneyValue` DECIMAL(6,2) UNSIGNED NOT NULL DEFAULT 0.00,
-  PRIMARY KEY  (`property`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;

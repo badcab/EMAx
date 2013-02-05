@@ -28,19 +28,12 @@ class EMAxSTATIC
 	public static $ROOM_RESERVATION_NON_PROFIT = 1;
 	public static $ROOM_RESERVATION_FOR_PROFIT = 2;
 
-/*	
-	public static $USE__EMAIL = FALSE; //I can likely get rid of this for now
-		public static $USE_GOOGLE_EMAIL = FALSE;
-		public static $USE_SMTP_EMAIL = FALSE;
-		public static $USE_EXCHANGE_EMAIL = FALSE;
-*/	
 	public static $USE_GOOGLE_CAL = FALSE;
 	public static $USE_SSL = FALSE;
 	public static $PATH_ZEND = '../../ZendGdata-1.10.5/library';
 	public static $PATH_JQUERY = '//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js';
 	public static $PATH_JQUERY_UI = '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js';
 	public static $PATH_JQUERY_UI_CSS = '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css';
-	public static $PATH_PHPMAILER = '../../PHPMailer_v5.1/class.phpmailer.php';
 	
 	public static $db_host = '127.0.0.1';
 	public static $db_user = 'root';
@@ -51,13 +44,6 @@ class EMAxSTATIC
 	
 	public static $googleUserName = '';
 	public static $googlePassword = '';
-	
-	public static $smtpPassword = '';
-	public static $smtpServer = '';
-	public static $smtpUserName = '';	
-	
-	public static $nameOfSender = '';
-	public static $replyEmail = '';
 	
 	public static $EMAIL_LINK_ALL = array(
 		'discription' => 'yahoo.com',

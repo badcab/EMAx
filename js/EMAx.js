@@ -286,7 +286,7 @@ password = 'blizzard';
 							$("#content").html(DefaultViewDiv);
 							$("#userStatus").html(
 								result
-								+ " <input type='button' id='changePasswordButton' value='Change Password' onclick='loadChangePasswordModal()' />"
+								+ " <input type='button' id='changePasswordButton' value='Change Password' onclick='Login.loadChangePasswordModal()' />"
 							);
 						});
 						$("#tooltip").html("This is a list of upcoming events");
@@ -368,6 +368,18 @@ password = 'blizzard';
 				}
 			});
 		},
+		deleteUser:function()
+		{
+			alert("delete user clicked");	
+			//AdminDeleteUserPRC
+			//AdminDeleteUserWritePRC
+		},
+		setUserPassword:function()
+		{
+			alert("set user password clicked");	
+			//AdminChangePassWordPRC
+			//AdminChangePassWordWritePRC
+		},
 		loadChangePasswordModal:function()
 		{
 			$.ajax
@@ -388,7 +400,7 @@ password = 'blizzard';
 						closeOnEscape: true,
 						draggable: false,
 						title: 'Change Password',
-						width: 400,
+						width: 500,
 						resizable: false,
 						modal: true,
 						buttons:
