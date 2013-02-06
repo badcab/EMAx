@@ -18,11 +18,21 @@ class EmailModule
 		
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
 		
-		$eventDate = date('Y-m-d', strtotime($Event->getstartTime()));	
-		$eventTime = date("H:i:s", strtotime($Event->getstartTime()));	
+		$eventDate = date('l, F jS', strtotime($Event->getstartTime()));	
+		$eventTime = date("g:i a", strtotime($Event->getstartTime()));	
+		
+		$roomLocation = $Event->getRoomLocation()->getRoomLocation();
+		$attendance = $Event->getattendance();
+		$cost = $Event->getcost();
+		
+		$eventTypeCost = '';
+		
 		$links = EMAxSTATIC::$EMAIL_LINK_ALL;
 
 		$orgName = EMAxSTATIC::$NAME_OF_ORG;
+		$orgPhone = EMAxSTATIC::$PHONE_OF_ORG;
+		$orgEmail = EMAxSTATIC::$EMAIL_OF_ORG;
+		$orgAddress = EMAxSTATIC::$ADDRESS_OF_ORG;
 		$emailAddress = ( $Person->getemailAddress() ) ? $Person->getemailAddress() : $Organization->getemailAddress() ; 
 		$emailSubjectLine = "Conformation of Event at {$orgName} on {$eventDate}";	
 		$emailBodySeason = '';
@@ -38,11 +48,13 @@ class EmailModule
 		if($Event->getroomReservation()) 
 		{
 			//is a room reservation
+			$eventTypeCost = 'for a total cost of $' . number_format($cost, 2, '.', '');
 			$links = array_merge($links, EMAxSTATIC::$EMAIL_LINK_ROOM_RESERVATION);
 		}
-		else 
+		else    
 		{
 			//is not a room reservation
+			$eventTypeCost = 'for a total cost of $' . number_format($attendance * $cost, 2, '.', '') . ' assuming everyone comes';
 			$links = array_merge($links, EMAxSTATIC::$EMAIL_LINK_FEILD_TRIP_ALL);
 		}
 
@@ -82,17 +94,34 @@ class EmailModule
 		);
 		
 		$email['body'] = "
-			To {$Person->getfName()} {$Person->getlName()}, <br/>
+			<p>
+			To {$Person->getfName()} {$Person->getlName()},
+			</p>
 			
-			This email is conformation that you have sucsessfully booked an event at the {$orgName} on {$eventDate} at {$eventTime}.	
+			<p>
+			This email is conformation that you have sucsessfully booked an event at the 
+			{$orgName} on {$eventDate} at {$eventTime} in the {$roomLocation} {$eventTypeCost}.
+			</p>	
+			
+			<p>
 			{$emailBodySeason}
-			Here are some documents you will need for your event to be successful 
+			</p>	
+			
+			<p>
+			Here are some documents you will need for your event to be successful: 
+			</p>	
+
 			<ul>
 			{$linkEmailBody}
 			</ul>
-			Thank you for your interest in {$orgName} we look forward to serving you	
+			
+			<p>
+			Thank you for your interest in {$orgName} we look forward to serving you
+			</p>
+			
+			<sub> {$orgPhone} | {$orgAddress} </sub>	
+			
 		";
-	
 		return $email;
 	}
 }

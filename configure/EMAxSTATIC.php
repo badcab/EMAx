@@ -46,37 +46,37 @@ class EMAxSTATIC
 	public static $googlePassword = '';
 	
 	public static $EMAIL_LINK_ALL = array(
-		'discription' => 'yahoo.com',
-		'another one' => 'google.com'
+		'this is a link All http://google.com',
+		'this is a link more all http://google.com',
 	);
 	
 	public static $EMAIL_LINK_FEILD_TRIP_ALL = array(
-		'discription' => 'url',
+		'this is a link FT http://google.com',
 	);
 	
 	public static $EMAIL_LINK_ROOM_RESERVATION = array(
-		'discription' => 'url',
+		'this is a link RR http://google.com',
 	);
 	
 	public static $EMAIL_LINK_FEILD_TRIP_SUMMER = array(
-		'discription' => 'url',
+		'this is a link summer http://google.com',
 	);
 	
 	public static $EMAIL_LINK_FEILD_TRIP_FALL = array(
-		'discription' => 'url',
+		'this is a link Fall http://google.com',
 	);
 	
 	public static $EMAIL_LINK_FEILD_TRIP_WINTER = array(
-		'discription' => 'url',
+		'this is a link winter http://google.com',
 	);
 	
 	public static $EMAIL_LINK_FEILD_TRIP_SPRING = array(
-		'discription' => 'url',
+		'this is a link spring http://google.com',
 	);
 	
-	public static $EMAIL_BODY_ADD_ON_SUMMER = '';
-	public static $EMAIL_BODY_ADD_ON_FALL = '';
-	public static $EMAIL_BODY_ADD_ON_WINTER = '';
-	public static $EMAIL_BODY_ADD_ON_SPRING = '';
+	public static $EMAIL_BODY_ADD_ON_SUMMER = 'Summer body';
+	public static $EMAIL_BODY_ADD_ON_FALL = 'Fall body';
+	public static $EMAIL_BODY_ADD_ON_WINTER = 'Winter body';
+	public static $EMAIL_BODY_ADD_ON_SPRING = 'Spring body';
 }
 ?>

@@ -30,7 +30,7 @@
       <?php foreach($gradeList as $item): ?>
       		<tr>
 					<td> <?= $item['name'] ?> </td>
-					<td> <?= $item['cost'] ?> </td>
+					<td> money_format('%(#10n',$item['cost']) </td>
 					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('GRADE', 'DELETE', '<?= $item['name'] ?>')" /></td>
       		</tr>    
       <?php endforeach; ?>
@@ -47,7 +47,7 @@
       <?php foreach($optionList as $item): ?>
       		<tr>
 					<td> <?= $item['name'] ?> </td>
-					<td> <?= $item['cost'] ?> </td>
+					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
 					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('OPTION', 'DELETE', '<?= $item['name'] ?>')" /></td>
       		</tr>      
       <?php endforeach; ?>
@@ -64,7 +64,7 @@
       <?php foreach($roomList as $item): ?>
       		<tr>
 					<td> <?= $item['name'] ?> </td>
-					<td> <?= $item['cost'] ?> </td>
+					<td> money_format('%(#10n',$item['cost']) </td>
 					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('ROOM', 'DELETE', '<?= $item['name'] ?>')" /></td>
       		</tr>  
       <?php endforeach; ?>

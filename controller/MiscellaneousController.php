@@ -40,12 +40,16 @@ class MiscellaneousController
 		require_once('../view/MiscellaneousView.php');
 	}
 	
-	private function costDropdown($id, $maxMoney = 5.01, $incrementBy = 0.25)
+	private function costDropdown($id, $maxMoney = 5.00, $incrementBy = 0.25, $superMaxMoney = 100.01)
 	{
 		setlocale(LC_MONETARY, 'en_US');
 
 		$result = "<select id='{$id}' name='{$id}' onchange=''>";
 		for($i = 0.00; $i < $maxMoney; $i += $incrementBy) 
+		{
+			$result .= "<option value='{$i}'>" . money_format('%(#10n', $i) . "</option>";
+		}	
+		for($i = $maxMoney; $i < $superMaxMoney; $i += $maxMoney) 
 		{
 			$result .= "<option value='{$i}'>" . money_format('%(#10n', $i) . "</option>";
 		}	
