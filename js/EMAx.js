@@ -342,7 +342,7 @@ var Login = function()
 						},
 						close:function()
 						{
-							$( this ).dialog( "destroy" );
+							$( this ).dialog( "destroy" ).remove();
 						},
 						closeOnEscape: true,
 						draggable: false,
@@ -390,7 +390,7 @@ var Login = function()
 						},
 						close:function()
 						{
-							$( this ).dialog( "destroy" );
+							$( this ).dialog( "destroy" ).remove();
 						},
 						closeOnEscape: true,
 						draggable: false,
@@ -400,7 +400,7 @@ var Login = function()
 						modal: true,
 						buttons:
 						{
-							'Save':function()
+							'Delete':function()
 							{
 								$.ajax
 									({
@@ -443,7 +443,7 @@ var Login = function()
 						},
 						close:function()
 						{
-							$( this ).dialog( "destroy" );
+							$( this ).dialog( "destroy" ).remove();
 						},
 						closeOnEscape: true,
 						draggable: false,
@@ -453,7 +453,7 @@ var Login = function()
 						modal: true,
 						buttons:
 						{
-							'Save':function()
+							'Change Password':function()
 							{
 								$.ajax
 									({
@@ -496,7 +496,7 @@ var Login = function()
 						},
 						close:function()
 						{
-							$( this ).dialog( "destroy" );
+							$( this ).dialog( "destroy" ).remove();
 						},
 						closeOnEscape: true,
 						draggable: false,
@@ -506,7 +506,7 @@ var Login = function()
 						modal: true,
 						buttons:
 						{
-							'Save':function()
+							'Change Password':function()
 							{
 								$.ajax
 									({

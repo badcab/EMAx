@@ -1,26 +1,8 @@
-these are some things I need to do
-KEY - = partly done, -- = done but not full tested
-
-event model needs cost (get only)
-
-fix the issue with no zip (maybe in the return NULL line inside of the zip model?)
-
-add warnings for unacceptable form fill outedness
-
-add double book protection
-
--finish triggers and stored procedure
-
-tool tip niceify
-
---default admin login, accept any password
-
--password salting should involve the user name
-
-add event cost to views but it is not directly editable
-
-ability to delete users (admin only)
-
--remove programmatic fk resolution
-
-for misslanious fix so that tabs do not reset every time a query is made (note keep this behavior for search as this is an event centeric program)
+Search String auto complete not working
+delete user not working (admin)
+change password not work and not tested
+add double book protection (and return an error message if warranted)
+in isolated view the person select in event is not working
+misc should not require changing of the tabs all the time (like done in reports)
+tool tip should be nicer
+deleting a misc fk should throw a warning before continuing
