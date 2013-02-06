@@ -57,7 +57,7 @@ class RoomLocationModel
 			$id = NULL;
 			$name = NULL;
 			$notes = NULL;
-//			$cost = NULL;
+			$cost = 0.00;
 		}
 		
 		$this->ClassObjectArg = array(
@@ -78,7 +78,7 @@ class RoomLocationModel
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$name = $connection->quote($this->getRoomLocation());
 		$cost = $connection->quote($this->getCost());
-		$notes = $connection->quote($this->getnotes()());
+		$notes = $connection->quote($this->getnotes());
 		$id = $connection->quote($this->getID());
 		
 		$sql = "UPDATE `EMAx_Option` SET `name`={$name},`cost`={$cost}, `notes`={$notes} WHERE `ID` = {$id}";

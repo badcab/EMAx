@@ -129,7 +129,6 @@ class _SearchModel
 	public function getEventSearch($id = NULL)
 	{
 		$id = ($id == '') ? NULL : (int)$id;
-//error_log($id . ' is the id passed to getEventSearch in _SearchModel' . "line 148 _SearchModel");
 		$queryResult = $this->connection->query("SELECT * FROM `EMAx_Event` WHERE `ID`=". $this->connection->quote($id) );
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)
@@ -278,6 +277,7 @@ class _SearchModel
 			$Organization[] = $record;
 		}
 		$queryResult = $this->connection->query($sqlPerson);
+error_log($sqlPerson . "\n is the sql person search string");		
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
 		foreach($queryArr as $record)
 		{

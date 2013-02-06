@@ -18,10 +18,10 @@ class WritePersonModule
 		require_once('../model/StateModel.php');
 		
 		$Person = new PersonModel((int)$dataArray['id']);
-		$Organization = new OrganizationModel((int)$dataArray['Organization']);//==not defined
+		$Organization = new OrganizationModel((int)$dataArray['Organization']);
 		$City = new CityModel($dataArray['City']);
 		$Zip = new ZipModel($dataArray['Zip']);
-		$State = new StateModel((int)$dataArray['State']);//==not defined
+		$State = new StateModel((int)$dataArray['State']);
 		
 		$Person->setfName($dataArray['fName']);
 		$Person->setmName($dataArray['mName']);

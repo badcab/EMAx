@@ -71,6 +71,7 @@ class LoginModel
 					". $connection->quote($this->ClassObjectArg['password']) ."
 				)";
 		}
+error_log($sql);		
 		$success = $connection->exec($sql);
 		$connection = NULL;
 		return $success;
@@ -95,7 +96,7 @@ class LoginModel
 	}
 	public function checkPassword($passwordPlain)
 	{
-		if($passwordPlain == $this->getpassword() && $passwordPlain == 'admin')
+		if($passwordPlain == $this->getpassword() && $passwordPlain == 'Admin')
 		{
 			return TRUE; //should only be used for default login
 		}
@@ -117,8 +118,7 @@ class LoginModel
 	}
 	private function hashifyPassword($plainTextPassword)
 	{
-		$hashedPassword = sha1($plainTextPassword . EMAxSTATIC::$passwordSalt);
-		//$hashedPassword = sha1($plainTextPassword . EMAxSTATIC::$passwordSalt . $this->getuserName());
+		$hashedPassword = sha1($plainTextPassword . EMAxSTATIC::$passwordSalt . $this->getuserName());
 		return $hashedPassword;
 	}
 

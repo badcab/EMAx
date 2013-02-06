@@ -7,7 +7,6 @@ class GradeModel
 	
 	function __construct($id = NULL, $cost = 0.00)
 	{
-		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$currentDBvalues = NULL;
 		

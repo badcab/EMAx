@@ -7,7 +7,6 @@ class DeleteEventModule
 		require_once('../model/EventModel.php');
 		$Event = new EventModel($id);
 		$Event->deleteRecord();
-		unset($Event);
 	}
 }
 ?>

@@ -16,9 +16,6 @@
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE); 
 		$_SESSION['user'] = '';//I don't think this is needed, remove later
 	}
-/*
-at this point we will use the session variable to spawn a login object and then get the perm level for the if statement
-*/
 ?>
 	<title>EMAx Event Management Application eXtended</title>	
 	<link type="text/css" href="css/EMAx.css" rel="stylesheet" />
@@ -63,21 +60,19 @@ at this point we will use the session variable to spawn a login object and then 
 				<li>
 					<input type="button" class="isLogin" value="Logout" onclick="LoadContent.loadContent('RPC/LogoutRPC.php')" />
 				</li>
-<?php if(TRUE): ?>				
+			
 				<li>
-					<input type="button" class="isLogin" value="Miscellaneous" onclick="LoadContent.loadContent('RPC/MiscellaneousRPC.php')" />
+					<input type="button" class="isLogin Admin" value="Miscellaneous" onclick="LoadContent.loadContent('RPC/MiscellaneousRPC.php')" />
 				</li>			
 				<li>
-					<input type="button" class="isLogin" value="Create User" onclick="Login.createNewUser()" />				
+					<input type="button" class="isLogin Admin" value="Create User" onclick="Login.createNewUser()" />				
 				</li>
 				<li>
-					<input type="button" class="isLogin" value="Delete User" onclick="Login.deleteUser()" />			
+					<input type="button" class="isLogin Admin" value="Delete User" onclick="Login.deleteUser()" />			
 				</li>
 				<li>
-					<input type="button" class="isLogin" value="Change User Password" onclick="Login.setUserPassword()" />				
+					<input type="button" class="isLogin Admin" value="Change User Password" onclick="Login.setUserPassword()" />				
 				</li>
-<!-- remember to add filters to block non-admins from calling the rpc -->			
-<?php endif; ?>	
 			</ul>
 		</div>
 		<div id="content">

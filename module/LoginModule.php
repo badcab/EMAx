@@ -17,14 +17,10 @@ class LoginModule
 	
 	public function activate()
 	{
-
 		if($this->verifyUserExists())
-		{
-error_log("user exists");
+		{		
 			if($this->verifyPassword())
-			{
-error_log("passwords match");
-				$this->log_user_login();
+			{					
 				return $this->fullLoginObject->getuserName();	
 			}	
 		}
@@ -34,7 +30,9 @@ error_log("passwords match");
 	private function verifyUserExists()
 	{
 		$userList = $this->emptyLoginObject->getList();
-		if(in_array($this->user, $userList))
+		$userArr = array();
+		foreach($userList as $user) $userArr[] = $user['name'];
+		if(in_array($this->user, $userArr))
 		{
 			require_once('../model/LoginModel.php');
 			$this->fullLoginObject = new LoginModel($this->user);
@@ -43,16 +41,8 @@ error_log("passwords match");
 		return FALSE;
 	}
 	
-	private function log_user_login()
-	{
-		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
-		$loginLog = "User: " . $this->user . " has logged in " . date('Y-m-d H:i:s');
-
-error_log($loginLog);
-	}
-	
 	private function verifyPassword()
-	{
+	{		
 		return $this->fullLoginObject->checkPassword($this->password);//return bool
 	}
 }

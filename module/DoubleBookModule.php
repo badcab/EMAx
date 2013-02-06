@@ -16,11 +16,11 @@ class DoubleBookModule
 
 	function activate()
 	{
-		//return true or false
-		//true means continue with the booking
+		$start = $this->eventStart;
+		$end = $this->eventEnd;
 		$sql = "SELECT * FROM `EMAx_Event` 
-			WHERE  {$this->eventStart} < `endTime` 
-			AND {$this->eventEnd} > `startTime` 
+			WHERE  {$start} < `endTime` 
+			AND {$end} > `startTime` 
 			AND `EMAx_RoomLocation_ID` = {$this->roomLocation}";
 			
 		$connection = new PDO(

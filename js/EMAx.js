@@ -267,9 +267,7 @@ var Login = function()
 		loginScript:function()
 		{
 			var user = $("#userName").val();
-			var password = $("#password").val();
-user= 'mike';
-password = 'blizzard';			
+			var password = $("#password").val();		
 			$.ajax
 			({
 		  		type: "POST",
@@ -282,13 +280,22 @@ password = 'blizzard';
 					if(result != "FALSE")
 					{
 						var DefaultViewDiv = LoadContent.loadContent('RPC/DefaultViewRPC.php');
-						$(".isLogin").show( "fold", 1000,function() {
+						$(".isLogin").show( "fold", 1000,function() 
+						{
 							$("#content").html(DefaultViewDiv);
 							$("#userStatus").html(
 								result
 								+ " <input type='button' id='changePasswordButton' value='Change Password' onclick='Login.loadChangePasswordModal()' />"
 							);
 						});
+						if(result == 'Admin')
+						{
+							$('.Admin').show()
+						}
+						else
+						{
+							$('.Admin').hide()	
+						}
 						$("#tooltip").html("This is a list of upcoming events");
 					}
 					else
@@ -370,9 +377,6 @@ password = 'blizzard';
 		},
 		deleteUser:function()
 		{
-			alert("delete user clicked");	
-			//AdminDeleteUserPRC
-			//AdminDeleteUserWritePRC
 			$.ajax
 			({
 				type: 'POST',
@@ -426,10 +430,7 @@ password = 'blizzard';
 		},
 		setUserPassword:function()
 		{
-			alert("set user password clicked");	
-			//AdminChangePassWordPRC
-			//AdminChangePassWordWritePRC
-						$.ajax
+			$.ajax
 			({
 				type: 'POST',
 				url: 'RPC/AdminChangePassWordPRC.php' ,

@@ -15,10 +15,9 @@ class WriteOrganizationModule
 		require_once('../model/CityModel.php');
 		require_once('../model/ZipModel.php');
 		require_once('../model/StateModel.php');
-//allow to be null		
+	
 		$Organization = new OrganizationModel((int)$dataArray['id']);
-//in name modules ignore empty strings
-//county
+
 		$City = new CityModel($dataArray['City']);
 		$Zip = new ZipModel($dataArray['Zip']);
 		$State = new StateModel((int)$dataArray['State']);//==not defined

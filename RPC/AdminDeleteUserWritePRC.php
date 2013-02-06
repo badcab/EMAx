@@ -1,8 +1,12 @@
 <?php
+if(!isset($_SESSION))
+{		
+	session_start();
+}
 require_once('../module/DeleteUser_WriteToDataBaseModule.php');
 $formData = (isset($_POST['formData'])) ? $_POST['formData'] : NULL;
 parse_str($formData, $writeToDB);
 $user = $writeToDB['user'];
 $DeleteUser = new DeleteUser_WriteToDataBaseModule();
-$DeleteUser->activate($user);
+$DeleteUser->activate($user, $_SESSION['user']);
 ?>

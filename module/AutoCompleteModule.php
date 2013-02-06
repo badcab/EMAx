@@ -13,12 +13,6 @@ class AutoCompleteModule
 	private $orgList;
 	private $EventList;
 
-/*
-$queryResult = $this->connection->query($sqlPerson);
-		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();
-		foreach($queryArr as $record)	
-*/
-
 	function __construct()
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
@@ -33,7 +27,7 @@ $queryResult = $this->connection->query($sqlPerson);
     			$row['lName'];
 		}
 		sort($this->personList);
-//=====================================
+
 		$this->orgList = array();
 		$queryResult = $connection->query('SELECT * FROM `EMAx_Organization`');
 		$orgList = ($queryResult) ? $queryResult->fetchAll() : array();

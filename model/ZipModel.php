@@ -6,7 +6,6 @@ class ZipModel
 	
 	function __construct($id = NULL)
 	{
-		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$id = ($id == '') ? NULL : $id;
 		if(is_string($id))
@@ -27,7 +26,6 @@ class ZipModel
 			
 			else
 			{
-				//if(/*lenght is 5 and all are numerical*/){}
 				$connection->exec("INSERT INTO `EMAx_Zip`(`name`) VALUES (" . $connection->quote( $name ) . ")");
 				$exists = $connection->query("SELECT * FROM `EMAx_Zip` WHERE name=" . $connection->quote( $name ) );
 				$create = $exists->fetch(PDO::FETCH_OBJ);
@@ -66,7 +64,6 @@ class ZipModel
 	
 	public function deleteRecord()
 	{
-		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$connection->exec("DELETE FROM `EMAx_Zip` WHERE `ID`=" . $connection->quote($this->getID()) );
 	}	
@@ -79,8 +76,6 @@ class ZipModel
 	public function setZip($value)
 	{
 		$value = ($value == '') ? NULL : $value;
-		//if is numerical
-		//if lengh is 5
 		$this->ClassObjectArg['name'] = ($value);
 	}
 }

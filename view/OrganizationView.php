@@ -67,7 +67,9 @@
 		</script>
 	<?php endif; ?>
 	<?php if($sameCounty): ?>
-		$("#countyCB").prop("checked", true);
+		<script type="text/javascript" > 
+			$("#countyCB").prop("checked", true);
+		</script>
 	<?php endif; ?>
 </table>
 </form>

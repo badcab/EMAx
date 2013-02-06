@@ -37,7 +37,7 @@ class EMAxSTATIC
 	
 	public static $db_host = '127.0.0.1';
 	public static $db_user = 'root';
-	public static $db_name = 'EMAx';
+	public static $db_name = 'EMAx2';
 	public static $db_password = 'your-new-password';
 	
 	public static $passwordSalt = 'ghger67irs6&^Sfukl5324f6cfja';

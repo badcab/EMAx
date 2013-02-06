@@ -33,12 +33,10 @@ class GoogleCalanderModule
 		try 
 		{
     		$listFeed= $this->service->getCalendarListFeed();
-//    			foreach($listFeed as $feed)
-//error_log( $feed . " is the feed");
 		} 
 		catch (Zend_Gdata_App_Exception $e) 
 		{
-//error_log( "Error: " . $e->getMessage() );
+
 		}
 	}
 	

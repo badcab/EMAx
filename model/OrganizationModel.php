@@ -108,10 +108,7 @@ class OrganizationModel
 		$success = $lastInsertedID;
 		$connection = NULL;
 
-//error_log("the id is: " . $lastInsertedID );
-//error_log($sql);
-
-		return $success; //maybe I shall remove this line and just use get ID?
+		return $success; 
 		
 	}
 	public function getID()

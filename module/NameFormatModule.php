@@ -1,4 +1,4 @@
-<?php 
+<?php //I might be able to delete this
 require('');
 class NameFormatModule
 {

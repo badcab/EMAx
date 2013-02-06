@@ -233,13 +233,6 @@ class EventModel
 			$connection->exec($sql);
 		}
 
-//		if(EMAxSTATIC::$USE__EMAIL)
-//		{
-//			require_once('../module/MailModule.php');
-//			$mail = new MailModule();
-//			$mail->activate();	
-//		}
-
 		$connection = NULL;
 		return $success;
 	}
@@ -370,19 +363,19 @@ class EventModel
 		$this->ClassObjectArg['Login'] = (int)$value->getID();
 	}
 
-	public function setstartTime($value) //format here
+	public function setstartTime($value)
 	{
 		$value = ($value == '') ? NULL : $value;
 		$this->ClassObjectArg['startTime'] = $value;
 	}
 
-	public function setendTime($value) //format
+	public function setendTime($value) 
 	{
 		$value = ($value == '') ? NULL : $value;
 		$this->ClassObjectArg['endTime'] = $value;
 	}
 
-	public function setattendance($value) //force to int
+	public function setattendance($value)
 	{
 		$this->ClassObjectArg['attendance'] = (int)$value;
 	}

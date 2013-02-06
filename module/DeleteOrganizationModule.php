@@ -7,7 +7,6 @@ class DeleteOrganizationModule
 		require_once('../model/OrganizationModel.php');
 		$Organization = new OrganizationModel($id);
 		$Organization->deleteRecord();
-		unset($Organization);
 	}
 }
 ?>

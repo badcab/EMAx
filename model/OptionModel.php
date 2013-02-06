@@ -56,7 +56,7 @@ class OptionModel
 		{
 			$id = NULL;
 			$name = NULL;
-//			$cost = 0.00; since this is already declared we are all good
+			$cost = 0.00;
 		}
 		
 		$this->ClassObjectArg = array(
@@ -89,7 +89,6 @@ class OptionModel
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$id = $this->getID();
-		/*handle dependancies*/
 		$connection->exec("
 			DELETE FROM `EMAx_OptionEventMap` 
 			WHERE `EMAx_OptionEventMap`.`EMAx_Option_ID`= " . $connection->quote($id) 
