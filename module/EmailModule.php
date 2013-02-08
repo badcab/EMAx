@@ -99,7 +99,7 @@ class EmailModule
 			</p>
 			
 			<p>
-			This email is conformation that you have sucsessfully booked an event at the 
+			This email is confirmation that you have successfully booked an event at the 
 			{$orgName} on {$eventDate} at {$eventTime} in the {$roomLocation} {$eventTypeCost}.
 			</p>	
 			

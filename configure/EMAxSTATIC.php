@@ -27,6 +27,7 @@ class EMAxSTATIC
 	public static $FEILD_TRIP_EVENT = 0;
 	public static $ROOM_RESERVATION_NON_PROFIT = 1;
 	public static $ROOM_RESERVATION_FOR_PROFIT = 2;
+	public static $PUBLIC_PROGRAM_EVENT = 2;
 
 	public static $USE_GOOGLE_CAL = FALSE;
 	public static $USE_SSL = FALSE;
