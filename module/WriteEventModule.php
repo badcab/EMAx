@@ -57,8 +57,10 @@ class WriteEventModule
 		
 		if($Event->getroomReservation() == EMAxSTATIC::$PUBLIC_PROGRAM_EVENT)
 		{
+			$expense = (double)$dataArray['expense'];
+			$revenue = (double)$dataArray['revenue'];
 			$PublicProgramMoneyModule = new PublicProgramMoneyModule();
-			$PublicProgramMoneyModule->activate($Event, $expence, $reventue)
+			$PublicProgramMoneyModule->activate($Event, $expense, $revenue);
 		}		
 				
 		return $eventID;

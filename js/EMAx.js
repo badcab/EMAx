@@ -6,7 +6,7 @@ var EventAdd = function()
 		{
 			if(input == 'ON')
 			{
-				$(outsideDiv).html("<div id='PublicProgramFields'><table><tr><td>Total Revenue</td><td><input type='text' name='revenue' /></td></tr><tr><td>Total Expences</td><td><input type='text' name='expence' /></td></tr></table></div>");
+				$(outsideDiv).html("<div id='PublicProgramFields'><table><tr><td>Total Revenue</td><td><input type='text' name='revenue' onblur='Valid.moneyValid(this)'/></td></tr><tr><td>Total Expences</td><td><input type='text' name='expense' onblur='Valid.moneyValid(this)'/></td></tr></table></div>");
 			}
 			if(input == 'OFF')
 			{
@@ -131,7 +131,7 @@ var DropDown = function()
 			}
 			else
 			{
-				orgValue = organization.value;
+				orgValue = $(organization).val();
 			}
 			$.ajax
 			({
@@ -647,14 +647,57 @@ var Valid = function()
 {
 	var ret =
 	{
+		positionOfDotFromEndOfString:function(inputString)
+		{
+			var lengthOfString = inputString.length;
+			var positionOfDot = inputString.indexOf(".");
+			
+			return lengthOfString - positionOfDot - 1;//-1 so we can count like people not computers 
+		},
 		moneyValid:function(field)
 		{
 			var money = $(field).val();
-			var stripped_money = .replace(/[^0-9]/g, '');//remember to add '.' to that regular exprection
-			//first strip out all char other than numbers and . 
-			//if no . in string add .00
-			//if .X then add 0 to the end
-			//if .XXX... then clear string 
+			var stripped_money = money.replace(/[^0-9.]/g, '');
+			
+			if(stripped_money.replace(/[^.]/g, "").length > 0)//stripped money has a . in it
+			{
+				if(stripped_money.replace(/[^.]/g, "").length == 1)//has only one . in it
+				{
+					if( ret.positionOfDotFromEndOfString(stripped_money) == 2 )// X.XX
+					{
+						//do nothing
+					}
+					if( ret.positionOfDotFromEndOfString(stripped_money) == 1 ) // X.X
+					{
+						stripped_money += '0';	
+					}					
+					if( ret.positionOfDotFromEndOfString(stripped_money) == 0 ) // X.
+					{
+						stripped_money += '00';
+					}
+					
+					if( ret.positionOfDotFromEndOfString(stripped_money) > 2 ) // X.XXX
+					{
+						stripped_money = '0.00';
+						$("#tooltip").html("money malformed, try again");	
+					}
+					
+					if( stripped_money.indexOf(".") == 0 ) // .X (has nothing in front of it)
+					{
+						stripped_money = '0' + stripped_money;
+					}
+				}
+				else //has more than one . in it
+				{
+					stripped_money = '0.00';
+					$("#tooltip").html("money malformed, try again");	
+				}
+			}
+			else
+			{
+				stripped_money += '.00';	
+			}					
+			$(field).val(stripped_money);
 		},
 		emailValid:function(field)
 		{
@@ -747,7 +790,7 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed showReportOption line 750 js");
+					alert("it failed report.showReportOption js");
 				}
 			});
 		},	
@@ -766,7 +809,7 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed showReportAttendance line 769 js");
+					alert("it failed report.showReportAttendance js");
 				}
 			});
 		},
@@ -785,7 +828,7 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed tabs-Time-Results line 788 js");
+					alert("it failed tabs-Time-Results report.showReportDateRange js");
 				}
 			});
 		},

@@ -64,12 +64,14 @@ class _ReportModel
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
 		$filterTable = ($filter == 'Option') ? 'EMAx_OptionEventMap`.`EMAx_Option_ID' : 'EMAx_RoomLocation_ID' ;
+		$join = '`EMAx_Organization` , `EMAx_Person`';
+		$join .= ($filter == 'Option') ? ', `EMAx_OptionEventMap`' : '' ;
+		$andOption = ($filter == 'Option') ? 'AND `EMAx_OptionEventMap`.`EMAx_Event_ID` = `EMAx_Event`.`ID`' : ''; 
 		$filterID = (int)$filterID;
 		$startDate = date('Y-m-d', strtotime($start));
 		$endDate = date('Y-m-d', strtotime($end));
 		if(!$startDate || !$endDate)
 		{
-error_log('_ReportModel line 62 one of the dates is not valid');
 			return $result;
 		}
 		if($startDate > $endDate)
@@ -90,15 +92,15 @@ error_log('_ReportModel line 62 one of the dates is not valid');
 			`EMAx_Person`.`fName`,
 			`EMAx_Person`.`lName`
 		FROM `EMAx_Event`
-		JOIN  `EMAx_Organization` , `EMAx_Person`, `EMAx_OptionEventMap`
+		JOIN  {$join}
 		WHERE `EMAx_Person`.`ID` = `EMAx_Event`.`EMAx_Person_ID`
-		AND `EMAx_OptionEventMap`.`EMAx_Event_ID` = `EMAx_Event`.`ID`
+		{$andOption}
 		AND `EMAx_Organization`.`ID` = `EMAx_Event`.`EMAx_Organization_ID`
 		AND `EMAx_Event`.`startTime` > '{$formatedStartDate}'
 		AND `EMAx_Event`.`endTime` < '{$formatedEndDate}'
 		AND `{$filterTable}` = '{$filterID}'
 		ORDER BY `EMAx_Event`.`startTime` ASC";
-error_log($sql . ' line 91 _ReportModel');
+error_log($sql . ' line 101 _ReportModel');
 		$result = array();
 		$queryResult = $connection->query($sql);
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();

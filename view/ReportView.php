@@ -21,7 +21,7 @@
 	        From: <input type="text" name="start" class="datepicker"/>
 	        To: <input type="text" name="end" class="datepicker"/>
 	      	<input type="button" value="lookup" onclick="Report.showReportOption(this.form)"/>
-
+	      	<br/>
 				<input type="radio" name="filterBy" value="Option" onclick="Report.radioChange($('#optionSelect'))" checked>Option </input>
 				
 				<input type="radio" name="filterBy" value="Room" onclick="Report.radioChange($('#roomSelect'))">Room </input>

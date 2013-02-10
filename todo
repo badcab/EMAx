@@ -6,7 +6,6 @@ in isolated view the person select in event is not working
 misc should not require changing of the tabs all the time (like done in reports)
 tool tip should be nicer
 deleting a misc fk should throw a warning before continuing
-report option search not working
 IE css is not working
 --Add "public program" to list of event types (allow two cost [revenue][expense] to be entered when selected)
 test the deleting of events and orgs and such
