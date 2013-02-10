@@ -18,3 +18,12 @@ Total Room Reservations: <?= $reportResult['Total_Room_Reservations'] ?>
 <p>
 Total income from Room Reservations: $<?= $reportResult['Total_income_Room_Reservations'] ?>
 </p>
+<p>
+Total Public Program Revenue: $<?= $reportResult['Total_revenue_public_program'] ?>
+</p>
+<p>
+Total Public Program Expense: $<?= $reportResult['Total_expenses_public_program'] ?>
+</p>
+<p>
+Total Public Program Attendance: <?= $reportResult['Total_attendance_public_program'] ?>
+</p>

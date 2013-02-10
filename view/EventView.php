@@ -102,17 +102,20 @@
 	<tr>	
 		<td>Room Reservation</td>
 		<td>
-			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$FEILD_TRIP_EVENT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation')">Field Trip </input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$FEILD_TRIP_EVENT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation'); EventAdd.showPublicProgramFields('OFF', $('#PublicProgram'));">Field Trip </input>
 			<br/>		
-			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation')">Room Reservation Non-Profit</input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation'); EventAdd.showPublicProgramFields('OFF', $('#PublicProgram'));" on>Room Reservation Non-Profit</input>
 			<br/>	
-			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation')">Room Reservation For-Profit</input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation'); EventAdd.showPublicProgramFields('OFF', $('#PublicProgram'));">Room Reservation For-Profit</input>
 			<br/>
-			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$PUBLIC_PROGRAM_EVENT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation')">Public Program </input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$PUBLIC_PROGRAM_EVENT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation'); EventAdd.showPublicProgramFields('ON', $('#PublicProgram'));">Public Program </input>
 			<input type="hidden" name="roomReservation" value="<?= $roomRes ?>" />
 		</td>	
 	</tr>
-	
+	<tr>
+		<td></td>
+		<td><div id="PublicProgram"></div></td>	
+	</tr>
 	<tr>
 		<td></td>
 		<td>

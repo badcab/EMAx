@@ -34,9 +34,16 @@ class _ReportModel
 		$feildTrip = EMAxSTATIC::$FEILD_TRIP_EVENT;
 		$notProfit = EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT;
 		$forProfit = EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT;
+		$publicProgram = EMAxSTATIC::$PUBLIC_PROGRAM_EVENT;
 		$sqlKidAttend = "SELECT SUM(attendance),  SUM(cost) FROM `EMAx_Event` WHERE `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}' AND `roomReservation` = {$feildTrip}";
 		$sqlRoomReservation = "SELECT COUNT(*), SUM(cost) FROM `EMAx_Event` WHERE `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}' AND `roomReservation` = {$notProfit} OR `roomReservation` = {$forProfit}";
-//error_log($sqlKidAttend . ' line 45 _ReportModel ' . $sqlRoomReservation);
+
+		$sqlPublicProgram = "SELECT SUM(revenue), SUM(expenses), `EMAx_Event`.SUM(attendance) FROM `EMAx_PublicProgramMoney` JOIN `EMAx_Event`
+		WHERE `EMAx_PublicProgramMoney`.`EMAx_Event_ID` = `EMAx_Event`.`ID`
+		AND `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}'
+		AND `roomReservation` = {$publicProgram} ";
+
+
 		$sqlKidAttendQuery = $connection->query($sqlKidAttend);
 		$sqlRoomReservationQuery = $connection->query($sqlRoomReservation);
 		$KidAttendResult = ($sqlKidAttendQuery) ? $sqlKidAttendQuery->fetch(PDO::FETCH_ASSOC): NULL;
@@ -45,6 +52,9 @@ class _ReportModel
 		$result['Total_income_Field_Trip'] = ($KidAttendResult['SUM(cost)']) ? $KidAttendResult['SUM(cost)']: 0.00;
 		$result['Total_Room_Reservations'] = ($RoomResResult['COUNT(*)']) ? $RoomResResult['COUNT(*)'] : 0;
 		$result['Total_income_Room_Reservations'] = ($RoomResResult['SUM(cost)']) ? $RoomResResult['SUM(cost)'] : 0.00;
+		$result['Total_revenue_public_program'] = ($sqlPublicProgram['SUM(revenue)']) ? $sqlPublicProgram['SUM(revenue)'] : 0.00;
+		$result['Total_expenses_public_program'] = ($sqlPublicProgram['SUM(expenses)']) ? $sqlPublicProgram['SUM(expenses)'] : 0.00;
+		$result['Total_attendance_public_program'] = ($sqlPublicProgram['SUM(attendance)']) ? $sqlPublicProgram['SUM(attendance)'] : 0;
 		$connection = NULL;
 		return $result;
 	}
@@ -59,7 +69,7 @@ class _ReportModel
 		$endDate = date('Y-m-d', strtotime($end));
 		if(!$startDate || !$endDate)
 		{
-error_log('_ReportModel line 77 one of the dates is not valid');
+error_log('_ReportModel line 62 one of the dates is not valid');
 			return $result;
 		}
 		if($startDate > $endDate)
@@ -88,7 +98,7 @@ error_log('_ReportModel line 77 one of the dates is not valid');
 		AND `EMAx_Event`.`endTime` < '{$formatedEndDate}'
 		AND `{$filterTable}` = '{$filterID}'
 		ORDER BY `EMAx_Event`.`startTime` ASC";
-error_log($sql . ' line 109 _ReportModel');
+error_log($sql . ' line 91 _ReportModel');
 		$result = array();
 		$queryResult = $connection->query($sql);
 		$queryArr = ($queryResult) ? $queryResult->fetchAll() : array();

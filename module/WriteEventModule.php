@@ -44,9 +44,22 @@ class WriteEventModule
 		$Event->writeData();
 		$eventID = $Event->getID();
 		
-		$CostModule = new _CostModule();
-		$cost = $CostModule->singleEventCost($eventID);
-		$CostModule->writeCost($cost, $eventID);
+		if(
+			$Event->getroomReservation() == EMAxSTATIC::$FEILD_TRIP_EVENT ||
+			$Event->getroomReservation() == EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ||
+			$Event->getroomReservation() == EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT		
+		)
+		{
+			$CostModule = new _CostModule();
+			$cost = $CostModule->singleEventCost($eventID);
+			$CostModule->writeCost($cost, $eventID);
+		}
+		
+		if($Event->getroomReservation() == EMAxSTATIC::$PUBLIC_PROGRAM_EVENT)
+		{
+			$PublicProgramMoneyModule = new PublicProgramMoneyModule();
+			$PublicProgramMoneyModule->activate($Event, $expence, $reventue)
+		}		
 				
 		return $eventID;
 	}

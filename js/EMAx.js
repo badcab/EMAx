@@ -2,6 +2,17 @@ var EventAdd = function()
 {
 	var ret =
 	{
+		showPublicProgramFields:function(input, outsideDiv)
+		{
+			if(input == 'ON')
+			{
+				$(outsideDiv).html("<div id='PublicProgramFields'><table><tr><td>Total Revenue</td><td><input type='text' name='revenue' /></td></tr><tr><td>Total Expences</td><td><input type='text' name='expence' /></td></tr></table></div>");
+			}
+			if(input == 'OFF')
+			{
+				$('#PublicProgramFields', outsideDiv).remove();
+			}
+		},
 		hiddenForPrint:function(table)
 		{
 			if(table == 'Option')
@@ -636,6 +647,15 @@ var Valid = function()
 {
 	var ret =
 	{
+		moneyValid:function(field)
+		{
+			var money = $(field).val();
+			var stripped_money = .replace(/[^0-9]/g, '');//remember to add '.' to that regular exprection
+			//first strip out all char other than numbers and . 
+			//if no . in string add .00
+			//if .X then add 0 to the end
+			//if .XXX... then clear string 
+		},
 		emailValid:function(field)
 		{
 			var email = $(field).val();
@@ -727,7 +747,7 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed showReportOption line 619 js");
+					alert("it failed showReportOption line 750 js");
 				}
 			});
 		},	
@@ -746,7 +766,7 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed showReportAttendance line 638 js");
+					alert("it failed showReportAttendance line 769 js");
 				}
 			});
 		},
@@ -765,7 +785,7 @@ var Report = function()
 				},
 				error:function()
 				{
-					alert("it failed tabs-Time-Results line 653 js");
+					alert("it failed tabs-Time-Results line 788 js");
 				}
 			});
 		},
