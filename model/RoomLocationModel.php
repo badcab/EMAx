@@ -100,16 +100,19 @@ class RoomLocationModel
 	{
 		return (int)$this->ClassObjectArg['ID'];
 	}
-	
+
 	public function writeChanges()
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$name = $connection->quote($this->getRoomLocation());
-		$cost = $connection->quote($this->getCost());
+		$costBaseNonProfit = $connection->quote($this->getCostBaseNonProfit());
+		$costBaseForProfit = $connection->quote($this->getCostBaseForProfit());
+		$costExtraLongNonProfit = $connection->quote($this->getCostExtraLongNonProfit());
+		$costExtraLongForProfit = $connection->quote($this->getCostExtraLongForProfit());
 		$notes = $connection->quote($this->getnotes());
 		$id = $connection->quote($this->getID());
 		
-		$sql = "UPDATE `EMAx_Option` SET `name`={$name},`cost`={$cost}, `notes`={$notes} WHERE `ID` = {$id}";
+		$sql = "UPDATE `EMAx_Option` SET `name`={$name},`costBaseNonProfit`={$costBaseNonProfit}, `costBaseForProfit`={$costBaseForProfit}, `costExtraLongNonProfit`={$costExtraLongNonProfit}, `costExtraLongForProfit`={$costExtraLongForProfit}, `notes`={$notes} WHERE `ID` = {$id}";
 		$connection->exec($sql);
 		$connection = NULL;	
 	}
@@ -124,7 +127,7 @@ class RoomLocationModel
 			SET `EMAx_Event`.`EMAx_RoomLocation_ID`= NULL 
 			WHERE `EMAx_Event`.`EMAx_RoomLocation_ID`= " . $id
 		);
-		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`=" . $id;
+		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`=" . $id);
 	}	
 	
 	public function getRoomLocation()

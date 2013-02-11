@@ -14,7 +14,7 @@
       <?php foreach($stateList as $item): ?>
       		<tr>
 					<td> <?= $item['name'] ?> </td>
-					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('STATE', 'DELETE', '<?= $item ?>')" /></td>
+					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('STATE', 'DELETE', '<?= $item['name'] ?>')" /></td>
       		</tr>      
       <?php endforeach; ?>
 		</table>        

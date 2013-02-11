@@ -594,14 +594,17 @@ var Etera = function()
 		{
 			$( "#tabs" ).tabs();
 		},
-		miscellaneousScript:function(tableName, Action, stringValue, cost)
+		miscellaneousScript:function(tableName, Action, stringValue, cost1, cost2, cost3, cost4)
 		{
-			cost = typeof cost !== 'undefined' ? cost : 'none' ;
+			cost1 = typeof cost1 !== 'undefined' ? cost1 : 'none' ;
+			cost2 = typeof cost2 !== 'undefined' ? cost2 : 'none' ;
+			cost3 = typeof cost3 !== 'undefined' ? cost3 : 'none' ;
+			cost4 = typeof cost4 !== 'undefined' ? cost4 : 'none' ;
 			$.ajax
 			({
 				type: 'POST',
 				url: 'RPC/MiscellaneousWriteRPC.php' ,
-				data: {tableName: tableName, Action: Action, stringValue: stringValue, cost: cost},
+				data: {tableName: tableName, Action: Action, stringValue: stringValue, cost1: cost1, cost2: cost2, cost3: cost3, cost4: cost4},
 				success:function()
 				{
 					LoadContent.loadContent('RPC/MiscellaneousRPC.php');

@@ -1,10 +1,11 @@
 <?php
-//require_once('../module/_UpdateCostModule.php');
-//require_once('../configure/EMAxSTATIC.php');
 $tableName = $_POST['tableName'];
 $Action = $_POST['Action'];
 $stringValue = trim($_POST['stringValue']);
-$costValue = (isset($_POST['cost'])) ? $_POST['cost'] : NULL;
+$costValue1 = (isset($_POST['cost1'])) ? $_POST['cost1'] : NULL;
+$costValue2 = (isset($_POST['cost2'])) ? $_POST['cost2'] : NULL;
+$costValue3 = (isset($_POST['cost3'])) ? $_POST['cost3'] : NULL;
+$costValue4 = (isset($_POST['cost4'])) ? $_POST['cost4'] : NULL;
 if($Action == "ADD")
 {
 	if($stringValue == '') return;
@@ -12,10 +13,9 @@ if($Action == "ADD")
 	{
 		case "GRADE":
 			require_once('../model/GradeModel.php');
-//			$Grade = new GradeModel($stringValue);
-				if($costValue)
+				if($costValue1)
 				{
-					$Grade = new GradeModel($stringValue, $costValue);
+					$Grade = new GradeModel($stringValue, $costValue1);
 				}			
 				
 				else
@@ -26,10 +26,9 @@ if($Action == "ADD")
 		
 		case "OPTION":
 			require_once('../model/OptionModel.php');
-//			$Option = new OptionModel($stringValue);
-				if($costValue)
+				if($costValue1)
 				{
-					$Option = new OptionModel($stringValue, $costValue);
+					$Option = new OptionModel($stringValue, $costValue1);
 				}			
 				
 				else
@@ -45,10 +44,9 @@ if($Action == "ADD")
 		
 		case "ROOM":
 			require_once('../model/RoomLocationModel.php');
-//			$Room = new RoomLocationModel($stringValue);
-				if($costValue)
+				if($costValue1)
 				{
-					$Room = new RoomLocationModel($stringValue, $costValue);
+					$Room = new RoomLocationModel($stringValue, $costValue1, $costValue2, $costValue3, $costValue4);
 				}			
 				
 				else
@@ -97,4 +95,4 @@ if($Action == "DELETE")
 		break;
 	}	
 }
-?>$
+?>
