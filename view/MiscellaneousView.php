@@ -53,18 +53,32 @@
       <?php endforeach; ?>
 		</table> 
     </div>
-   
+
     <div id="tabs-Room" class="overflow">
       <table>
         		<tr>
 					<td><input type="text" name="add" id="tabs-Room-add" /></td> 
-					<td><?= $costRoom ?></td>
+					<td><?= $costBaseNonProfit ?></td>
+					<td><?= $costBaseForProfit ?></td>
+					<td><?= $costExtraLongNonProfit ?></td>
+					<td><?= $costExtraLongForProfit ?></td>
 					<td><input type="button" value="Add New" onclick="Etera.miscellaneousScript('ROOM', 'ADD', $('#tabs-Room-add').val(), $('#roomCost').val() )" /></td> <!-- we will need to add cost variables to the miscelaneoues script -->      					
-        		</tr>
+        		</tr>      		
+				<tr>
+					<th> Room </th>
+					<th> Non Profit Short Stay </th>
+					<th> For Profit Short Stay </th>
+					<th> Non Profit Long Stay </th>
+					<th> For Profit Long Stay </th>
+				</tr>        		        		
       <?php foreach($roomList as $item): ?>
       		<tr>
 					<td> <?= $item['name'] ?> </td>
-					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
+					<td> <?= money_format('%(#10n',$item['costBaseNonProfit']) ?> </td>
+					<td> <?= money_format('%(#10n',$item['costBaseForProfit']) ?> </td>
+					<td> <?= money_format('%(#10n',$item['costExtraLongNonProfit']) ?> </td>
+					<td> <?= money_format('%(#10n',$item['costExtraLongForProfit']) ?> </td>
+					
 					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('ROOM', 'DELETE', '<?= $item['name'] ?>')" /></td>
       		</tr>  
       <?php endforeach; ?>

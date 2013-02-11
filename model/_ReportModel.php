@@ -31,7 +31,7 @@ class _ReportModel
 		$formatedEndDate = $this->make_Time( (60 * 60 * 24) - 1 , $endDate );
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
-		$feildTrip = EMAxSTATIC::$FEILD_TRIP_EVENT;
+		$feildTrip = EMAxSTATIC::$FIELD_TRIP_EVENT;
 		$notProfit = EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT;
 		$forProfit = EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT;
 		$publicProgram = EMAxSTATIC::$PUBLIC_PROGRAM_EVENT;

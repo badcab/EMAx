@@ -18,6 +18,7 @@ class WriteEventModule
 		require_once('../model/RoomLocationModel.php');
 		require_once('../model/LoginModel.php');
 		require_once('_CostModule.php');
+		require_once('PublicProgramMoneyModule.php');
 		
 		$Event = new EventModel((int)$dataArray['id']);
 		$Organization = new OrganizationModel((int)$dataArray['Organization']);
@@ -45,7 +46,7 @@ class WriteEventModule
 		$eventID = $Event->getID();
 		
 		if(
-			$Event->getroomReservation() == EMAxSTATIC::$FEILD_TRIP_EVENT ||
+			$Event->getroomReservation() == EMAxSTATIC::$FIELD_TRIP_EVENT ||
 			$Event->getroomReservation() == EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ||
 			$Event->getroomReservation() == EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT		
 		)

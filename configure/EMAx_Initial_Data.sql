@@ -1,5 +1,37 @@
 INSERT INTO `EMAx_Login` (`userName`,`password`,`authorityLevel`) VALUES ('admin', 'admin', 1);
 
+
+INSERT INTO `EMAx_CONFIG`(`property`, `value`) VALUES 
+('TIMEZONE','America/Chicago'),
+('COUNTY','Outagamie'),
+('DEFAULT_STATE','Wisconsin'),
+('AREA_CODE','920'),
+('NAME_OF_ORG','Mosquito Hill Nature Center'),
+('PHONE_OF_ORG','(920) 779-6433'),
+('EMAIL_OF_ORG',''),
+('ADDRESS_OF_ORG','N3880 County Road Nc, New London, WI 54961'),
+('AUTH_LEVEL_LOGIN','0'),
+('AUTH_LEVEL_ADMIN','1'),
+('IMPOSSIBLE_PK_NUMBER','0'),
+('FIELD_TRIP_EVENT','0'),
+('ROOM_RESERVATION_NON_PROFIT','1'),
+('ROOM_RESERVATION_FOR_PROFIT','2'),
+('PUBLIC_PROGRAM_EVENT','3'),
+('USE_GOOGLE_CAL','FALSE'),
+('USE_SSL','FALSE'),
+('PATH_ZEND','../../ZendGdata-1.10.5/library'),
+('PATH_JQUERY','//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'),
+('PATH_JQUERY_UI','//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'),
+('PATH_JQUERY_UI_CSS','//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css'),
+('passwordSalt','ghger67irs6&^Sfukl5324f6cfja'),
+('googleUserName',''),
+('googlePassword',''),
+('EMAIL_BODY_ADD_ON_SUMMER','Summer body'),
+('EMAIL_BODY_ADD_ON_FALL','Fall body'),
+('EMAIL_BODY_ADD_ON_WINTER','Winter body'),
+('EMAIL_BODY_ADD_ON_SPRING','Spring body'),
+('HOURS_BEFORE_EXTRA_CHARGE_ROOM_RESERVATION','4');
+
 INSERT INTO `EMAx_State` (`Name`) VALUES
 ('Alabama'),
 ('Alaska'),

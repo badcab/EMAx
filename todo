@@ -1,11 +1,11 @@
-Search String auto complete not working
 delete user not working (admin)
 change password not work and not tested
 add double book protection (and return an error message if warranted)
 in isolated view the person select in event is not working
-misc should not require changing of the tabs all the time (like done in reports)
-tool tip should be nicer
 deleting a misc fk should throw a warning before continuing
 IE css is not working
 --Add "public program" to list of event types (allow two cost [revenue][expense] to be entered when selected)
 test the deleting of events and orgs and such
+find and replace all $FIELD_TRIP_EVENT for spelling
+EMAxSTATIC needs to be redone so it sets the static variable from the db (a misc page should be added after that)
+RoomReservation misc page and all needs to be changed to have four money inputs

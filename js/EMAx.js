@@ -659,9 +659,9 @@ var Valid = function()
 			var money = $(field).val();
 			var stripped_money = money.replace(/[^0-9.]/g, '');
 			
-			if(stripped_money.replace(/[^.]/g, "").length > 0)//stripped money has a . in it
+			if(stripped_money.replace(/[^.]/g, '').length > 0)//stripped money has a . in it
 			{
-				if(stripped_money.replace(/[^.]/g, "").length == 1)//has only one . in it
+				if(stripped_money.replace(/[^.]/g, '').length == 1)//has only one . in it
 				{
 					if( ret.positionOfDotFromEndOfString(stripped_money) == 2 )// X.XX
 					{
@@ -695,6 +695,10 @@ var Valid = function()
 			}
 			else
 			{
+				if(stripped_money == '')
+				{
+					stripped_money += '0';
+				} 
 				stripped_money += '.00';	
 			}					
 			$(field).val(stripped_money);
@@ -877,7 +881,7 @@ var Email = function()
 				},
 				error:function()
 				{
-					alert("it failed 682 EMAx.js");
+					alert("it failed Email.emailDialog EMAx.js");
 				}
 			});
 		}

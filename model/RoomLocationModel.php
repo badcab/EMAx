@@ -5,18 +5,23 @@ class RoomLocationModel
 	private $ClassObjectArg;
 	private $RoomLocationList;
 	
-	function __construct($id = NULL, $cost = 0.00)
+	function __construct($id = NULL, $costBaseNonProfit = 0.00, $costBaseForProfit = 0.00, $costExtraLongNonProfit = 0.00, $costExtraLongForProfit = 0.00)
 	{
 		 
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$currentDBvalues = NULL;
-		$roomLocationList = $connection->query("SELECT `ID`,`name`,`cost` FROM `EMAx_RoomLocation`");
+		$roomLocationList = $connection->query("SELECT * FROM `EMAx_RoomLocation`");
 		$this->RoomLocationList = $roomLocationList->fetchAll();			
+		
+		$costBaseNonProfit = $connection->quote( (double)$costBaseNonProfit );
+		$costBaseForProfit = $connection->quote( (double)$costBaseForProfit );		
+		$costExtraLongNonProfit = $connection->quote( (double)$costExtraLongNonProfit );
+		$costExtraLongForProfit = $connection->quote( (double)$costExtraLongForProfit );
 		
 		if(is_string($id))
 		{
-			$name = (ucwords(strtolower($id)));
-			$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name=" . $connection->quote($name) );
+			$name = $connection->quote((ucwords(strtolower($id))));
+			$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name=" . $name );
 			$existsReturn = ($exists) ? $exists->fetch(PDO::FETCH_OBJ) : NULL;
 			if($existsReturn)
 			{
@@ -29,9 +34,23 @@ class RoomLocationModel
 			}
 			
 			else
-			{
-				$create = $connection->exec("INSERT INTO `EMAx_RoomLocation`(`name`, `cost`) VALUES (" . $connection->quote($name) . "," . $connection->quote($cost) . ")");
-				$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name=" . $connection->quote($name) );
+			{		
+				$create = $connection->exec(
+					"INSERT INTO `EMAx_RoomLocation`(
+						`name`, 
+						`costBaseNonProfit`, 
+						`costBaseForProfit`, 
+						`costExtraLongNonProfit`, 
+						`costExtraLongForProfit`
+					) VALUES (
+					{$name},
+					{$costBaseNonProfit},
+					{$costBaseForProfit},
+					{$costExtraLongNonProfit},
+					{$costExtraLongForProfit})"
+				);
+				
+				$exists = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE name=" . $name );
 				$createReturn = $exists->fetch(PDO::FETCH_OBJ);
 				$id = (int)$createReturn->ID;
 			}	
@@ -39,7 +58,7 @@ class RoomLocationModel
 	
 		if($id && is_int($id))
 		{
-			$result = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE ID=" . $connection->quote($id));
+			$result = $connection->query("SELECT * FROM `EMAx_RoomLocation` WHERE ID=" . $id);
 			$currentDBvalues = $result->fetch(PDO::FETCH_OBJ);
 		}
 		
@@ -49,7 +68,10 @@ class RoomLocationModel
 		{
 			$name = $currentDBvalues->name;
 			$notes = $currentDBvalues->notes;
-			$cost = $currentDBvalues->cost;
+			$costBaseNonProfit = (double)$currentDBvalues->costBaseNonProfit;
+			$costBaseForProfit = (double)$currentDBvalues->costBaseForProfit;
+			$costExtraLongNonProfit = (double)$currentDBvalues->costExtraLongNonProfit;
+			$costExtraLongForProfit = (double)$currentDBvalues->costExtraLongForProfit;
 		}
 		
 		else
@@ -57,14 +79,20 @@ class RoomLocationModel
 			$id = NULL;
 			$name = NULL;
 			$notes = NULL;
-			$cost = 0.00;
+			$costBaseNonProfit = 0.00;
+			$costBaseForProfit = 0.00;
+			$costExtraLongNonProfit = 0.00;
+			$costExtraLongForProfit = 0.00;
 		}
 		
 		$this->ClassObjectArg = array(
 			'ID' => $id,
 			'name' => $name,
 			'notes' => $notes,	
-			'cost' => $cost	
+			'costBaseNonProfit' => $costBaseNonProfit,	
+			'costBaseForProfit' => $costBaseForProfit,
+			'costExtraLongNonProfit' => $costExtraLongNonProfit,
+			'costExtraLongForProfit' => $costExtraLongForProfit,
 		);
 	}
 
@@ -90,14 +118,13 @@ class RoomLocationModel
 	{
 		
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$id = $this->getID();
-		
+		$id = $connection->quote($this->getID());
 		$connection->exec("
 			UPDATE `EMAx_Event` 
 			SET `EMAx_Event`.`EMAx_RoomLocation_ID`= NULL 
-			WHERE `EMAx_Event`.`EMAx_RoomLocation_ID`= " . $connection->quote($id)
+			WHERE `EMAx_Event`.`EMAx_RoomLocation_ID`= " . $id
 		);
-		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`=" . $connection->quote($id) );
+		$connection->exec("DELETE FROM `EMAx_RoomLocation` WHERE `ID`=" . $id;
 	}	
 	
 	public function getRoomLocation()
@@ -109,17 +136,56 @@ class RoomLocationModel
 	{
 		return $this->ClassObjectArg['notes'];
 	}
-	
-	public function getCost()
+
+	public function getCostBaseNonProfit()  //`costBaseNonProfit`
 	{
-		return $this->ClassObjectArg['cost'];	
+		return $this->ClassObjectArg['costBaseNonProfit'];	
 	}
 	
-	public function setCost($value)
+	public function setCostBaseNonProfit($value)
 	{
 		if(is_numeric($value))
 		{
-			$this->ClassObjectArg['cost'] = (double)$value;
+			$this->ClassObjectArg['costBaseNonProfit'] = (double)$value;
+		}
+	}	
+
+	public function getCostBaseForProfit()  //`costBaseForProfit`
+	{
+		return $this->ClassObjectArg['costBaseForProfit'];	
+	}
+	
+	public function setCostBaseForProfit($value)
+	{
+		if(is_numeric($value))
+		{
+			$this->ClassObjectArg['costBaseForProfit'] = (double)$value;
+		}
+	}	
+
+	public function getCostExtraLongNonProfit()  // `costExtraLongNonProfit`
+	{
+		return $this->ClassObjectArg['costExtraLongNonProfit'];	
+	}
+	
+	public function setCostExtraLongNonProfit($value)
+	{
+		if(is_numeric($value))
+		{
+			$this->ClassObjectArg['costExtraLongNonProfit'] = (double)$value;
+		}
+	}	
+	
+	public function getCostExtraLongForProfit() // `costExtraLongForProfit`
+	{
+		return $this->ClassObjectArg['costExtraLongForProfit'];	
+	}
+	
+	public function setCostExtraLongForProfit($value)
+	{
+		if(is_numeric($value))
+		{
+			$this->ClassObjectArg['costExtraLongForProfit'] = (double)$value;
 		}
 	}		
 	
@@ -140,7 +206,14 @@ class RoomLocationModel
 		$listArr = array();
 		foreach($this->RoomLocationList as $list)	
 		{
-			$listArr[] = array( 'id' => $list['ID'], 'name' => $list['name'], 'cost' => $list['cost']);
+			$listArr[] = array( 
+				'id' => $list['ID'], 
+				'name' => $list['name'], 
+				'costBaseNonProfit' => $list['costBaseNonProfit'],
+				'costBaseForProfit' => $list['costBaseForProfit'],
+				'costExtraLongNonProfit' => $list['costExtraLongNonProfit'],
+				'costExtraLongForProfit' => $list['costExtraLongForProfit'],
+			);
 		}
 		return $listArr;
 	}

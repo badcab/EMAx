@@ -31,7 +31,13 @@ class MiscellaneousController
 		$roomList = $RoomLocation->getList();
 		$gradeList = $Grade->getList();
 		$optionList = $Option->getList();
-		$costRoom = $this->costDropdown('roomCost');
+//		$costRoom = $this->costDropdown('roomCost');
+//here we need to change to for options		
+		$costBaseNonProfit = $this->costDropdown('costBaseNonProfit');
+		$costBaseForProfit = $this->costDropdown('costBaseForProfit');
+		$costExtraLongNonProfit = $this->costDropdown('costExtraLongNonProfit');
+		$costExtraLongForProfit = $this->costDropdown('costExtraLongForProfit');
+		
 		$costOption = $this->costDropdown('optionCost');
 		$costGrade = $this->costDropdown('gradeCost');
 		

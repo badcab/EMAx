@@ -13,7 +13,7 @@
 //		}
 
 		session_start();
-		date_default_timezone_set(EMAxSTATIC::$TIMEZONE); 
+		date_default_timezone_set($CONFIG->TIMEZONE); 
 		$_SESSION['user'] = '';//I don't think this is needed, remove later
 	}
 ?>
@@ -33,7 +33,7 @@
 <body>
 	<div id="header" class="noPrint">
 		<div id="searchBar">
-			<input type="text" name="search" id="search" class="isLogin" onclick=""/>
+			<input type="text" name="search" id="search" class="isLogin" onclick="Etera.autoCompleteSearch()"/>
 			<input type="button" value="Search" class="isLogin" onclick="LoadContent.loadContent('RPC/SearchResultsRPC.php', $('#search').val())"/>
 			<input type="checkbox" id="searchByDate" class="isLogin" onchange="Etera.SearchByDate(this)" > 
 				<span class="isLogin"  class="noPrint"> Search By Date </span> 
