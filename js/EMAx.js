@@ -567,6 +567,26 @@ var Etera = function()
 				}
 			});
 		},
+		enableDisableOptionGrade:function(tableName, selectionName, setValueTo, buttonObject)
+		{
+			var correctedValue = (setValueTo == '0') ? '1' : '0';
+			$.ajax
+			({
+		 		type: "POST",
+		  		url: "RPC/EnableDisableOptionGradePRC.php",
+		 		data: { tableName: tableName, selectionName: selectionName, setValueTo: correctedValue },
+				dataType: "html",
+				success:function(result)
+				{
+					var buttonLabel = (result == 'Enable') ? 'Enable' : 'Disable';
+					$(buttonObject).val(buttonLabel);
+				},
+				error:function()
+				{
+					
+				}
+			});
+		},
 		autoCompleteSearch:function()
 		{
 			$.ajax

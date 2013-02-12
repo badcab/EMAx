@@ -72,6 +72,7 @@ class RoomLocationModel
 			$costBaseForProfit = (double)$currentDBvalues->costBaseForProfit;
 			$costExtraLongNonProfit = (double)$currentDBvalues->costExtraLongNonProfit;
 			$costExtraLongForProfit = (double)$currentDBvalues->costExtraLongForProfit;
+			$enable = $currentDBvalues->enable;	
 		}
 		
 		else
@@ -83,6 +84,7 @@ class RoomLocationModel
 			$costBaseForProfit = 0.00;
 			$costExtraLongNonProfit = 0.00;
 			$costExtraLongForProfit = 0.00;
+			$enable = 1;
 		}
 		
 		$this->ClassObjectArg = array(
@@ -93,6 +95,7 @@ class RoomLocationModel
 			'costBaseForProfit' => $costBaseForProfit,
 			'costExtraLongNonProfit' => $costExtraLongNonProfit,
 			'costExtraLongForProfit' => $costExtraLongForProfit,
+			'enable' => $enable,
 		);
 	}
 
@@ -111,8 +114,9 @@ class RoomLocationModel
 		$costExtraLongForProfit = $connection->quote($this->getCostExtraLongForProfit());
 		$notes = $connection->quote($this->getnotes());
 		$id = $connection->quote($this->getID());
+		$enable = $connection->quote($this->getEnable());
 		
-		$sql = "UPDATE `EMAx_Option` SET `name`={$name},`costBaseNonProfit`={$costBaseNonProfit}, `costBaseForProfit`={$costBaseForProfit}, `costExtraLongNonProfit`={$costExtraLongNonProfit}, `costExtraLongForProfit`={$costExtraLongForProfit}, `notes`={$notes} WHERE `ID` = {$id}";
+		$sql = "UPDATE `EMAx_Option` SET `name`={$name},`costBaseNonProfit`={$costBaseNonProfit}, `costBaseForProfit`={$costBaseForProfit}, `costExtraLongNonProfit`={$costExtraLongNonProfit}, `costExtraLongForProfit`={$costExtraLongForProfit}, `notes`={$notes},`enable`={$enable} WHERE `ID` = {$id}";
 		$connection->exec($sql);
 		$connection = NULL;	
 	}
@@ -204,7 +208,17 @@ class RoomLocationModel
 		$this->ClassObjectArg['notes'] = ($value);
 	}
 	
-	public function getList()
+	public function setEnable($value)
+	{
+		$this->ClassObjectArg['enable'] = ($value) ? 1 : 0;			
+	}
+	
+	public function getEnable()
+	{
+		return (int)$this->ClassObjectArg['enable'];	
+	}
+	
+	public function getFullList()
 	{
 		$listArr = array();
 		foreach($this->RoomLocationList as $list)	
@@ -216,7 +230,29 @@ class RoomLocationModel
 				'costBaseForProfit' => $list['costBaseForProfit'],
 				'costExtraLongNonProfit' => $list['costExtraLongNonProfit'],
 				'costExtraLongForProfit' => $list['costExtraLongForProfit'],
+				'enable' => $list['enable'],
 			);
+		}
+		return $listArr;
+	}
+	
+	public function getList()//remember to add the enable col and filter out non enable rooms
+	{
+		$listArr = array();
+		foreach($this->RoomLocationList as $list)	
+		{
+			if((int)$list['enable'])
+			{
+				$listArr[] = array( 
+					'id' => $list['ID'], 
+					'name' => $list['name'], 
+					'costBaseNonProfit' => $list['costBaseNonProfit'],
+					'costBaseForProfit' => $list['costBaseForProfit'],
+					'costExtraLongNonProfit' => $list['costExtraLongNonProfit'],
+					'costExtraLongForProfit' => $list['costExtraLongForProfit'],
+					'enable' => $list['enable'],
+				);
+			}
 		}
 		return $listArr;
 	}

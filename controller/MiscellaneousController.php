@@ -28,11 +28,10 @@ class MiscellaneousController
 		$Option = new OptionModel();
 
 		$stateList = $State->getList();
-		$roomList = $RoomLocation->getList();
-		$gradeList = $Grade->getList();
-		$optionList = $Option->getList();
-//		$costRoom = $this->costDropdown('roomCost');
-//here we need to change to for options		
+		$roomList = $RoomLocation->getFullList();
+		$gradeList = $Grade->getFullList();
+		$optionList = $Option->getFullList();
+	
 		$costBaseNonProfit = $this->costDropdown('costBaseNonProfit');
 		$costBaseForProfit = $this->costDropdown('costBaseForProfit');
 		$costExtraLongNonProfit = $this->costDropdown('costExtraLongNonProfit');

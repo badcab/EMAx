@@ -49,19 +49,22 @@ class GradeModel
 		{
 			$name = $currentDBvalues->name;
 			$cost = $currentDBvalues->cost;
+			$enable = $currentDBvalues->enable;					
 		}
 		
 		else
 		{
 			$id = NULL;
 			$name = NULL;
-//			$cost = 0.00
+			$cost = 0.00;
+			$enable = 1;
 		}
 		
 		$this->ClassObjectArg = array(
 			'ID' => $id,
 			'name' => $name,
-//			'cost' => $cost		
+			'cost' => $cost,
+			'enable' => $enable,		
 		);
 	}
 	
@@ -72,8 +75,9 @@ class GradeModel
 		$name = $connection->quote($this->getGrade());
 		$cost = $connection->quote($this->getCost());
 		$id = $connection->quote($this->getID());
+		$enable = $connection->quote($this->getEnable());
 		
-		$sql = "UPDATE `EMAx_Grade` SET `name`={$name},`cost`={$cost} WHERE `ID` = {$id}";
+		$sql = "UPDATE `EMAx_Grade` SET `name`={$name},`cost`={$cost},`enable`={$enable} WHERE `ID` = {$id}";
 		$connection->exec($sql);
 		$connection = NULL;	
 	}
@@ -119,12 +123,35 @@ class GradeModel
 		$this->ClassObjectArg['name'] = (ucwords(strtolower($value)));
 	}
 	
-	public function getList()
+	public function setEnable($value)
+	{
+		$this->ClassObjectArg['enable'] = ($value) ? 1 : 0;			
+	}
+	
+	public function getEnable()
+	{
+		return (int)$this->ClassObjectArg['enable'];	
+	}
+	
+	public function getFullList()
 	{
 		$listArr = array();
 		foreach($this->GradeList as $list)	
 		{
-			$listArr[] = array( 'id' => $list['ID'], 'name' => $list['name'], 'cost' => $list['cost']);
+			$listArr[] = array( 'id' => $list['ID'], 'name' => $list['name'], 'cost' => $list['cost'], 'enable' => $list['enable']);
+		}
+		return $listArr;		
+	}
+	
+	public function getList()//add claws so that only the enabled get returned
+	{
+		$listArr = array();
+		foreach($this->GradeList as $list)	
+		{
+			if((int)$list['enable'])
+			{
+				$listArr[] = array( 'id' => $list['ID'], 'name' => $list['name'], 'cost' => $list['cost'], 'enable' => $list['enable']);	
+			}
 		}
 		return $listArr;
 	}
