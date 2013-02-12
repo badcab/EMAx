@@ -102,7 +102,7 @@
 	<tr>	
 		<td>Room Reservation</td>
 		<td>
-			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$FEILD_TRIP_EVENT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation'); EventAdd.showPublicProgramFields('OFF', $('#PublicProgram'));">Field Trip </input>
+			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$FIELD_TRIP_EVENT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation'); EventAdd.showPublicProgramFields('OFF', $('#PublicProgram'));">Field Trip </input>
 			<br/>		
 			<input type="radio" name="roomReservationRB" value="<?= EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT ?>" onclick="Etera.radioSetHidden(this, 'roomReservation'); EventAdd.showPublicProgramFields('OFF', $('#PublicProgram'));" on>Room Reservation Non-Profit</input>
 			<br/>	

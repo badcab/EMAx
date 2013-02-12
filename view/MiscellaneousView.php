@@ -4,6 +4,7 @@
         <li><a href="#tabs-Grade">Grade</a></li> 
         <li><a href="#tabs-Option">Option</a></li> 
         <li><a href="#tabs-Room">Room</a></li>
+        <li><a href="#tabs-Config">Admin Configure</a></li>
     </ul>
     <div id="tabs-State" class="overflow">
 		<table>
@@ -31,7 +32,11 @@
       		<tr>
 					<td> <?= $item['name'] ?> </td>
 					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
-					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('GRADE', 'DELETE', '<?= $item['name'] ?>')" /></td>
+					<td>
+					<input type="button" value="disable/enable" onclick=""/>
+					<!-- well for not there will be no feedback but in the future change the button text depending of the current state -->
+					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('GRADE', 'DELETE', '<?= $item['name'] ?>')" />
+					</td>
       		</tr>    
       <?php endforeach; ?>
 		</table> 
@@ -48,7 +53,11 @@
       		<tr>
 					<td> <?= $item['name'] ?> </td>
 					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
-					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('OPTION', 'DELETE', '<?= $item['name'] ?>')" /></td>
+					<td>
+					<input type="button" value="disable/enable" onclick=""/>
+					<!-- well for not there will be no feedback but in the future change the button text depending of the current state -->
+					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('OPTION', 'DELETE', '<?= $item['name'] ?>')" />
+					</td>
       		</tr>      
       <?php endforeach; ?>
 		</table> 
@@ -62,7 +71,7 @@
 					<td><?= $costBaseForProfit ?></td>
 					<td><?= $costExtraLongNonProfit ?></td>
 					<td><?= $costExtraLongForProfit ?></td>
-					<td><input type="button" value="Add New" onclick="Etera.miscellaneousScript('ROOM', 'ADD', $('#tabs-Room-add').val(), $('#roomCost').val() )" /></td> <!-- we will need to add cost variables to the miscelaneoues script -->      					
+					<td><input type="button" value="Add New" onclick="Etera.miscellaneousScript('ROOM', 'ADD', $('#tabs-Room-add').val(), $('#costBaseNonProfit').val(), $('#costBaseForProfit').val(), $('#costExtraLongNonProfit').val(), $('#costExtraLongForProfit').val() )" /></td>      					
         		</tr>      		
 				<tr>
 					<th> Room </th>
@@ -83,6 +92,12 @@
       		</tr>  
       <?php endforeach; ?>
 		</table> 
+    </div>
+    
+    
+    
+    <div id="tabs-Config" class="overflow">
+  		<p>This will be for the new config table when everything else is set up</p>
     </div>
     <script type="text/javascript" > Etera.reloadTabs(); </script>
 </div>	

@@ -82,7 +82,7 @@ class EMAxSTATIC
 	public static $EMAIL_BODY_ADD_ON_SPRING = 'Spring body';
 }
 
-$CONFIG = new CONFIG();
+$CONFIG = new CONFIG();//maybe add something incase this already exists not to run it again
 class CONFIG
 {
 	function __construct()
