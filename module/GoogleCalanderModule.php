@@ -7,6 +7,7 @@ class GoogleCalanderModule
 	
 	function __construct()
 	{
+		global $CONFIG;
 		$oldPath = set_include_path(get_include_path() . PATH_SEPARATOR . $CONFIG->PATH_ZEND);
 		
 		require_once ('Zend/Loader.php');

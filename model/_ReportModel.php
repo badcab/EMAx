@@ -14,7 +14,8 @@ class _ReportModel
 			'Total_Room_Reservations' => 0,
 			'Total_income_Room_Reservations' => 0,
 		);
-		date_default_timezone_set($CONFIG->TIMEZONE);
+		global $CONFIG;
+date_default_timezone_set($CONFIG->TIMEZONE);
 		$startDate = date('Y-m-d', strtotime($start));
 		$endDate = date('Y-m-d', strtotime($end));
 		if(!$startDate || !$endDate)
@@ -30,6 +31,7 @@ class _ReportModel
 		$formatedStartDate = $this->make_Time( 0 , $startDate );
 		$formatedEndDate = $this->make_Time( (60 * 60 * 24) - 1 , $endDate );
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
+		global $CONFIG;
 		date_default_timezone_set($CONFIG->TIMEZONE);
 		$feildTrip = EMAxSTATIC::$FIELD_TRIP_EVENT;
 		$notProfit = EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT;
@@ -62,7 +64,8 @@ class _ReportModel
 	{
 		$result = NULL;
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		date_default_timezone_set($CONFIG->TIMEZONE);
+		global $CONFIG;
+date_default_timezone_set($CONFIG->TIMEZONE);
 		$filterTable = ($filter == 'Option') ? 'EMAx_OptionEventMap`.`EMAx_Option_ID' : 'EMAx_RoomLocation_ID' ;
 		$join = '`EMAx_Organization` , `EMAx_Person`';
 		$join .= ($filter == 'Option') ? ', `EMAx_OptionEventMap`' : '' ;
@@ -115,7 +118,8 @@ error_log($sql . ' line 101 _ReportModel');
 	{
 		$result = NULL;
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		date_default_timezone_set($CONFIG->TIMEZONE);
+		global $CONFIG;
+date_default_timezone_set($CONFIG->TIMEZONE);
 		$startDate = date('Y-m-d', strtotime($start));
 		$endDate = date('Y-m-d', strtotime($end));
 		if(!$startDate || !$endDate)
@@ -158,7 +162,8 @@ error_log($sql . ' line 101 _ReportModel');
 	}
 	private function make_Time($time, $day)
 	{
-		date_default_timezone_set($CONFIG->TIMEZONE);
+		global $CONFIG;
+date_default_timezone_set($CONFIG->TIMEZONE);
 		$timets = date("H:i:s", $time);
 		$dayts = date('Y-m-d', strtotime($day));
 		return $dayts . ' ' . $timets;

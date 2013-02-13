@@ -69,7 +69,8 @@ class WriteEventModule
 	
 	private function make_Time($time, $day)
 	{
-		date_default_timezone_set($CONFIG->TIMEZONE);
+		global $CONFIG;
+date_default_timezone_set($CONFIG->TIMEZONE);
 		$timets = date("H:i:s", $time);
 		$dayts = date('Y-m-d', strtotime($day));
 

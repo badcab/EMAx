@@ -6,16 +6,12 @@
 	require_once('configure/EMAxSTATIC.php');
 	if(!isset($_SESSION))
 	{		
-//		if($_SERVER["HTTPS"] != "on" && $CONFIG->USE_SSL)
-//		{
-//			header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-//	   	exit();
-//		}
-
+//		if($_SERVER["HTTPS"] != "on" && $CONFIG->USE_SSL){header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);exit();}
 		session_start();
 		date_default_timezone_set($CONFIG->TIMEZONE); 
 		$_SESSION['user'] = '';//I don't think this is needed, remove later
 	}
+	
 ?>
 	<title>EMAx Event Management Application eXtended</title>	
 	<link type="text/css" href="css/EMAx.css" rel="stylesheet" />

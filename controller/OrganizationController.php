@@ -17,6 +17,7 @@ class OrganizationController
 			require_once('../view/LoginView.php');
 			return;
 		}
+		global $CONFIG;
 		$areaCode = $CONFIG->AREA_CODE;
 		$Organization = new OrganizationModel((int)$id);
 		$City = $Organization->getCity();

@@ -16,6 +16,7 @@ class PersonController
 			require_once('../view/LoginView.php');
 			return;
 		}
+		global $CONFIG;
 		$areaCode = $CONFIG->AREA_CODE;
 		$Person = new PersonModel($id);
 		$State = $Person->getState();

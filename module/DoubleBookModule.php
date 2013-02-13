@@ -8,7 +8,8 @@ class DoubleBookModule
 
 	function __construct($eventStart, $eventEnd, $roomLocation)
 	{
-		date_default_timezone_set($CONFIG->TIMEZONE);
+		global $CONFIG;
+date_default_timezone_set($CONFIG->TIMEZONE);
 		$this->eventStart = date("Y-m-d H:i:s", $eventStart);
 		$this->eventEnd = date("Y-m-d H:i:s", $eventEnd);
 		$this->roomLocation = (int)$roomLocation;

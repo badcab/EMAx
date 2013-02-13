@@ -209,7 +209,8 @@ class _SearchModel
 		$sqlPerson = $this->sqlBasePerson;
 		$sqlEvent = $this->sqlBaseEvent;
 		$sqlOrganization = $this->sqlBaseOrganization;
-		date_default_timezone_set($CONFIG->TIMEZONE);
+		global $CONFIG;
+date_default_timezone_set($CONFIG->TIMEZONE);
 		if(strtotime($searchString))
 		{
 			$date = date('Y-m-d', strtotime($searchString));

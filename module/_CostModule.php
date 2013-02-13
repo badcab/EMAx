@@ -70,6 +70,7 @@ class _CostModule
 	}
 	private function lengthOfTime($start, $end)
 	{
+		global $CONFIG;
 		date_default_timezone_set($CONFIG->TIMEZONE);
 		return (int)date('G',strtotime($end)) - (int)date('G',strtotime($start));
 		//not this will fail if meeting takes place over midnight but for now we will just have to risk it

@@ -61,34 +61,34 @@ class CONFIG
 {
 	function __construct()
    {
-   	if(!isset($_SESSION['EMAxCONFIG']))
+	  	if(!isset($GLOBALS['EMAxCONFIG']))
 		{		
-			require_once(get_include_path() . '/model/CONFIG_Model.php');
+			require_once( dirname(__FILE__) . '/../model/CONFIG_Model.php');
 			$Config = new CONFIG_Model(EMAxSTATIC::$db_host, EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-			$_SESSION['EMAxCONFIG'] = $Config->getAll();
+			$GLOBALS['EMAxCONFIG'] = $Config->getAll();
 		}
  	
-		$this->TIMEZONE = $_SESSION['EMAxCONFIG']['TIMEZONE'];
-		$this->COUNTY = $_SESSION['EMAxCONFIG']['COUNTY'];
-		$this->DEFAULT_STATE = $_SESSION['EMAxCONFIG']['DEFAULT_STATE'];
-		$this->AREA_CODE = $_SESSION['EMAxCONFIG']['AREA_CODE'];
-		$this->NAME_OF_ORG = $_SESSION['EMAxCONFIG']['NAME_OF_ORG'];
-		$this->PHONE_OF_ORG = $_SESSION['EMAxCONFIG']['PHONE_OF_ORG'];
-		$this->EMAIL_OF_ORG = $_SESSION['EMAxCONFIG']['EMAIL_OF_ORG'];
-		$this->ADDRESS_OF_ORG = $_SESSION['EMAxCONFIG']['ADDRESS_OF_ORG'];
-		$this->HOURS_BEFORE_EXTRA_CHARGE = (int)$_SESSION['EMAxCONFIG']['HOURS_BEFORE_EXTRA_CHARGE'];
-		$this->USE_GOOGLE_CAL = (int)$_SESSION['EMAxCONFIG']['USE_GOOGLE_CAL'];//is a bool
-		$this->USE_SSL = (int)$_SESSION['EMAxCONFIG']['USE_SSL'];//is a bool
-		$this->PATH_ZEND = $_SESSION['EMAxCONFIG']['PATH_ZEND'];
-		$this->PATH_JQUERY = $_SESSION['EMAxCONFIG']['PATH_JQUERY'];
-		$this->PATH_JQUERY_UI = $_SESSION['EMAxCONFIG']['PATH_JQUERY_UI'];
-		$this->PATH_JQUERY_UI_CSS = $_SESSION['EMAxCONFIG']['PATH_JQUERY_UI_CSS'];
-		$this->googleUserName = $_SESSION['EMAxCONFIG']['googleUserName'];
-		$this->googlePassword = $_SESSION['EMAxCONFIG']['googlePassword'];
-		$this->EMAIL_BODY_ADD_ON_SUMMER = $_SESSION['EMAxCONFIG']['EMAIL_BODY_ADD_ON_SUMMER'];
-		$this->EMAIL_BODY_ADD_ON_FALL = $_SESSION['EMAxCONFIG']['EMAIL_BODY_ADD_ON_FALL'];
-		$this->EMAIL_BODY_ADD_ON_WINTER = $_SESSION['EMAxCONFIG']['EMAIL_BODY_ADD_ON_WINTER'];
-		$this->EMAIL_BODY_ADD_ON_SPRING = $_SESSION['EMAxCONFIG']['EMAIL_BODY_ADD_ON_SPRING'];
+		$this->TIMEZONE = $GLOBALS['EMAxCONFIG']['TIMEZONE'];
+		$this->COUNTY = $GLOBALS['EMAxCONFIG']['COUNTY'];
+		$this->DEFAULT_STATE = $GLOBALS['EMAxCONFIG']['DEFAULT_STATE'];
+		$this->AREA_CODE = $GLOBALS['EMAxCONFIG']['AREA_CODE'];
+		$this->NAME_OF_ORG = $GLOBALS['EMAxCONFIG']['NAME_OF_ORG'];
+		$this->PHONE_OF_ORG = $GLOBALS['EMAxCONFIG']['PHONE_OF_ORG'];
+		$this->EMAIL_OF_ORG = $GLOBALS['EMAxCONFIG']['EMAIL_OF_ORG'];
+		$this->ADDRESS_OF_ORG = $GLOBALS['EMAxCONFIG']['ADDRESS_OF_ORG'];
+		$this->HOURS_BEFORE_EXTRA_CHARGE = (int)$GLOBALS['EMAxCONFIG']['HOURS_BEFORE_EXTRA_CHARGE'];
+		$this->USE_GOOGLE_CAL = (int)$GLOBALS['EMAxCONFIG']['USE_GOOGLE_CAL'];//is a bool
+		$this->USE_SSL = (int)$GLOBALS['EMAxCONFIG']['USE_SSL'];//is a bool
+		$this->PATH_ZEND = $GLOBALS['EMAxCONFIG']['PATH_ZEND'];
+		$this->PATH_JQUERY = $GLOBALS['EMAxCONFIG']['PATH_JQUERY'];
+		$this->PATH_JQUERY_UI = $GLOBALS['EMAxCONFIG']['PATH_JQUERY_UI'];
+		$this->PATH_JQUERY_UI_CSS = $GLOBALS['EMAxCONFIG']['PATH_JQUERY_UI_CSS'];
+		$this->googleUserName = $GLOBALS['EMAxCONFIG']['googleUserName'];
+		$this->googlePassword = $GLOBALS['EMAxCONFIG']['googlePassword'];
+		$this->EMAIL_BODY_ADD_ON_SUMMER = $GLOBALS['EMAxCONFIG']['EMAIL_BODY_ADD_ON_SUMMER'];
+		$this->EMAIL_BODY_ADD_ON_FALL = $GLOBALS['EMAxCONFIG']['EMAIL_BODY_ADD_ON_FALL'];
+		$this->EMAIL_BODY_ADD_ON_WINTER = $GLOBALS['EMAxCONFIG']['EMAIL_BODY_ADD_ON_WINTER'];
+		$this->EMAIL_BODY_ADD_ON_SPRING = $GLOBALS['EMAxCONFIG']['EMAIL_BODY_ADD_ON_SPRING'];
    }	
    
    public static $TIMEZONE;
@@ -114,4 +114,7 @@ class CONFIG
 	public static $EMAIL_BODY_ADD_ON_SPRING;
 }
 $CONFIG = new CONFIG();
+
+//echo($CONFIG->TIMEZONE);
+//echo('America/Chicago');
 ?>

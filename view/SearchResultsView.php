@@ -19,7 +19,8 @@
         		}
         		else
         		{
-        			date_default_timezone_set($CONFIG->TIMEZONE);
+        			global $CONFIG;
+					date_default_timezone_set($CONFIG->TIMEZONE);
         			echo('
         			<table class="searchTable">
         			<tr>

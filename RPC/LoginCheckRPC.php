@@ -10,13 +10,13 @@ $password = (isset($_POST['password'])) ? $_POST['password'] : NULL;
 	$Login = new LoginModule($user, $password);
 	$isValidLogin = $Login->activate();
 	if($isValidLogin)
-	{
+	{	
 		$_SESSION['user'] = $isValidLogin;
 		$_SESSION['isLoggedIn'] = TRUE;
 		echo($isValidLogin);
 	}
 	else
-	{
+	{		
 		echo('FALSE');
 	}
 ?>

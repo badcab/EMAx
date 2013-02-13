@@ -16,6 +16,7 @@ class EmailModule
 		$Person = $Event->getPerson();
 		$Organization = $Event->getOrganization();
 		
+		global $CONFIG;
 		date_default_timezone_set($CONFIG->TIMEZONE);
 		
 		$eventDate = date('l, F jS', strtotime($Event->getstartTime()));	

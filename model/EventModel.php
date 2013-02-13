@@ -92,7 +92,7 @@ class EventModel
 
 	public function writeData()
 	{
-
+		global $CONFIG;
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 
 		$googleURI = NULL;
@@ -245,7 +245,7 @@ class EventModel
 	public function deleteRecord()
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-
+		global $CONFIG;
 		if($CONFIG->USE_GOOGLE_CAL)
 		{
 			require_once('../module/GoogleCalanderModule.php');
