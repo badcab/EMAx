@@ -33,7 +33,7 @@
 					<td> <?= $item['name'] ?> </td>
 					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
 					<td>
-					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('GRADE', <?= $item['name'] ?>, <?= $item['enable'] ?>, this)"/>
+					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('GRADE', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
 					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('GRADE', 'DELETE', '<?= $item['name'] ?>')" />
 					</td>
       		</tr>    
@@ -53,7 +53,7 @@
 					<td> <?= $item['name'] ?> </td>
 					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
 					<td>
-					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('OPTION', <?= $item['name'] ?>, <?= $item['enable'] ?>, this)"/>
+					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('OPTION', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
 					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('OPTION', 'DELETE', '<?= $item['name'] ?>')" />
 					</td>
       		</tr>      
@@ -87,7 +87,7 @@
 					<td> <?= money_format('%(#10n',$item['costExtraLongForProfit']) ?> </td>
 					
 					<td>
-					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('ROOM', <?= $item['name'] ?>, <?= $item['enable'] ?>, this)"/>
+					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('ROOM', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
 					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('ROOM', 'DELETE', '<?= $item['name'] ?>')" />
 					</td>
       		</tr>  

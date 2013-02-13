@@ -36,7 +36,7 @@ $_SESSION['user'] = ($_SESSION['user']) ? $_SESSION['user'] : 'UNDEFINED USER ER
 		$roomRes = ($Event->getroomReservation()) ? $Event->getroomReservation() : EMAxSTATIC::$FIELD_TRIP_EVENT;
 		$selectedOptions = implode(',', $Event->getOption());
 		$selectedGrades = implode(',', $Event->getGrade());
-		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
+		date_default_timezone_set($CONFIG->TIMEZONE);
 		$date = '';
 		if($id)
 		{

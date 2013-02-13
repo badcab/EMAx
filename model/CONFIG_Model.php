@@ -1,13 +1,12 @@
 <?php
-require_once('../configure/EMAxSTATIC.php');
 class CONFIG_Model
 {
 	private $ClassObjectArg;
 	private $connection;
 	
-	function __construct()
+	function __construct($db_host, $db_name, $db_user, $db_password)
 	{
-		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
+		$connection = new PDO('mysql:host='. $db_host .';dbname=' . $db_name, $db_user, $db_password);
 		$this->connection = $connection;
 		$sql = "SELECT * FROM `EMAx_CONFIG`";
 		$query = $connection->query($sql);
@@ -36,7 +35,6 @@ class CONFIG_Model
 			$sql .= "UPDATE `EMAx_CONFIG` SET `value`={$configValue} WHERE `property`={$configProperty};\n";
 		}		
 		$this->connection->exec($sql);
-
 	}
 	
 	public function getAddressOfOrg()

@@ -7,7 +7,7 @@ class GoogleCalanderModule
 	
 	function __construct()
 	{
-		$oldPath = set_include_path(get_include_path() . PATH_SEPARATOR . EMAxSTATIC::$PATH_ZEND);
+		$oldPath = set_include_path(get_include_path() . PATH_SEPARATOR . $CONFIG->PATH_ZEND);
 		
 		require_once ('Zend/Loader.php');
 		Zend_Loader::loadClass('Zend_Gdata');
@@ -16,7 +16,7 @@ class GoogleCalanderModule
 
 		try 
 		{
-   		$this->client = Zend_Gdata_ClientLogin::getHttpClient(EMAxSTATIC::$googleUserName, EMAxSTATIC::$googlePassword, 'cl');
+   		$this->client = Zend_Gdata_ClientLogin::getHttpClient($CONFIG->googleUserName, $CONFIG->googlePassword, 'cl');
 		} 
 		catch (Zend_Gdata_App_CaptchaRequiredException $cre) 
 		{
@@ -104,7 +104,7 @@ class GoogleCalanderModule
 	
 	private function offsetON( $date )
 	{
-		$timeZone = EMAxSTATIC::$TIMEZONE;
+		$timeZone = $CONFIG->TIMEZONE;
 		date_default_timezone_set($timeZone);
 		$DateTimeObject = new DateTime(date('Y-m-d', strtotime($date)), new DateTimeZone($timeZone));
 		$offsetRAW_HOUR = date_offset_get($DateTimeObject) / 60 / 60; //we need to turn that into hours.

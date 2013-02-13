@@ -16,7 +16,7 @@ class EmailModule
 		$Person = $Event->getPerson();
 		$Organization = $Event->getOrganization();
 		
-		date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
+		date_default_timezone_set($CONFIG->TIMEZONE);
 		
 		$eventDate = date('l, F jS', strtotime($Event->getstartTime()));	
 		$eventTime = date("g:i a", strtotime($Event->getstartTime()));	
@@ -29,10 +29,10 @@ class EmailModule
 		
 		$links = EMAxSTATIC::$EMAIL_LINK_ALL;
 
-		$orgName = EMAxSTATIC::$NAME_OF_ORG;
+		$orgName = $CONFIG->NAME_OF_ORG;
 		$orgPhone = EMAxSTATIC::$PHONE_OF_ORG;
-		$orgEmail = EMAxSTATIC::$EMAIL_OF_ORG;
-		$orgAddress = EMAxSTATIC::$ADDRESS_OF_ORG;
+		$orgEmail = $CONFIG->EMAIL_OF_ORG;
+		$orgAddress = $CONFIG->ADDRESS_OF_ORG;
 		$emailAddress = ( $Person->getemailAddress() ) ? $Person->getemailAddress() : $Organization->getemailAddress() ; 
 		$emailSubjectLine = "Conformation of Event at {$orgName} on {$eventDate}";	
 		$emailBodySeason = '';
@@ -63,22 +63,22 @@ class EmailModule
 		if($season >= $october || $season <= $febuary) 
 		{
 			$links = array_merge($links, EMAxSTATIC::$EMAIL_LINK_FEILD_TRIP_WINTER);
-			$emailBodySeason = EMAxSTATIC::$EMAIL_BODY_ADD_ON_WINTER;
+			$emailBodySeason = $CONFIG->EMAIL_BODY_ADD_ON_WINTER;
 		}
 		elseif($season >= $march && $season <= $may) 
 		{
 			$links = array_merge($links, EMAxSTATIC::$EMAIL_LINK_FEILD_TRIP_SPRING);
-			$emailBodySeason = EMAxSTATIC::$EMAIL_BODY_ADD_ON_SPRING;
+			$emailBodySeason = $CONFIG->EMAIL_BODY_ADD_ON_SPRING;
 		}		
 		elseif($season >= $june && $season <= $september) 
 		{	
 			$links = array_merge($links, EMAxSTATIC::$EMAIL_LINK_FEILD_TRIP_SUMMER);
-			$emailBodySeason = EMAxSTATIC::$EMAIL_BODY_ADD_ON_SUMMER;
+			$emailBodySeason = $CONFIG->EMAIL_BODY_ADD_ON_SUMMER;
 		}
 		else
 		{
 			$links = array_merge($links, EMAxSTATIC::$EMAIL_LINK_FEILD_TRIP_FALL);
-			$emailBodySeason = EMAxSTATIC::$EMAIL_BODY_ADD_ON_FALL;
+			$emailBodySeason = $CONFIG->EMAIL_BODY_ADD_ON_FALL;
 		}
 		
 		$linkEmailBody = '';

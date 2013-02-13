@@ -16,7 +16,7 @@ class PersonController
 			require_once('../view/LoginView.php');
 			return;
 		}
-		$areaCode = EMAxSTATIC::$AREA_CODE;
+		$areaCode = $CONFIG->AREA_CODE;
 		$Person = new PersonModel($id);
 		$State = $Person->getState();
 		$Organization = $Person->getOrganization();
@@ -28,7 +28,7 @@ class PersonController
 		$stateDropDown = '';
 		foreach($stateList as $state)
 		{
-			if($state['name'] == EMAxSTATIC::$DEFAULT_STATE)
+			if($state['name'] == $CONFIG->DEFAULT_STATE)
 			{
 				$stateDropDown .= "<option selected='selected' value='{$state['id']}'> {$state['name']} </option>";
 			}

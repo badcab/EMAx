@@ -6,7 +6,7 @@
 	require_once('configure/EMAxSTATIC.php');
 	if(!isset($_SESSION))
 	{		
-//		if($_SERVER["HTTPS"] != "on" && EMAxSTATIC::$USE_SSL)
+//		if($_SERVER["HTTPS"] != "on" && $CONFIG->USE_SSL)
 //		{
 //			header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
 //	   	exit();
@@ -24,10 +24,10 @@
 		<link rel="stylesheet" href="css/Mobile_EMAx.css" type="text/css" media="handheld" />
 	-->
 
-	<script src="<?= EMAxSTATIC::$PATH_JQUERY ?>"></script>
-	<script src="<?= EMAxSTATIC::$PATH_JQUERY_UI ?>"></script>
+	<script src="<?= $CONFIG->PATH_JQUERY ?>"></script>
+	<script src="<?= $CONFIG->PATH_JQUERY_UI ?>"></script>
 	<script type="text/javascript" src="js/EMAx.js"></script>
-	<link type="text/css" href="<?= EMAxSTATIC::$PATH_JQUERY_UI_CSS ?>" rel="stylesheet" />
+	<link type="text/css" href="<?= $CONFIG->PATH_JQUERY_UI_CSS ?>" rel="stylesheet" />
 	
 </head>
 <body>

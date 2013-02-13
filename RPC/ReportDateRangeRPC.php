@@ -1,7 +1,7 @@
 <?php 
 require_once('../model/_ReportModel.php');
 require_once('../configure/EMAxSTATIC.php');
-date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
+date_default_timezone_set($CONFIG->TIMEZONE);
 $start = (isset($_POST['start'])) ? $_POST['start'] : NULL;
 $end = (isset($_POST['end'])) ? $_POST['end'] : NULL;
 

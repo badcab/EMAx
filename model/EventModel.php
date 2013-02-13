@@ -101,7 +101,7 @@ class EventModel
 
 		if($this->ClassObjectArg['ID'])
 		{
-			if(EMAxSTATIC::$USE_GOOGLE_CAL)
+			if($CONFIG->USE_GOOGLE_CAL)
 			{
 				$google_date = date('Y-m-d H:i:s', strtotime($this->getstartTime()));
 				$google_startTime = date('Y-m-d H:i:s', strtotime($this->getstartTime()));
@@ -143,7 +143,7 @@ class EventModel
 
 		else
 		{
-			if(EMAxSTATIC::$USE_GOOGLE_CAL)
+			if($CONFIG->USE_GOOGLE_CAL)
 			{
 				$google_date = date('Y-m-d H:i:s', strtotime($this->getstartTime()));
 				$google_startTime = date('Y-m-d H:i:s', strtotime($this->getstartTime()));
@@ -246,7 +246,7 @@ class EventModel
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 
-		if(EMAxSTATIC::$USE_GOOGLE_CAL)
+		if($CONFIG->USE_GOOGLE_CAL)
 		{
 			require_once('../module/GoogleCalanderModule.php');
 			$Google = new GoogleCalanderModule();

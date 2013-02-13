@@ -19,7 +19,7 @@
         		}
         		else
         		{
-        			date_default_timezone_set(EMAxSTATIC::$TIMEZONE);
+        			date_default_timezone_set($CONFIG->TIMEZONE);
         			echo('
         			<table class="searchTable">
         			<tr>
