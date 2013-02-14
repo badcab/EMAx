@@ -279,6 +279,4 @@ class CONFIG_Model
 		$this->ClassObjectArg["SURCHARGE_FOR_OUT_OF_COUNTY"] = $value;
 	}
 }
-//$testObject = new CONFIG_Model();
-//$testObject->writeChanges();
 ?>

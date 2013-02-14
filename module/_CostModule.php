@@ -29,14 +29,14 @@ class _CostModule
 		$gradeCost = $this->getGradeTotal($Event->getGrade());
 		$OrgInCounty = $Event->getOrganization()->getsameCounty();
 		
-		if( $Event->getroomReservation() == EMAxSTATIC::$FEILD_TRIP_EVENT )
+		if( $Event->getroomReservation() == EMAxSTATIC::$FIELD_TRIP_EVENT )
 		{
 			$sum = $gradeCost + $optionCost;//not done yet
 			if($OrgInCounty)
 			{
 				$sum += $surchargeForOutOfCounty;	
 			}
-			$sum = ($sum < $minimumCharge) ? $minimumCharge : $sum ;
+			//$sum = ($sum < $minimumCharge) ? $minimumCharge : $sum ;
 		}
 		
 		if( $Event->getroomReservation() == EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT )

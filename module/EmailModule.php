@@ -31,7 +31,7 @@ class EmailModule
 		$links = EMAxSTATIC::$EMAIL_LINK_ALL;
 
 		$orgName = $CONFIG->NAME_OF_ORG;
-		$orgPhone = EMAxSTATIC::$PHONE_OF_ORG;
+		$orgPhone = $CONFIG->PHONE_OF_ORG;
 		$orgEmail = $CONFIG->EMAIL_OF_ORG;
 		$orgAddress = $CONFIG->ADDRESS_OF_ORG;
 		$emailAddress = ( $Person->getemailAddress() ) ? $Person->getemailAddress() : $Organization->getemailAddress() ; 

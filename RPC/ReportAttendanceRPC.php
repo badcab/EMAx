@@ -7,7 +7,7 @@ $reportResult = $report->attendanceReport($start, $end);
 ?>
 
 <p>
-Total Kids Field Trip: <?= $reportResult['Total_Kids_Field_Trip'] ?>
+Total Kids Attending a Field Trip: <?= $reportResult['Total_Kids_Field_Trip'] ?>
 </p>
 <p>
 Total income from Field Trip: $<?= $reportResult['Total_income_Field_Trip']; ?>
@@ -18,6 +18,8 @@ Total Room Reservations: <?= $reportResult['Total_Room_Reservations'] ?>
 <p>
 Total income from Room Reservations: $<?= $reportResult['Total_income_Room_Reservations'] ?>
 </p>
+
+<!--
 <p>
 Total Public Program Revenue: $<?= $reportResult['Total_revenue_public_program'] ?>
 </p>
@@ -27,3 +29,4 @@ Total Public Program Expense: $<?= $reportResult['Total_expenses_public_program'
 <p>
 Total Public Program Attendance: <?= $reportResult['Total_attendance_public_program'] ?>
 </p>
+-->
