@@ -13,6 +13,7 @@ $password = (isset($_POST['password'])) ? $_POST['password'] : NULL;
 	{	
 		$_SESSION['user'] = $isValidLogin;
 		$_SESSION['isLoggedIn'] = TRUE;
+		error_log($isValidLogin . ' has logged into EMAx');		
 		echo($isValidLogin);
 	}
 	else

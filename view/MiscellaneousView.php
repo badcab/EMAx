@@ -7,7 +7,7 @@
         <li><a href="#tabs-Config">Admin Configure</a></li>
     </ul>
     <div id="tabs-State" class="overflow">
-		<table>
+		<table class="searchTable">
         		<tr>
 					<td><input type="text" name="add" id="tabs-State-add"/></td> 
 					<td><input type="button" value="Add New" onclick="Etera.miscellaneousScript('STATE', 'ADD', $('#tabs-State-add').val())" /></td>       		
@@ -15,14 +15,14 @@
       <?php foreach($stateList as $item): ?>
       		<tr>
 					<td> <?= $item['name'] ?> </td>
-					<td><input type="button" value="Delete" onclick="Etera.miscellaneousScript('STATE', 'DELETE', '<?= $item['name'] ?>')" /></td>
+					<td><input type="button" value="Delete" class="red" onclick="Etera.miscellaneousScript('STATE', 'DELETE', '<?= $item['name'] ?>')" /></td>
       		</tr>      
       <?php endforeach; ?>
 		</table>        
     </div>
   
     <div id="tabs-Grade" class="overflow">
-      <table>
+      <table class="searchTable">
         		<tr>
 					<td><input type="text" name="add" id="tabs-Grade-add" /></td> 
 					<td><?= $costGrade ?></td>
@@ -33,8 +33,8 @@
 					<td> <?= $item['name'] ?> </td>
 					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
 					<td>
-					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('GRADE', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
-					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('GRADE', 'DELETE', '<?= $item['name'] ?>')" />
+					<input type="button" value="<?= ($item['enable']) ? 'Disable' : 'Enable' ?>" onclick="Etera.enableDisableOptionGrade('GRADE', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
+					<input type="button" value="Delete" class="red" onclick="Etera.miscellaneousScript('GRADE', 'DELETE', '<?= $item['name'] ?>')" />
 					</td>
       		</tr>    
       <?php endforeach; ?>
@@ -42,7 +42,7 @@
     </div>
     
     <div id="tabs-Option" class="overflow">
-      <table>
+      <table class="searchTable">
         		<tr>
 					<td><input type="text" name="add" id="tabs-Option-add" /></td> 
 					<td><?= $costOption ?></td>
@@ -53,8 +53,8 @@
 					<td> <?= $item['name'] ?> </td>
 					<td> <?= money_format('%(#10n',$item['cost']) ?> </td>
 					<td>
-					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('OPTION', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
-					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('OPTION', 'DELETE', '<?= $item['name'] ?>')" />
+					<input type="button" value="<?= ($item['enable']) ? 'Disable' : 'Enable' ?>" onclick="Etera.enableDisableOptionGrade('OPTION', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
+					<input type="button" value="Delete" class="red" onclick="Etera.miscellaneousScript('OPTION', 'DELETE', '<?= $item['name'] ?>')" />
 					</td>
       		</tr>      
       <?php endforeach; ?>
@@ -62,7 +62,7 @@
     </div>
 
     <div id="tabs-Room" class="overflow">
-      <table>
+      <table class="searchTable">
         		<tr>
 					<td><input type="text" name="add" id="tabs-Room-add" /></td> 
 					<td><?= $costBaseNonProfit ?></td>
@@ -87,16 +87,14 @@
 					<td> <?= money_format('%(#10n',$item['costExtraLongForProfit']) ?> </td>
 					
 					<td>
-					<input type="button" value="disable/enable" onclick="Etera.enableDisableOptionGrade('ROOM', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
-					<input type="button" value="Delete" onclick="Etera.miscellaneousScript('ROOM', 'DELETE', '<?= $item['name'] ?>')" />
+					<input type="button" value="<?= ($item['enable']) ? 'Disable' : 'Enable' ?>" onclick="Etera.enableDisableOptionGrade('ROOM', '<?= $item['name'] ?>', <?= $item['enable'] ?>, this)"/>
+					<input type="button" value="Delete" class="red" onclick="Etera.miscellaneousScript('ROOM', 'DELETE', '<?= $item['name'] ?>')" />
 					</td>
       		</tr>  
       <?php endforeach; ?>
 		</table> 
     </div>
-    
-    
-    
+
     <div id="tabs-Config" class="overflow">
   		<p>This will be for the new config table when everything else is set up</p>
     </div>

@@ -72,7 +72,7 @@ class RoomLocationModel
 			$costBaseForProfit = (double)$currentDBvalues->costBaseForProfit;
 			$costExtraLongNonProfit = (double)$currentDBvalues->costExtraLongNonProfit;
 			$costExtraLongForProfit = (double)$currentDBvalues->costExtraLongForProfit;
-			$enable = $currentDBvalues->enable;	
+			$enable = ($currentDBvalues->enable) ? 1 : 0 ;	
 		}
 		
 		else
@@ -116,7 +116,7 @@ class RoomLocationModel
 		$id = $connection->quote($this->getID());
 		$enable = $connection->quote($this->getEnable());
 		
-		$sql = "UPDATE `EMAx_Option` SET `name`={$name},`costBaseNonProfit`={$costBaseNonProfit}, `costBaseForProfit`={$costBaseForProfit}, `costExtraLongNonProfit`={$costExtraLongNonProfit}, `costExtraLongForProfit`={$costExtraLongForProfit}, `notes`={$notes},`enable`={$enable} WHERE `ID` = {$id}";
+		$sql = "UPDATE `EMAx_RoomLocation` SET `name`={$name},`costBaseNonProfit`={$costBaseNonProfit}, `costBaseForProfit`={$costBaseForProfit}, `costExtraLongNonProfit`={$costExtraLongNonProfit}, `costExtraLongForProfit`={$costExtraLongForProfit}, `notes`={$notes},`enable`={$enable} WHERE `ID` = {$id}";
 		$connection->exec($sql);
 		$connection = NULL;	
 	}

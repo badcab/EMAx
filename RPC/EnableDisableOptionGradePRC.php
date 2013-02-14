@@ -1,8 +1,10 @@
 <?php
 
-$tableName;
-$selectionName;
-$setValueTo;
+$tableName = (isset($_POST['tableName'])) ? $_POST['tableName'] : NULL;
+$selectionName = (isset($_POST['selectionName'])) ? $_POST['selectionName'] : NULL;
+$setValueTo = (isset($_POST['setValueTo'])) ? $_POST['setValueTo'] : NULL;
+
+error_log("EnableDisableOptionGradeRPC line7 \n TableName: " . $tableName . "\n SelectionName: " . $selectionName . "\n SetValueTo: " . $setValueTo);
 
 if($tableName == 'GRADE')
 {

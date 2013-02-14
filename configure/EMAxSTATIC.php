@@ -1,15 +1,6 @@
 <?php
 class EMAxSTATIC
 {
-	public static $BASECOST_FEILD_TRIP_IN_COUNTY = 0.00; //mark for removal *not db
-	public static $BASECOST_FEILD_TRIP_OUT_OF_COUNTY = 1.00; //mark for removal *not db
-	
-	public static $BASECOST_NON_PROFIT = 1.00; //mark for removal *not db
-	public static $BASECOST_NON_PROFIT_EXTRA_2HR = 1.00; //mark for removal *not db
-	
-	public static $BASECOST_FOR_PROFIT = 10.00; //mark for removal *not db
-	public static $BASECOST_FOR_PROFIT_EXTRA_2HR = 10.00; //mark for removal *not db
-		
 	public static $AUTH_LEVEL_LOGIN = 0;
 	public static $AUTH_LEVEL_ADMIN = 1;
 	
@@ -89,6 +80,8 @@ class CONFIG
 		$this->EMAIL_BODY_ADD_ON_FALL = $GLOBALS['EMAxCONFIG']['EMAIL_BODY_ADD_ON_FALL'];
 		$this->EMAIL_BODY_ADD_ON_WINTER = $GLOBALS['EMAxCONFIG']['EMAIL_BODY_ADD_ON_WINTER'];
 		$this->EMAIL_BODY_ADD_ON_SPRING = $GLOBALS['EMAxCONFIG']['EMAIL_BODY_ADD_ON_SPRING'];
+		$this->MINIMUM_FIELD_TRIP_INCOME = (double)$GLOBALS['EMAxCONFIG']['MINIMUM_FIELD_TRIP_INCOME'];
+		$this->SURCHARGE_FOR_OUT_OF_COUNTY = (double)$GLOBALS['EMAxCONFIG']['SURCHARGE_FOR_OUT_OF_COUNTY'];
    }	
    
    public static $TIMEZONE;
@@ -112,9 +105,8 @@ class CONFIG
 	public static $EMAIL_BODY_ADD_ON_FALL;
 	public static $EMAIL_BODY_ADD_ON_WINTER;
 	public static $EMAIL_BODY_ADD_ON_SPRING;
+	public static $MINIMUM_FIELD_TRIP_INCOME;
+	public static $SURCHARGE_FOR_OUT_OF_COUNTY;
 }
 $CONFIG = new CONFIG();
-
-//echo($CONFIG->TIMEZONE);
-//echo('America/Chicago');
 ?>

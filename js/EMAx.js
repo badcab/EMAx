@@ -569,7 +569,7 @@ var Etera = function()
 		},
 		enableDisableOptionGrade:function(tableName, selectionName, setValueTo, buttonObject)
 		{
-			var correctedValue = (setValueTo == '0') ? '1' : '0';
+			var correctedValue = (setValueTo == 0) ? 1 : 0;		
 			$.ajax
 			({
 		 		type: "POST",
@@ -577,9 +577,11 @@ var Etera = function()
 		 		data: { tableName: tableName, selectionName: selectionName, setValueTo: correctedValue },
 				dataType: "html",
 				success:function(result)
-				{
+				{				
 					var buttonLabel = (result == 'Enable') ? 'Enable' : 'Disable';
+					var enableInt = (result == 'Enable') ? 1 : 0;
 					$(buttonObject).val(buttonLabel);
+					$(buttonObject).prop("onclick", "Etera.enableDisableOptionGrade(" + tableName + "," + selectionName + "," + enableInt + ", this)");
 				},
 				error:function()
 				{

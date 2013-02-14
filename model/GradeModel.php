@@ -10,7 +10,7 @@ class GradeModel
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		$currentDBvalues = NULL;
 		
-		$gradeList = $connection->query("SELECT `ID`,`name`,`cost` FROM `EMAx_Grade`");
+		$gradeList = $connection->query("SELECT * FROM `EMAx_Grade`");
 		$this->GradeList = $gradeList->fetchAll();	
 		$id = ($id == '') ? NULL : $id;
 		if(is_string($id))
@@ -49,7 +49,7 @@ class GradeModel
 		{
 			$name = $currentDBvalues->name;
 			$cost = $currentDBvalues->cost;
-			$enable = $currentDBvalues->enable;					
+			$enable = ($currentDBvalues->enable) ? 1 : 0 ;				
 		}
 		
 		else

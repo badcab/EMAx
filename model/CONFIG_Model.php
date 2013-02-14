@@ -137,6 +137,16 @@ class CONFIG_Model
 		return $this->ClassObjectArg["USE_GOOGLE_CAL"];
 	}
 	
+	public function getMinimumFieldTripIncome()
+	{
+		return $this->ClassObjectArg["MINIMUM_FIELD_TRIP_INCOME"];
+	}	
+	
+	public function getSurchargeForOutOfCounty()
+	{
+		return $this->ClassObjectArg["SURCHARGE_FOR_OUT_OF_COUNTY"];
+	}
+	
 	public function setAddressOfOrg($value)
 	{
 		$value = $this->connection->quote($value);
@@ -256,6 +266,18 @@ class CONFIG_Model
 		$value = $this->connection->quote($value);
 		$this->ClassObjectArg["USE_GOOGLE_CAL"] = $value;
 	}	
+	
+	public function setMinimumFieldTripIncome($value)
+	{
+		$value = $this->connection->quote($value);
+		$this->ClassObjectArg["MINIMUM_FIELD_TRIP_INCOME"] = $value;
+	}	
+	
+	public function setSurchargeForOutOfCounty($value)
+	{
+		$value = $this->connection->quote($value);
+		$this->ClassObjectArg["SURCHARGE_FOR_OUT_OF_COUNTY"] = $value;
+	}
 }
 //$testObject = new CONFIG_Model();
 //$testObject->writeChanges();
