@@ -10,9 +10,12 @@ class _ReportModel
 	{
 		$result = array(
 			'Total_Kids_Field_Trip' => 0,
-			'Total_income_Field_Trip' => 0,
+			'Total_income_Field_Trip' => 0.00,
 			'Total_Room_Reservations' => 0,
-			'Total_income_Room_Reservations' => 0,
+			'Total_income_Room_Reservations' => 0.00,
+			'Total_revenue_public_program' => 0.00,
+			'Total_expenses_public_program'] => 0.00,
+			'Total_attendance_public_program' => 0,
 		);
 		global $CONFIG;
 date_default_timezone_set($CONFIG->TIMEZONE);
@@ -32,12 +35,13 @@ date_default_timezone_set($CONFIG->TIMEZONE);
 		$formatedEndDate = $this->make_Time( (60 * 60 * 24) - 1 , $endDate );
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
 		global $CONFIG;
+// $CONFIG->MINIMUM_FIELD_TRIP_INCOME;
 		date_default_timezone_set($CONFIG->TIMEZONE);
 		$feildTrip = EMAxSTATIC::$FIELD_TRIP_EVENT;
 		$notProfit = EMAxSTATIC::$ROOM_RESERVATION_NON_PROFIT;
 		$forProfit = EMAxSTATIC::$ROOM_RESERVATION_FOR_PROFIT;
 		$publicProgram = EMAxSTATIC::$PUBLIC_PROGRAM_EVENT;
-		$sqlKidAttend = "SELECT SUM(attendance),  SUM(cost) FROM `EMAx_Event` WHERE `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}' AND `roomReservation` = {$feildTrip}";
+		$sqlKidAttend = "SELECT SUM(attendance),  SUM(cost) FROM `EMAx_Event` WHERE `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}' AND `roomReservation` = {$feildTrip}";//add some mojo here to set value to MINIMUM_FIELD_TRIP_INCOME if product not greater
 		$sqlRoomReservation = "SELECT COUNT(*), SUM(cost) FROM `EMAx_Event` WHERE `startTime` > '{$formatedStartDate}' AND `endTime` < '{$formatedEndDate}' AND `roomReservation` = {$notProfit} OR `roomReservation` = {$forProfit}";
 
 		$sqlPublicProgram = "SELECT SUM(revenue), SUM(expenses), `EMAx_Event`.SUM(attendance) FROM `EMAx_PublicProgramMoney` JOIN `EMAx_Event`

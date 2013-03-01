@@ -4,9 +4,17 @@
 <?php
 	set_include_path(dirname(__FILE__));
 	require_once('configure/EMAxSTATIC.php');
+	global $CONFIG;
 	if(!isset($_SESSION))
 	{		
-//		if($_SERVER["HTTPS"] != "on" && $CONFIG->USE_SSL){header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);exit();}
+		if($CONFIG->USE_SSL)
+		{
+			if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on")
+			{ 
+				header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]); 
+				exit();
+			}
+		}
 		session_start();
 		date_default_timezone_set($CONFIG->TIMEZONE); 
 		$_SESSION['user'] = '';//I don't think this is needed, remove later

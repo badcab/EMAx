@@ -5,6 +5,8 @@ class EMAxSTATIC
 	public static $AUTH_LEVEL_ADMIN = 1;
 	
 	public static $IMPOSSIBLE_PK_NUMBER = 0;
+	public static $IMPOSSIBLE_ZIP_CODE = '00000';
+	public static $IMPOSSIBLE_CITY = 'UNKNOWN';
 	
 	public static $FIELD_TRIP_EVENT = 0;
 	public static $ROOM_RESERVATION_NON_PROFIT = 1;
@@ -17,6 +19,12 @@ class EMAxSTATIC
 	public static $db_password = 'your-new-password';
 	
 	public static $passwordSalt = 'ghger67irs6&^Sfukl5324f6cfja';
+	
+	/*
+we will need another table for the links
+TYPE(int) and LINK(varchar)
+a module or _model will have to be set up for the fetching
+	*/
 	
 	public static $EMAIL_LINK_ALL = array(
 		'this is a link All http://google.com',

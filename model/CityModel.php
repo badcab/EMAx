@@ -7,7 +7,7 @@ class CityModel
 	function __construct($id = NULL)//is_ numeric
 	{
 		$connection = new PDO('mysql:host='. EMAxSTATIC::$db_host .';dbname=' . EMAxSTATIC::$db_name, EMAxSTATIC::$db_user, EMAxSTATIC::$db_password);
-		$id = ($id == '') ? NULL : $id;
+		$id = ($id == '') ? EMAxSTATIC::$IMPOSSIBLE_CITY : $id;
 		if(is_string($id))
 		{
 			if(is_null($id)) {return $id;}
